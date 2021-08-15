@@ -44,7 +44,7 @@ set nu
 set nohlsearch
 set nowrap
 set guicursor=
-set scrolloff=8
+set scrolloff=3
 set updatetime=50
 set hidden
 set shortmess+=c
