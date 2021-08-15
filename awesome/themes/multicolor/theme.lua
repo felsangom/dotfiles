@@ -105,7 +105,7 @@ local cw = calendar_widget({
   theme = "outrun",
   placement = "top_right"
 })
-mytextclock:connect_signal("button::press", 
+mytextclock:connect_signal("button::press",
     function(_, _, _, button)
         if button == 1 then cw.toggle() end
     end)
@@ -140,14 +140,6 @@ local netdowninfo = wibox.widget.textbox()
 local netupicon = wibox.widget.imagebox(theme.widget_netup)
 local netupinfo = lain.widget.net({
     settings = function()
-        --[[
-        if iface ~= "network off" and
-           string.match(theme.weather.widget.text, "N/A")
-        then
-            theme.weather.update()
-        end
-        --]]
-
         widget:set_markup(markup.fontfg(theme.font, "#e54c62", net_now.sent .. " "))
         netdowninfo:set_markup(markup.fontfg(theme.font, "#87af5f", net_now.received .. " "))
     end

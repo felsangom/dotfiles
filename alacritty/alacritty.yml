@@ -13,7 +13,7 @@ shell:
 
 font:
   use_thin_strokes: true
-  size: 12
+  size: 11
   normal:
     family: Hack
     style: Regular
