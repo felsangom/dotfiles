@@ -53,7 +53,7 @@ set signcolumn=yes
 syntax on
 set t_Co=256
 colorscheme oceanic_material
-let g:airline_theme='badwolf'
+let g:airline_theme='molokai'
 set background=dark
 
 if exists('+termguicolors')

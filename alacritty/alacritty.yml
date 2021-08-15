@@ -4,15 +4,19 @@ dynamic_title: true
 cursor_style: Block
 
 env:
-  term: xterm
+  TERM: alacritty
+  LANG: pt_BR.UTF-8
+  LC_CTYPE: pt_BR.UTF-8
 
 shell:
   program: /usr/bin/fish
 
 font:
+  use_thin_strokes: true
   size: 12
   normal:
     family: Hack
+    style: Regular
   bold:
     family: Hack
   italic:
