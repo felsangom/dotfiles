@@ -17,19 +17,21 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 local theme                                     = {}
 theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome/themes/multicolor"
 --theme.wallpaper                                 = theme.confdir .. "/wall.png"
-theme.font                                      = "Ubuntu 10"
-theme.menu_bg_normal                            = "#000000"
-theme.menu_bg_focus                             = "#000000"
-theme.bg_normal                                 = "#000000"
-theme.bg_focus                                  = "#000000"
-theme.bg_urgent                                 = "#000000"
-theme.fg_normal                                 = "#aaaaaa"
-theme.fg_focus                                  = "#ff8c00"
-theme.fg_urgent                                 = "#af1d18"
+theme.font                                      = "Ubuntu 11"
+theme.icon_font                                 = "Font Awesome 5 Free Solid"
+theme.icon_size                                 = 10
+theme.menu_bg_normal                            = "#282c34"
+theme.menu_bg_focus                             = "#191f2b"
+theme.bg_normal                                 = "#282c34"
+theme.bg_focus                                  = "#191f2b"
+theme.bg_urgent                                 = "#b70202"
+theme.fg_normal                                 = "#cccccc"
+theme.fg_focus                                  = "#46d9ff"
+theme.fg_urgent                                 = "#ffffff"
 theme.fg_minimize                               = "#ffffff"
 theme.border_width                              = dpi(2)
-theme.border_normal                             = "#1c2022"
-theme.border_focus                              = "#e54c62"
+theme.border_normal                             = "#282c34"
+theme.border_focus                              = "#46d9ff"
 theme.border_marked                             = "#3ca4d8"
 theme.menu_border_width                         = 0
 theme.menu_width                                = dpi(130)
@@ -93,9 +95,19 @@ theme.titlebar_maximized_button_focus_active    = theme.confdir .. "/icons/title
 
 local markup = lain.util.markup
 
+local function make_icon(icon_code, icon_color)
+  return wibox.widget{
+    markup = ' <span color="' .. icon_color .. '">' .. icon_code .. '</span>  ',
+    font = theme.icon_font .. theme.icon_size,
+    align = 'center',
+    valign = 'center',
+    widget = wibox.widget.textbox
+  }
+end
+
 -- Textclock
 os.setlocale(os.getenv("LANG")) -- to localize the clock
-local clockicon = wibox.widget.imagebox(theme.widget_clock)
+local clockicon = make_icon('\u{f017}', '#7788af')
 local mytextclock = wibox.widget.textclock(markup("#7788af", "%d/%m/%Y ") .. markup("#ab7367", ">") .. markup("#de5e1e", " %H:%M "))
 mytextclock.font = theme.font
 
@@ -111,7 +123,7 @@ mytextclock:connect_signal("button::press",
     end)
 
 -- CPU
-local cpuicon = wibox.widget.imagebox(theme.widget_cpu)
+local cpuicon = make_icon('\u{f2db}', '#e33a6e')
 local cpu = lain.widget.cpu({
     settings = function()
         widget:set_markup(markup.fontfg(theme.font, "#e33a6e", cpu_now.usage .. "% "))
@@ -119,7 +131,7 @@ local cpu = lain.widget.cpu({
 })
 
 -- Battery
-local baticon = wibox.widget.imagebox(theme.widget_batt)
+local baticon = make_icon('\u{f0e7}', '#cccccc')
 local bat = lain.widget.bat({
     settings = function()
         local perc = bat_now.perc ~= "N/A" and bat_now.perc .. "%" or bat_now.perc
@@ -135,9 +147,10 @@ local bat = lain.widget.bat({
 local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
 
 -- Net
-local netdownicon = wibox.widget.imagebox(theme.widget_netdown)
+--local netdownicon = wibox.widget.imagebox(theme.widget_netdown)
+local netdownicon = make_icon('\u{f13a}', '#87af5f')
 local netdowninfo = wibox.widget.textbox()
-local netupicon = wibox.widget.imagebox(theme.widget_netup)
+local netupicon = make_icon('\u{f139}', '#e54c62')
 local netupinfo = lain.widget.net({
     settings = function()
         widget:set_markup(markup.fontfg(theme.font, "#e54c62", net_now.sent .. " "))
@@ -146,7 +159,7 @@ local netupinfo = lain.widget.net({
 })
 
 -- MEM
-local memicon = wibox.widget.imagebox(theme.widget_mem)
+local memicon = make_icon('\u{f85a}', '#e0da37') -- wibox.widget.imagebox(theme.widget_mem)
 local memory = lain.widget.mem({
     settings = function()
         widget:set_markup(markup.fontfg(theme.font, "#e0da37", mem_now.used .. "M "))
@@ -190,7 +203,8 @@ function theme.at_screen_connect(s)
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(19), bg = theme.bg_normal, fg = theme.fg_normal })
+    -- s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(19), bg = theme.bg_normal, fg = theme.fg_normal })
+    s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(21), bg = '#282c34', fg = '#cccccc' })
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -209,23 +223,23 @@ function theme.at_screen_connect(s)
             wibox.container.margin(wibox.widget.textbox(''), 0, 4),
             volume_widget(),
             wibox.container.margin(wibox.widget.textbox(markup('#444444', '|')), 2, 2),
-            wibox.container.margin(netdownicon, 0, 0, 0, 1, '#87af5f'),
-            wibox.container.margin(netdowninfo, 0, 0, 0, 1, '#87af5f'),
+            wibox.container.margin(netdownicon, 0, 0, 0, 2, '#87af5f'),
+            wibox.container.margin(netdowninfo, 0, 0, 0, 2, '#87af5f'),
             wibox.container.margin(wibox.widget.textbox(''), 0, 4),
-            wibox.container.margin(netupicon, 0, 0, 0, 1, '#e54c62'),
-            wibox.container.margin(netupinfo.widget, 0, 0, 0, 1, '#e54c62'),
+            wibox.container.margin(netupicon, 0, 0, 0, 2, '#e54c62'),
+            wibox.container.margin(netupinfo.widget, 0, 0, 0, 2, '#e54c62'),
             wibox.container.margin(wibox.widget.textbox(markup('#444444', '|')), 2, 2),
-            wibox.container.margin(memicon, 0, 0, 0, 1, '#e0da37'),
-            wibox.container.margin(memory.widget, 0, 0, 0, 1, '#e0da37'),
+            wibox.container.margin(memicon, 0, 0, 0, 2, '#e0da37'),
+            wibox.container.margin(memory.widget, 0, 0, 0, 2, '#e0da37'),
             wibox.container.margin(wibox.widget.textbox(markup('#444444', '|')), 2, 2),
-            wibox.container.margin(cpuicon, 0, 0, 0, 1, '#e33a6e'),
-            wibox.container.margin(cpu.widget, 0, 0, 0, 1, '#e33a6e'),
+            wibox.container.margin(cpuicon, 0, 0, 0, 2, '#e33a6e'),
+            wibox.container.margin(cpu.widget, 0, 0, 0, 2, '#e33a6e'),
             wibox.container.margin(wibox.widget.textbox(markup('#444444', '|')), 2, 2),
-            wibox.container.margin(baticon, 0, 0, 0, 1, '#cccccc'),
-            wibox.container.margin(bat.widget, 0, 0, 0, 1, '#cccccc'),
+            wibox.container.margin(baticon, 0, 0, 0, 2, '#cccccc'),
+            wibox.container.margin(bat.widget, 0, 0, 0, 2, '#cccccc'),
             wibox.container.margin(wibox.widget.textbox(markup("#444444", "|")), 2, 2),
-            wibox.container.margin(clockicon, 0, 0, 0, 1, '#7788af'),
-            wibox.container.margin(mytextclock, 0, 0, 0, 1, '#7788af'),
+            wibox.container.margin(clockicon, 0, 0, 0, 2, '#7788af'),
+            wibox.container.margin(mytextclock, 0, 0, 0, 2, '#7788af'),
             s.mylayoutbox
         },
     }
