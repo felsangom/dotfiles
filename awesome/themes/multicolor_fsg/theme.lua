@@ -159,6 +159,9 @@ local memory = lain.widget.mem({
     end
 })
 
+-- Logout widget
+local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
+
 function theme.at_screen_connect(s)
     -- Quake application
     s.quake = lain.util.quake({ app = awful.util.terminal })
@@ -233,7 +236,8 @@ function theme.at_screen_connect(s)
             wibox.container.margin(wibox.widget.textbox(markup("#444444", "|")), 2, 2),
             wibox.container.margin(clockicon, 0, 0, 0, 2, '#7788af'),
             wibox.container.margin(mytextclock, 0, 0, 0, 2, '#7788af'),
-            s.mylayoutbox
+            s.mylayoutbox,
+            logout_menu_widget()
         },
     }
 
