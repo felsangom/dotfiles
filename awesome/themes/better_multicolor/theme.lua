@@ -1,7 +1,10 @@
 --[[
 
-     Multicolor Awesome WM theme 2.0
-     github.com/lcpz
+    Theme based on:
+      Multicolor Awesome WM theme 2.0
+      github.com/lcpz
+
+    By Felipe Gomes
 
 --]]
 
@@ -15,8 +18,7 @@ local os = os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 local theme                                     = {}
-theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome/themes/multicolor"
---theme.wallpaper                                 = theme.confdir .. "/wall.png"
+theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome/themes/better_multicolor"
 theme.font                                      = "Ubuntu 11"
 theme.icon_font                                 = "Hack"
 theme.icon_size                                 = 10
