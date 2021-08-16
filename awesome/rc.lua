@@ -200,12 +200,6 @@ local mymainmenu = freedesktop.menu.build {
     }
 }
 
--- hide menu when mouse leaves it
---mymainmenu.wibox:connect_signal("mouse::leave", function() mymainmenu:hide() end)
-
--- Set the Menubar terminal for applications that require it
---menubar.utils.terminal = terminal
-
 -- }}}
 
 -- {{{ Screen
@@ -313,14 +307,28 @@ globalkeys = mytable.join(
               {description = "focus the previous screen", group = "screen"}),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
               {description = "jump to urgent client", group = "client"}),
+
+    -- Super + Tab, Super + Shift + Tab, Change layout
     awful.key({ modkey,           }, "Tab",
+        function ()
+            awful.layout.inc(1)
+        end,
+        {description = "cycle with previous/go back", group = "client"}),
+    awful.key({ modkey, "Shift"}, "Tab",
+        function ()
+            awful.layout.inc(-1)
+        end,
+        {description = "cycle with previous/go back", group = "client"}),
+
+    -- Alt + Tab, Alt + Shift + Tab - Cycle active programs in tag
+    awful.key({ altkey,           }, "Tab",
         function ()
             awful.client.focus.byidx( 1)
         end,
         {description = "cycle with previous/go back", group = "client"}),
-    awful.key({ altkey,           }, "Tab",
+    awful.key({ altkey, "Shift"}, "Tab",
         function ()
-            awful.client.focus.byidx( 1)
+            awful.client.focus.byidx(-1)
         end,
         {description = "cycle with previous/go back", group = "client"}),
 
