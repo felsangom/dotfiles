@@ -83,6 +83,11 @@ theme.titlebar_maximized_button_focus_active    = theme.confdir .. "/icons/title
 
 local markup = lain.util.markup
 
+--[[
+-- Get the icon hex code on https://www.nerdfonts.com/cheat-sheet
+-- You'll need a patched nerd font for the icons. I recommend Hack Nerd Font, but you
+-- can use any nerd font you like and change the icon_font above.
+--]]
 local function make_icon(icon_code, icon_color)
   return wibox.widget{
     markup = ' <span color="' .. icon_color .. '">' .. icon_code .. '</span> ',
