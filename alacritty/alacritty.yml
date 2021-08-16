@@ -4,7 +4,6 @@ dynamic_title: true
 cursor_style: Block
 
 env:
-  TERM: alacritty
   LANG: pt_BR.UTF-8
   LC_CTYPE: pt_BR.UTF-8
 

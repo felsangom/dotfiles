@@ -18,7 +18,7 @@ local theme                                     = {}
 theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome/themes/multicolor"
 --theme.wallpaper                                 = theme.confdir .. "/wall.png"
 theme.font                                      = "Ubuntu 11"
-theme.icon_font                                 = "Font Awesome 5 Free Solid"
+theme.icon_font                                 = "Hack"
 theme.icon_size                                 = 10
 theme.menu_bg_normal                            = "#282c34"
 theme.menu_bg_focus                             = "#191f2b"
@@ -107,7 +107,7 @@ end
 
 -- Textclock
 os.setlocale(os.getenv("LANG")) -- to localize the clock
-local clockicon = make_icon('\u{f017}', '#7788af')
+local clockicon = make_icon('\u{f073}', '#7788af')
 local mytextclock = wibox.widget.textclock(markup("#7788af", "%d/%m/%Y ") .. markup("#ab7367", ">") .. markup("#de5e1e", " %H:%M "))
 mytextclock.font = theme.font
 
@@ -123,7 +123,7 @@ mytextclock:connect_signal("button::press",
     end)
 
 -- CPU
-local cpuicon = make_icon('\u{f2db}', '#e33a6e')
+local cpuicon = make_icon('\u{f85a}', '#e33a6e')
 local cpu = lain.widget.cpu({
     settings = function()
         widget:set_markup(markup.fontfg(theme.font, "#e33a6e", cpu_now.usage .. "% "))
@@ -131,7 +131,7 @@ local cpu = lain.widget.cpu({
 })
 
 -- Battery
-local baticon = make_icon('\u{f0e7}', '#cccccc')
+local baticon = make_icon('\u{f583}', '#cccccc')
 local bat = lain.widget.bat({
     settings = function()
         local perc = bat_now.perc ~= "N/A" and bat_now.perc .. "%" or bat_now.perc
@@ -148,9 +148,9 @@ local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
 
 -- Net
 --local netdownicon = wibox.widget.imagebox(theme.widget_netdown)
-local netdownicon = make_icon('\u{f13a}', '#87af5f')
+local netdownicon = make_icon('\u{f0ab}', '#87af5f')
 local netdowninfo = wibox.widget.textbox()
-local netupicon = make_icon('\u{f139}', '#e54c62')
+local netupicon = make_icon('\u{f0aa}', '#e54c62')
 local netupinfo = lain.widget.net({
     settings = function()
         widget:set_markup(markup.fontfg(theme.font, "#e54c62", net_now.sent .. " "))
@@ -159,7 +159,7 @@ local netupinfo = lain.widget.net({
 })
 
 -- MEM
-local memicon = make_icon('\u{f85a}', '#e0da37') -- wibox.widget.imagebox(theme.widget_mem)
+local memicon = make_icon('\u{f2db}', '#e0da37') -- wibox.widget.imagebox(theme.widget_mem)
 local memory = lain.widget.mem({
     settings = function()
         widget:set_markup(markup.fontfg(theme.font, "#e0da37", mem_now.used .. "M "))
