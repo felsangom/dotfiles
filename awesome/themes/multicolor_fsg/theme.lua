@@ -124,7 +124,7 @@ local cpu = lain.widget.cpu({
 })
 
 -- Battery
-local baticon = make_icon('\u{f583}', '#cccccc')
+local baticon = make_icon('\u{f0e7}', '#e0da37')
 local bat = lain.widget.bat({
     settings = function()
         local perc = bat_now.perc ~= "N/A" and bat_now.perc .. "%" or bat_now.perc
