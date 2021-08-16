@@ -85,7 +85,7 @@ awful.spawn.with_shell(
 -- {{{ Variable definitions
 
 local themes = {
-   "better_multicolor"
+   "multicolor_fsg"
 }
 
 local chosen_theme = themes[1]

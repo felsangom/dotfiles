@@ -18,7 +18,7 @@ local os = os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 local theme                                     = {}
-theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome/themes/better_multicolor"
+theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome/themes/multicolor_fsg"
 theme.font                                      = "Ubuntu 11"
 theme.icon_font                                 = "Hack"
 theme.icon_size                                 = 10
