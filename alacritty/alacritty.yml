@@ -8,7 +8,7 @@ env:
   LC_CTYPE: pt_BR.UTF-8
 
 shell:
-  program: /usr/bin/fish
+  program: /bin/bash
 
 font:
   use_thin_strokes: true
