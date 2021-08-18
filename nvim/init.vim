@@ -14,9 +14,6 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'jiangmiao/auto-pairs'
 Plug 'glepnir/oceanic-material'
 
-" (Optional) Multi-entry selection UI.
-Plug 'junegunn/fzf'
-
 " Initialize plugin system
 call plug#end()
 
