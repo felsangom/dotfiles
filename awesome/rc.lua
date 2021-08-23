@@ -765,7 +765,7 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 
 awful.spawn.single_instance("nm-applet")
-awful.spawn.single_instance("compton -b")
+awful.spawn.single_instance("picom -b")
 awful.spawn.single_instance("numlockx on")
 awful.spawn("nitrogen --restore")
 -- }}}
