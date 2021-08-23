@@ -172,7 +172,7 @@ function theme.at_screen_connect(s)
     gears.wallpaper.maximized(wallpaper, s, true)
 
     -- Tags
-    local names = { "web", "code", "term", "misc", "private" }
+    local names = { ' \u{f268} ', ' \u{f121} ', ' \u{e795} ', ' \u{f2d0} ', ' \u{f269} ' }
     local l = awful.layout.suit
     local layouts = { l.max, l.tile, l.fair, l.max, l.max }
     awful.tag(names, s, layouts)
@@ -197,20 +197,27 @@ function theme.at_screen_connect(s)
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
 
     -- Create the wibox
-    -- s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(19), bg = theme.bg_normal, fg = theme.fg_normal })
-    s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(21), bg = '#282c34', fg = '#cccccc' })
+    s.mywibox = awful.wibar({
+      position = "top",
+      screen = s,
+      height = dpi(21),
+      bg = theme.bg_normal,
+      fg = theme.fg_normal,
+      shape = function(cr, width, height)
+        gears.shape.rounded_rect(cr, width, height, 8)
+      end
+    })
 
     -- Add widgets to the wibox
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            --s.mylayoutbox,
-            s.mytaglist,
+            wibox.container.margin(s.mytaglist, 5),
             s.mypromptbox,
+            wibox.container.margin(wibox.widget.textbox(markup('#444444', '|')), 2, 2)
         },
-        --s.mytasklist, -- Middle widget
-        nil,
+        s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
