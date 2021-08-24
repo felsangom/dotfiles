@@ -21,11 +21,11 @@ local theme                                     = {}
 theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome/themes/multicolor_fsg"
 theme.font                                      = "Ubuntu 11"
 theme.icon_font                                 = "Hack"
-theme.icon_size                                 = 10
+theme.icon_size                                 = dpi(18)
 theme.menu_bg_normal                            = "#282c34"
 theme.menu_bg_focus                             = "#191f2b"
 theme.bg_normal                                 = "#282c34"
-theme.bg_focus                                  = "#191f2b"
+theme.bg_focus                                  = theme.bg_normal
 theme.bg_urgent                                 = "#b70202"
 theme.fg_normal                                 = "#cccccc"
 theme.fg_focus                                  = "#46d9ff"
@@ -200,9 +200,11 @@ function theme.at_screen_connect(s)
     s.mywibox = awful.wibar({
       position = "top",
       screen = s,
-      height = dpi(21),
+      height = dpi(26),
       bg = theme.bg_normal,
       fg = theme.fg_normal,
+      border_width = 3,
+      border_color = '#00000000',
       shape = function(cr, width, height)
         gears.shape.rounded_rect(cr, width, height, 8)
       end
@@ -224,23 +226,23 @@ function theme.at_screen_connect(s)
             wibox.container.margin(wibox.widget.textbox(''), 0, 4),
             volume_widget(),
             wibox.container.margin(wibox.widget.textbox(markup('#444444', '|')), 2, 2),
-            wibox.container.margin(netdownicon, 0, 0, 0, 2, '#87af5f'),
-            wibox.container.margin(netdowninfo, 0, 0, 0, 2, '#87af5f'),
+            netdownicon,
+            netdowninfo,
             wibox.container.margin(wibox.widget.textbox(''), 0, 4),
-            wibox.container.margin(netupicon, 0, 0, 0, 2, '#e54c62'),
-            wibox.container.margin(netupinfo.widget, 0, 0, 0, 2, '#e54c62'),
+            netupicon,
+            netupinfo.widget,
             wibox.container.margin(wibox.widget.textbox(markup('#444444', '|')), 2, 2),
-            wibox.container.margin(memicon, 0, 0, 0, 2, '#e0da37'),
-            wibox.container.margin(memory.widget, 0, 0, 0, 2, '#e0da37'),
+            memicon,
+            memory.widget,
             wibox.container.margin(wibox.widget.textbox(markup('#444444', '|')), 2, 2),
-            wibox.container.margin(cpuicon, 0, 0, 0, 2, '#e33a6e'),
-            wibox.container.margin(cpu.widget, 0, 0, 0, 2, '#e33a6e'),
+            cpuicon,
+            cpu.widget,
             wibox.container.margin(wibox.widget.textbox(markup('#444444', '|')), 2, 2),
-            wibox.container.margin(baticon, 0, 0, 0, 2, '#cccccc'),
-            wibox.container.margin(bat.widget, 0, 0, 0, 2, '#cccccc'),
+            baticon,
+            bat.widget,
             wibox.container.margin(wibox.widget.textbox(markup("#444444", "|")), 2, 2),
-            wibox.container.margin(clockicon, 0, 0, 0, 2, '#7788af'),
-            wibox.container.margin(mytextclock, 0, 0, 0, 2, '#7788af'),
+            clockicon,
+            mytextclock,
             s.mylayoutbox,
             logout_menu_widget()
         },
