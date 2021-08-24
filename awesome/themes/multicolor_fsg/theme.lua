@@ -109,30 +109,31 @@ local cw = calendar_widget({
   placement = "top_right"
 })
 mytextclock:connect_signal("button::press",
-    function(_, _, _, button)
-        if button == 1 then cw.toggle() end
-    end)
+  function(_, _, _, button)
+    if button == 1 then cw.toggle() end
+  end
+)
 
 -- CPU
 local cpuicon = make_icon('\u{f85a}', '#e33a6e')
 local cpu = lain.widget.cpu({
-    settings = function()
-        widget:set_markup(markup.fontfg(theme.font, "#e33a6e", cpu_now.usage .. "% "))
-    end
+  settings = function()
+    widget:set_markup(markup.fontfg(theme.font, "#e33a6e", cpu_now.usage .. "% "))
+  end
 })
 
 -- Battery
 local baticon = make_icon('\u{f0e7}', '#e0da37')
 local bat = lain.widget.bat({
-    settings = function()
-        local perc = bat_now.perc ~= "N/A" and bat_now.perc .. "%" or bat_now.perc
+  settings = function()
+    local perc = bat_now.perc ~= "N/A" and bat_now.perc .. "%" or bat_now.perc
 
-        if bat_now.ac_status == 1 then
-            perc = perc .. " plug"
-        end
-
-        widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, perc .. " "))
+    if bat_now.ac_status == 1 then
+      perc = perc .. " plug"
     end
+
+    widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, perc .. " "))
+  end
 })
 
 local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
@@ -143,111 +144,113 @@ local netdownicon = make_icon('\u{f0ab}', '#87af5f')
 local netdowninfo = wibox.widget.textbox()
 local netupicon = make_icon('\u{f0aa}', '#e54c62')
 local netupinfo = lain.widget.net({
-    settings = function()
-        widget:set_markup(markup.fontfg(theme.font, "#e54c62", net_now.sent .. " "))
-        netdowninfo:set_markup(markup.fontfg(theme.font, "#87af5f", net_now.received .. " "))
-    end
+  settings = function()
+    widget:set_markup(markup.fontfg(theme.font, "#e54c62", net_now.sent .. " "))
+    netdowninfo:set_markup(markup.fontfg(theme.font, "#87af5f", net_now.received .. " "))
+  end
 })
 
 -- MEM
 local memicon = make_icon('\u{f2db}', '#e0da37') -- wibox.widget.imagebox(theme.widget_mem)
 local memory = lain.widget.mem({
-    settings = function()
-        widget:set_markup(markup.fontfg(theme.font, "#e0da37", mem_now.used .. "M "))
-    end
+  settings = function()
+    widget:set_markup(markup.fontfg(theme.font, "#e0da37", mem_now.used .. "M "))
+  end
 })
 
 -- Logout widget
 local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
 
 function theme.at_screen_connect(s)
-    -- Quake application
-    s.quake = lain.util.quake({ app = awful.util.terminal })
+  -- Quake application
+  s.quake = lain.util.quake({ app = awful.util.terminal })
 
-    -- If wallpaper is a function, call it with the screen
-    local wallpaper = theme.wallpaper
-    if type(wallpaper) == "function" then
-        wallpaper = wallpaper(s)
+  -- If wallpaper is a function, call it with the screen
+  local wallpaper = theme.wallpaper
+  if type(wallpaper) == "function" then
+    wallpaper = wallpaper(s)
+  end
+  gears.wallpaper.maximized(wallpaper, s, true)
+
+  -- Tags
+  local names = { ' \u{f268} ', ' \u{f121} ', ' \u{e795} ', ' \u{f2d0} ', ' \u{f269} ' }
+  local l = awful.layout.suit
+  local layouts = { l.max, l.tile, l.fair, l.max, l.max }
+  awful.tag(names, s, layouts)
+
+  -- Create a promptbox for each screen
+  s.mypromptbox = awful.widget.prompt()
+
+  -- Create an imagebox widget which will contains an icon indicating which layout we're using.
+  -- We need one layoutbox per screen.
+  s.mylayoutbox = awful.widget.layoutbox(s)
+  s.mylayoutbox:buttons(
+    my_table.join(
+      awful.button({}, 1, function () awful.layout.inc( 1) end),
+      awful.button({}, 2, function () awful.layout.set( awful.layout.layouts[1] ) end),
+      awful.button({}, 3, function () awful.layout.inc(-1) end),
+      awful.button({}, 4, function () awful.layout.inc( 1) end),
+      awful.button({}, 5, function () awful.layout.inc(-1) end)
+    )
+  )
+
+  -- Create a taglist widget
+  s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
+
+  -- Create a tasklist widget
+  s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
+
+  -- Create the wibox
+  s.mywibox = awful.wibar({
+    position = "top",
+    screen = s,
+    height = dpi(26),
+    bg = theme.bg_normal,
+    fg = theme.fg_normal,
+    border_width = 3,
+    border_color = '#00000000',
+    shape = function(cr, width, height)
+      gears.shape.rounded_rect(cr, width, height, 8)
     end
-    gears.wallpaper.maximized(wallpaper, s, true)
+  })
 
-    -- Tags
-    local names = { ' \u{f268} ', ' \u{f121} ', ' \u{e795} ', ' \u{f2d0} ', ' \u{f269} ' }
-    local l = awful.layout.suit
-    local layouts = { l.max, l.tile, l.fair, l.max, l.max }
-    awful.tag(names, s, layouts)
-
-    -- Create a promptbox for each screen
-    s.mypromptbox = awful.widget.prompt()
-
-    -- Create an imagebox widget which will contains an icon indicating which layout we're using.
-    -- We need one layoutbox per screen.
-    s.mylayoutbox = awful.widget.layoutbox(s)
-    s.mylayoutbox:buttons(my_table.join(
-                           awful.button({}, 1, function () awful.layout.inc( 1) end),
-                           awful.button({}, 2, function () awful.layout.set( awful.layout.layouts[1] ) end),
-                           awful.button({}, 3, function () awful.layout.inc(-1) end),
-                           awful.button({}, 4, function () awful.layout.inc( 1) end),
-                           awful.button({}, 5, function () awful.layout.inc(-1) end)))
-
-    -- Create a taglist widget
-    s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
-
-    -- Create a tasklist widget
-    s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
-
-    -- Create the wibox
-    s.mywibox = awful.wibar({
-      position = "top",
-      screen = s,
-      height = dpi(26),
-      bg = theme.bg_normal,
-      fg = theme.fg_normal,
-      border_width = 3,
-      border_color = '#00000000',
-      shape = function(cr, width, height)
-        gears.shape.rounded_rect(cr, width, height, 8)
-      end
-    })
-
-    -- Add widgets to the wibox
-    s.mywibox:setup {
-        layout = wibox.layout.align.horizontal,
-        { -- Left widgets
-            layout = wibox.layout.fixed.horizontal,
-            wibox.container.margin(s.mytaglist, 5),
-            s.mypromptbox,
-            wibox.container.margin(wibox.widget.textbox(markup('#444444', '|')), 2, 2)
-        },
-        s.mytasklist, -- Middle widget
-        { -- Right widgets
-            layout = wibox.layout.fixed.horizontal,
-            wibox.widget.systray(),
-            wibox.container.margin(wibox.widget.textbox(''), 0, 4),
-            volume_widget(),
-            wibox.container.margin(wibox.widget.textbox(markup('#444444', '|')), 2, 2),
-            netdownicon,
-            netdowninfo,
-            wibox.container.margin(wibox.widget.textbox(''), 0, 4),
-            netupicon,
-            netupinfo.widget,
-            wibox.container.margin(wibox.widget.textbox(markup('#444444', '|')), 2, 2),
-            memicon,
-            memory.widget,
-            wibox.container.margin(wibox.widget.textbox(markup('#444444', '|')), 2, 2),
-            cpuicon,
-            cpu.widget,
-            wibox.container.margin(wibox.widget.textbox(markup('#444444', '|')), 2, 2),
-            baticon,
-            bat.widget,
-            wibox.container.margin(wibox.widget.textbox(markup("#444444", "|")), 2, 2),
-            clockicon,
-            mytextclock,
-            s.mylayoutbox,
-            logout_menu_widget()
-        },
-    }
-
+  -- Add widgets to the wibox
+  s.mywibox:setup {
+    layout = wibox.layout.align.horizontal,
+    { -- Left widgets
+      layout = wibox.layout.fixed.horizontal,
+      wibox.container.margin(s.mytaglist, 5),
+      s.mypromptbox,
+      wibox.container.margin(wibox.widget.textbox(markup('#444444', '|')), 2, 2)
+    },
+    s.mytasklist, -- Middle widget
+    { -- Right widgets
+      layout = wibox.layout.fixed.horizontal,
+      wibox.widget.systray(),
+      wibox.container.margin(wibox.widget.textbox(''), 0, 4),
+      volume_widget(),
+      wibox.container.margin(wibox.widget.textbox(markup('#444444', '|')), 2, 2),
+      netdownicon,
+      netdowninfo,
+      wibox.container.margin(wibox.widget.textbox(''), 0, 4),
+      netupicon,
+      netupinfo.widget,
+      wibox.container.margin(wibox.widget.textbox(markup('#444444', '|')), 2, 2),
+      memicon,
+      memory.widget,
+      wibox.container.margin(wibox.widget.textbox(markup('#444444', '|')), 2, 2),
+      cpuicon,
+      cpu.widget,
+      wibox.container.margin(wibox.widget.textbox(markup('#444444', '|')), 2, 2),
+      baticon,
+      bat.widget,
+      wibox.container.margin(wibox.widget.textbox(markup("#444444", "|")), 2, 2),
+      clockicon,
+      mytextclock,
+      s.mylayoutbox,
+      logout_menu_widget()
+    },
+  }
 end
 
 return theme
