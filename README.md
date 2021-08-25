@@ -14,6 +14,9 @@ Install [oh-my-bash](https://github.com/ohmybash/oh-my-bash), so you can use the
 ## Neovim
 Need [vim-plug](https://github.com/junegunn/vim-plug) installed to run the PlugInstall command in nvim.
 
+## Rofi themes
+![](https://githubmemory.com/repo/lr-tech/rofi-themes-collection)
+
 ![](https://github.com/felsangom/dotfiles/blob/main/awesome/screenshot2.png)
 
 ![](https://raw.githubusercontent.com/felsangom/dotfiles/main/awesome/screenshot.png)

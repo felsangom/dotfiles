@@ -1,0 +1,4 @@
+configuration {
+  modi: "window,run,drun,ssh,combi";
+}
+@import "/home/felipe/.local/share/rofi/themes/nord.rasi"
