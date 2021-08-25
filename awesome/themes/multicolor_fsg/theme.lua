@@ -1,10 +1,10 @@
 --[[
 
+  MultiColor - FSG
+
     Theme based on:
       Multicolor Awesome WM theme 2.0
       github.com/lcpz
-
-    By Felipe Gomes
 
 --]]
 
@@ -19,9 +19,10 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 local theme                                     = {}
 theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome/themes/multicolor_fsg"
-theme.font                                      = "Ubuntu 11"
+theme.font                                      = "Ubuntu " .. dpi(10)
+theme.taglist_font                              = "Hack " .. dpi(15)
 theme.icon_font                                 = "Hack"
-theme.icon_size                                 = dpi(18)
+theme.icon_size                                 = dpi(13)
 theme.menu_bg_normal                            = "#282c34"
 theme.menu_bg_focus                             = "#191f2b"
 theme.bg_normal                                 = "#282c34"
@@ -87,13 +88,16 @@ local markup = lain.util.markup
 -- can use any nerd font you like and change the icon_font above.
 --]]
 local function make_icon(icon_code, icon_color)
-  return wibox.widget{
-    markup = ' <span color="' .. icon_color .. '">' .. icon_code .. '</span> ',
-    font = theme.icon_font .. theme.icon_size,
+  local icon_widget = wibox.widget{
+    markup = '<span color="' .. icon_color .. '">' .. icon_code .. '</span>',
+    font = theme.icon_font .. ' ' .. theme.icon_size,
     align = 'center',
     valign = 'center',
     widget = wibox.widget.textbox
   }
+
+  -- Return the icon widget with left and right margins
+  return wibox.container.margin(icon_widget, 5, 5)
 end
 
 -- Textclock
@@ -139,7 +143,6 @@ local bat = lain.widget.bat({
 local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
 
 -- Net
---local netdownicon = wibox.widget.imagebox(theme.widget_netdown)
 local netdownicon = make_icon('\u{f0ab}', '#87af5f')
 local netdowninfo = wibox.widget.textbox()
 local netupicon = make_icon('\u{f0aa}', '#e54c62')
@@ -151,7 +154,7 @@ local netupinfo = lain.widget.net({
 })
 
 -- MEM
-local memicon = make_icon('\u{f2db}', '#e0da37') -- wibox.widget.imagebox(theme.widget_mem)
+local memicon = make_icon('\u{f2db}', '#e0da37')
 local memory = lain.widget.mem({
   settings = function()
     widget:set_markup(markup.fontfg(theme.font, "#e0da37", mem_now.used .. "M "))
@@ -173,7 +176,7 @@ function theme.at_screen_connect(s)
   gears.wallpaper.maximized(wallpaper, s, true)
 
   -- Tags
-  local names = { ' \u{f268} ', ' \u{f121} ', ' \u{e795} ', ' \u{f2d0} ', ' \u{f269} ' }
+  local names = { '\u{f268} ', '\u{f121} ', '\u{e795} ', '\u{f2d0} ', '\u{f269} ' }
   local l = awful.layout.suit
   local layouts = { l.max, l.tile, l.fair, l.max, l.max }
   awful.tag(names, s, layouts)
