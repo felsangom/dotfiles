@@ -20,9 +20,9 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 local theme                                     = {}
 theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome/themes/multicolor_fsg"
 theme.font                                      = "Ubuntu " .. dpi(10)
-theme.taglist_font                              = "Hack " .. dpi(15)
+theme.taglist_font                              = "Hack " .. 15
 theme.icon_font                                 = "Hack"
-theme.icon_size                                 = dpi(13)
+theme.icon_size                                 = 13
 theme.menu_bg_normal                            = "#282c34"
 theme.menu_bg_focus                             = "#191f2b"
 theme.bg_normal                                 = "#282c34"
@@ -176,7 +176,7 @@ function theme.at_screen_connect(s)
   gears.wallpaper.maximized(wallpaper, s, true)
 
   -- Tags
-  local names = { '\u{f268} ', '\u{f121} ', '\u{e795} ', '\u{f2d0} ', '\u{f269} ' }
+  local names = { '\u{f268}', '\u{f121}', '\u{e795}', '\u{f2d0}', '\u{f269}' }
   local l = awful.layout.suit
   local layouts = { l.max, l.tile, l.fair, l.max, l.max }
   awful.tag(names, s, layouts)
@@ -198,7 +198,23 @@ function theme.at_screen_connect(s)
   )
 
   -- Create a taglist widget
-  s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
+  s.mytaglist = awful.widget.taglist {
+    screen = s,
+    filter = awful.widget.taglist.filter.all,
+    buttons = awful.util.taglist_buttons,
+    style = {
+      shape = gears.shape.rectangle
+    },
+    layout = {
+      spacing = 5,
+      spacing_widget = {
+        color = '#00000000',
+        shape = gears.shape.rectangle,
+        widget = wibox.widget.separator
+      },
+      layout = wibox.layout.fixed.horizontal
+    }
+  }
 
   -- Create a tasklist widget
   s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
