@@ -240,6 +240,10 @@ root.buttons(mytable.join(
 -- {{{ Key bindings
 
 globalkeys = mytable.join(
+    -- Toggle title bar
+    awful.key({ "Control", "Shift" }, "t", function()  awful.titlebar.toggle(client.focus) end,
+              {description = "toggle title bar", group = "hotkeys"}),
+
     -- Destroy all notifications
     awful.key({ "Control",           }, "space", function() naughty.destroy_all_notifications() end,
               {description = "destroy all notifications", group = "hotkeys"}),
