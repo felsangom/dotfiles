@@ -6,6 +6,7 @@ cursor_style: Block
 env:
   LANG: pt_BR.UTF-8
   LC_CTYPE: pt_BR.UTF-8
+  TERM: xterm-256color
 
 shell:
   program: /bin/bash

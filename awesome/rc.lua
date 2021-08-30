@@ -241,7 +241,7 @@ root.buttons(mytable.join(
 
 globalkeys = mytable.join(
     -- Toggle title bar
-    awful.key({ "Control", "Shift" }, "t", function()  awful.titlebar.toggle(client.focus) end,
+    awful.key({ modkey, "Shift" }, "t", function()  awful.titlebar.toggle(client.focus) end,
               {description = "toggle title bar", group = "hotkeys"}),
 
     -- Destroy all notifications
