@@ -10,6 +10,8 @@ env:
 
 shell:
   program: /bin/bash
+  args:
+    - --login
 
 font:
   use_thin_strokes: true
