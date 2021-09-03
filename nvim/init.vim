@@ -14,6 +14,9 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'jiangmiao/auto-pairs'
 Plug 'glepnir/oceanic-material'
 
+Plug 'yuezk/vim-js'
+Plug 'maxmellon/vim-jsx-pretty'
+
 " Initialize plugin system
 call plug#end()
 

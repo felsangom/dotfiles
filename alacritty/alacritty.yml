@@ -2,6 +2,7 @@ scale_with_dpi: true
 background_opacity: 0.98
 dynamic_title: true
 cursor_style: Block
+working_directory: /home/felipe
 
 env:
   LANG: pt_BR.UTF-8
