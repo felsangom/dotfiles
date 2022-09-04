@@ -26,34 +26,29 @@ font:
     family: CaskaydiaCove Nerd Font
     style: Italic
 
-# Colors (Monokai Pro)
+# Gruvbox
 colors:
-  # Default colors
   primary:
-    background: '#2D2A2E'
-    foreground: '#FCFCFA'
-
-  # Normal colors
+    background: '#282828'
+    foreground: '#d4be98'
   normal:
-    black:   '#403E41'
-    red:     '#FF6188'
-    green:   '#A9DC76'
-    yellow:  '#FFD866'
-    blue:    '#FC9867'
-    magenta: '#AB9DF2'
-    cyan:    '#78DCE8'
-    white:   '#FCFCFA'
-
-  # Bright colors
+    black:   '#3c3836'
+    red:     '#ea6962'
+    green:   '#a9b665'
+    yellow:  '#d8a657'
+    blue:    '#7daea3'
+    magenta: '#d3869b'
+    cyan:    '#89b482'
+    white:   '#d4be98'
   bright:
-    black:   '#727072'
-    red:     '#FF6188'
-    green:   '#A9DC76'
-    yellow:  '#FFD866'
-    blue:    '#FC9867'
-    magenta: '#AB9DF2'
-    cyan:    '#78DCE8'
-    white:   '#FCFCFA'
+    black:   '#3c3836'
+    red:     '#ea6962'
+    green:   '#a9b665'
+    yellow:  '#d8a657'
+    blue:    '#7daea3'
+    magenta: '#d3869b'
+    cyan:    '#89b482'
+    white:   '#d4be98'
 
 key_bindings:
 - { key: PageUp,   action: ScrollPageUp,   mode: ~Alt, mods: Shift }
