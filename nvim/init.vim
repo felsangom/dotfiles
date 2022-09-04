@@ -12,7 +12,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'cloudhead/neovim-fuzzy'
 Plug 'scrooloose/nerdcommenter'
 Plug 'jiangmiao/auto-pairs'
-"Plug 'glepnir/oceanic-material'
 Plug 'phanviet/vim-monokai-pro'
 
 Plug 'yuezk/vim-js'
@@ -32,7 +31,7 @@ set showmatch
 set ignorecase
 set incsearch
 set mouse=a
-set clipboard=unnamedplus
+set clipboard^=unnamed,unnamedplus
 set list listchars=tab:»\ ,space:·,trail:·,eol:¬
 set number
 set smarttab
@@ -54,7 +53,7 @@ set signcolumn=yes
 syntax on
 set t_Co=256
 colorscheme monokai_pro
-let g:airline_theme='molokai'
+let g:airline_theme='deus'
 set background=dark
 
 if exists('+termguicolors')
