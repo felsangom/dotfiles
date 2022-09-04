@@ -12,7 +12,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'cloudhead/neovim-fuzzy'
 Plug 'scrooloose/nerdcommenter'
 Plug 'jiangmiao/auto-pairs'
-Plug 'phanviet/vim-monokai-pro'
+Plug 'sainnhe/gruvbox-material'
 
 Plug 'yuezk/vim-js'
 Plug 'maxmellon/vim-jsx-pretty'
@@ -24,6 +24,7 @@ call plug#end()
 " Felipe Gomes configs
 "
 let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#enabled = 1
 let g:powerline_pycmd="py"
 set laststatus=2
 set encoding=utf-8
@@ -52,7 +53,9 @@ set signcolumn=yes
 
 syntax on
 set t_Co=256
-colorscheme monokai_pro
+let g:gruvbox_material_better_performance=1
+let g:gruvbox_material_foreground='mix'
+colorscheme gruvbox-material
 let g:airline_theme='deus'
 set background=dark
 
