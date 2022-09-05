@@ -9,11 +9,12 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
-Plug 'cloudhead/neovim-fuzzy'
+"Plug 'cloudhead/neovim-fuzzy'
 Plug 'scrooloose/nerdcommenter'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sainnhe/sonokai'
-
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'yuezk/vim-js'
 Plug 'maxmellon/vim-jsx-pretty'
 
@@ -70,12 +71,30 @@ endif
 
 " Automatically remove all trailing whitespace
 autocmd BufWritePre * %s/\s\+$//e
+
+" j/k will move virtual lines (lines that wrap)
+noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+
 "
 " Felipe Gomes - configs end
 "
 
-nnoremap <C-p> :FuzzyOpen<CR>
+"
+" fzf config
+"
+nnoremap <C-p> :GFiles<CR>
 
+let g:fzf_layout = { 'down':  '40%' }
+let $FZF_DEFAULT_OPTS='--layout=reverse --border'
+"
+" fzf config end
+"
+
+
+"
+" NERDTree config
+"
 inoremap jk <ESC>
 nmap <C-n> :NERDTreeToggle<CR>
 vmap ++ <plug>NERDCommenterToggle
@@ -85,12 +104,6 @@ let g:NERDTreeGitStatusWithFlags = 1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:NERDTreeGitStatusNodeColorization = 1
 let g:NERDTreeIgnore = ['^node_modules$']
-
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-
-" j/k will move virtual lines (lines that wrap)
-noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
-noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
 " sync open file with NERDTree
 " " Check if NERDTree is open or active
@@ -106,8 +119,16 @@ function! SyncTree()
     wincmd p
   endif
 endfunction
+"
+" NERDTree config end
+"
 
+
+"
 " coc config
+"
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
 let g:coc_global_extensions = [
   \ 'coc-snippets',
   \ 'coc-pairs',
@@ -222,3 +243,6 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+"
+" coc config end
+"
