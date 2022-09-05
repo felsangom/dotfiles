@@ -1,5 +1,4 @@
 scale_with_dpi: true
-background_opacity: 0.98
 dynamic_title: true
 cursor_style: Block
 working_directory: /home/felipe
@@ -26,32 +25,34 @@ font:
     family: CaskaydiaCove Nerd Font
     style: Italic
 
-# Gruvbox
+# Sonokai Maia
 colors:
   primary:
-    background: '#282828'
-    foreground: '#d4be98'
+    background: "0x303030"
+    foreground: "0xe1e2e3"
+
   normal:
-    black:   '#3c3836'
-    red:     '#ea6962'
-    green:   '#a9b665'
-    yellow:  '#d8a657'
-    blue:    '#7daea3'
-    magenta: '#d3869b'
-    cyan:    '#89b482'
-    white:   '#d4be98'
+    black: "0x1c1e1f"
+    red: "0xf76c7c"
+    green: "0x9cd57b"
+    yellow: "0xe3d367"
+    blue: "0x78cee9"
+    magenta: "0xbaa0f8"
+    cyan: "0xf3a96a"
+    white: "0xe1e2e3"
+
   bright:
-    black:   '#3c3836'
-    red:     '#ea6962'
-    green:   '#a9b665'
-    yellow:  '#d8a657'
-    blue:    '#7daea3'
-    magenta: '#d3869b'
-    cyan:    '#89b482'
-    white:   '#d4be98'
+    black: "0x82878b"
+    red: "0xf76c7c"
+    green: "0x9cd57b"
+    yellow: "0xe3d367"
+    blue: "0x78cee9"
+    magenta: "0xbaa0f8"
+    cyan: "0xf3a96a"
+    white: "0xe1e2e3"
 
 key_bindings:
-- { key: PageUp,   action: ScrollPageUp,   mode: ~Alt, mods: Shift }
-- { key: PageDown, action: ScrollPageDown, mode: ~Alt, mods: Shift   }
-- { key: Home,     action: ScrollToTop,    mode: ~Alt, mods: Shift   }
-- { key: End,      action: ScrollToBottom, mode: ~Alt, mods: Shift   }
+  - { key: PageUp,   action: ScrollPageUp,   mods: Shift }
+  - { key: PageDown, action: ScrollPageDown, mods: Shift }
+  - { key: Home,     action: ScrollToTop,    mods: Shift }
+  - { key: End,      action: ScrollToBottom, mods: Shift }

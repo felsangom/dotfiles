@@ -12,7 +12,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'cloudhead/neovim-fuzzy'
 Plug 'scrooloose/nerdcommenter'
 Plug 'jiangmiao/auto-pairs'
-Plug 'sainnhe/gruvbox-material'
+Plug 'sainnhe/sonokai'
 
 Plug 'yuezk/vim-js'
 Plug 'maxmellon/vim-jsx-pretty'
@@ -30,6 +30,7 @@ let g:airline#extensions#tabline#show_buffers=0
 let g:airline#extensions#tabline#show_tab_count=0
 let g:airline#extensions#tabline#show_splits=0
 let g:powerline_pycmd="py"
+let g:sonokai_style="maia"
 set laststatus=2
 set encoding=utf-8
 set showmatch
@@ -59,8 +60,8 @@ syntax on
 set t_Co=256
 let g:gruvbox_material_better_performance=1
 let g:gruvbox_material_foreground='mix'
-colorscheme gruvbox-material
-let g:airline_theme='deus'
+colorscheme sonokai
+let g:airline_theme='sonokai'
 set background=dark
 
 if exists('+termguicolors')
