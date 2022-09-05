@@ -58,8 +58,6 @@ set signcolumn=yes
 
 syntax on
 set t_Co=256
-let g:gruvbox_material_better_performance=1
-let g:gruvbox_material_foreground='mix'
 colorscheme sonokai
 let g:airline_theme='sonokai'
 set background=dark

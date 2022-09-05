@@ -25,10 +25,9 @@ font:
     family: CaskaydiaCove Nerd Font
     style: Italic
 
-# Sonokai Maia
 colors:
   primary:
-    background: "0x303030"
+    background: "0x273136"
     foreground: "0xe1e2e3"
 
   normal:
