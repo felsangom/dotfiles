@@ -9,14 +9,11 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
-"Plug 'cloudhead/neovim-fuzzy'
 Plug 'scrooloose/nerdcommenter'
-Plug 'jiangmiao/auto-pairs'
-Plug 'sainnhe/sonokai'
+Plug 'sainnhe/gruvbox-material'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'yuezk/vim-js'
-Plug 'maxmellon/vim-jsx-pretty'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Initialize plugin system
 call plug#end()
@@ -31,7 +28,6 @@ let g:airline#extensions#tabline#show_buffers=0
 let g:airline#extensions#tabline#show_tab_count=0
 let g:airline#extensions#tabline#show_splits=0
 let g:powerline_pycmd="py"
-let g:sonokai_style="maia"
 set laststatus=2
 set encoding=utf-8
 set showmatch
@@ -59,15 +55,23 @@ set signcolumn=yes
 
 syntax on
 set t_Co=256
-colorscheme sonokai
-let g:airline_theme='sonokai'
-set background=dark
 
-if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
-endif
+"
+" Theme configs
+"
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+set termguicolors
+
+let g:gruvbox_material_background = 'soft'
+let g:gruvbox_material_better_performance = 1
+colorscheme gruvbox-material
+let g:airline_theme='gruvbox_material'
+set background=dark
+"
+" Theme configs end
+"
+
 
 " Automatically remove all trailing whitespace
 autocmd BufWritePre * %s/\s\+$//e
@@ -79,6 +83,23 @@ noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 "
 " Felipe Gomes - configs end
 "
+
+"
+" treesitter
+"
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  auto_install = true,
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false
+  }
+}
+EOF
+"
+" treesitter end
+"
+
 
 "
 " fzf config

@@ -27,28 +27,26 @@ font:
 
 colors:
   primary:
-    background: "0x273136"
-    foreground: "0xe1e2e3"
-
+    background: '0x32302f'
+    foreground: '0xd4be98'
   normal:
-    black: "0x1c1e1f"
-    red: "0xf76c7c"
-    green: "0x9cd57b"
-    yellow: "0xe3d367"
-    blue: "0x78cee9"
-    magenta: "0xbaa0f8"
-    cyan: "0xf3a96a"
-    white: "0xe1e2e3"
-
+    black:   '0x45403d'
+    red:     '0xea6962'
+    green:   '0xa9b665'
+    yellow:  '0xd8a657'
+    blue:    '0x7daea3'
+    magenta: '0xd3869b'
+    cyan:    '0x89b482'
+    white:   '0xd4be98'
   bright:
-    black: "0x82878b"
-    red: "0xf76c7c"
-    green: "0x9cd57b"
-    yellow: "0xe3d367"
-    blue: "0x78cee9"
-    magenta: "0xbaa0f8"
-    cyan: "0xf3a96a"
-    white: "0xe1e2e3"
+    black:   '0x45403d'
+    red:     '0xea6962'
+    green:   '0xa9b665'
+    yellow:  '0xd8a657'
+    blue:    '0x7daea3'
+    magenta: '0xd3869b'
+    cyan:    '0x89b482'
+    white:   '0xd4be98'
 
 key_bindings:
   - { key: PageUp, action: ScrollPageUp, mods: Shift }
