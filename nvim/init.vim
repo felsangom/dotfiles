@@ -84,6 +84,7 @@ noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 " fzf config
 "
 nnoremap <C-p> :GFiles<CR>
+nnoremap <C-S-p> :Ag<CR>
 
 let g:fzf_layout = { 'down':  '40%' }
 let $FZF_DEFAULT_OPTS='--layout=reverse --border'
