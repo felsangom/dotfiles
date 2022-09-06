@@ -55,4 +55,3 @@ key_bindings:
   - { key: PageDown, action: ScrollPageDown, mods: Shift }
   - { key: Home, action: ScrollToTop, mods: Shift }
   - { key: End, action: ScrollToBottom, mods: Shift }
-  - { key: P, mods: Control|Shift, chars: "\x1b[80;5u" }

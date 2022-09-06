@@ -84,9 +84,10 @@ noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 " fzf config
 "
 nnoremap <C-p> :GFiles<CR>
-nnoremap <C-S-p> :Ag<CR>
+nnoremap <C-A-p> :Ag<CR>
 
 let g:fzf_layout = { 'down':  '40%' }
+let g:fzf_preview_window = ['right:40%:hidden', 'ctrl-/']
 let $FZF_DEFAULT_OPTS='--layout=reverse --border'
 "
 " fzf config end
