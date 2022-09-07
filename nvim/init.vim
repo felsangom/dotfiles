@@ -6,12 +6,9 @@ call plug#begin('~/.nvim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'ryanoasis/vim-devicons'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'
 Plug 'airblade/vim-gitgutter'
-Plug 'preservim/nerdcommenter'
 Plug 'sainnhe/gruvbox-material'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -102,7 +99,8 @@ EOF
 " fzf config
 "
 nnoremap <C-p> :GFiles<CR>
-nnoremap <C-A-p> :Ag<CR>
+nnoremap <C-A-p> :GFiles?<CR>
+nnoremap <C-A-s> :Ag<CR>
 
 let g:fzf_layout = { 'down':  '40%' }
 let g:fzf_preview_window = ['right:40%:hidden', 'ctrl-/']
@@ -110,32 +108,17 @@ let $FZF_DEFAULT_OPTS='--layout=reverse --border'
 
 
 "
-" NERDTree config
+" nvim-tree
 "
+lua << EOF
+require("nvim-tree").setup {
+  reload_on_bufenter = true,
+  respect_buf_cwd = true
+}
+EOF
+
 inoremap jk <ESC>
-nmap <C-n> :NERDTreeToggle<CR>
-let g:NERDCreateDefaultMappings = 1
-let g:NERDTreeGitStatusWithFlags = 1
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-let g:NERDTreeGitStatusNodeColorization = 1
-let g:NERDTreeIgnore = ['^node_modules$']
-nmap <C-_> <Plug>NERDCommenterToggle
-vmap <C-_> <Plug>NERDCommenterToggle<CR>gv
-
-" sync open file with NERDTree
-" " Check if NERDTree is open or active
-function! IsNERDTreeOpen()
-  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-endfunction
-
-" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
-" file, and we're not in vimdiff
-function! SyncTree()
-  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
-    NERDTreeFind
-    wincmd p
-  endif
-endfunction
+nmap <C-n> :NvimTreeToggle<CR>
 
 
 "
