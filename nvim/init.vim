@@ -1,4 +1,6 @@
-" Specify a directory for plugins
+"
+" Plugins
+"
 call plug#begin('~/.nvim/plugged')
 
 Plug 'vim-airline/vim-airline'
@@ -14,20 +16,24 @@ Plug 'sainnhe/gruvbox-material'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'tpope/vim-fugitive'
 
-" Initialize plugin system
 call plug#end()
 
 "
 " Felipe Gomes configs
 "
-let g:airline_powerline_fonts=1
-let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#tabline#show_close_button=0
-let g:airline#extensions#tabline#show_buffers=0
-let g:airline#extensions#tabline#show_tab_count=0
-let g:airline#extensions#tabline#show_splits=0
-let g:powerline_pycmd="py"
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#branch#enabled=1
+let g:airline#extensions#hunks#enabled=0
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_close_button = 0
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#show_tab_count = 0
+let g:airline#extensions#tabline#show_splits = 0
+let g:airline#extensions#tabline#show_tab_nr = 0
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:powerline_pycmd = 'py'
 set laststatus=2
 set encoding=utf-8
 set showmatch
@@ -64,14 +70,12 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors
 
 let g:gruvbox_material_background = 'soft'
+let g:gruvbox_material_enable_italic = 1
+let g:gruvbox_material_enable_bold = 1
 let g:gruvbox_material_better_performance = 1
 colorscheme gruvbox-material
 let g:airline_theme='gruvbox_material'
 set background=dark
-"
-" Theme configs end
-"
-
 
 " Automatically remove all trailing whitespace
 autocmd BufWritePre * %s/\s\+$//e
@@ -79,10 +83,6 @@ autocmd BufWritePre * %s/\s\+$//e
 " j/k will move virtual lines (lines that wrap)
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
-
-"
-" Felipe Gomes - configs end
-"
 
 "
 " treesitter
@@ -96,9 +96,6 @@ require'nvim-treesitter.configs'.setup {
   }
 }
 EOF
-"
-" treesitter end
-"
 
 
 "
@@ -110,9 +107,6 @@ nnoremap <C-A-p> :Ag<CR>
 let g:fzf_layout = { 'down':  '40%' }
 let g:fzf_preview_window = ['right:40%:hidden', 'ctrl-/']
 let $FZF_DEFAULT_OPTS='--layout=reverse --border'
-"
-" fzf config end
-"
 
 
 "
@@ -125,6 +119,8 @@ let g:NERDTreeGitStatusWithFlags = 1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:NERDTreeGitStatusNodeColorization = 1
 let g:NERDTreeIgnore = ['^node_modules$']
+nmap <C-_> <Plug>NERDCommenterToggle
+vmap <C-_> <Plug>NERDCommenterToggle<CR>gv
 
 " sync open file with NERDTree
 " " Check if NERDTree is open or active
@@ -140,9 +136,6 @@ function! SyncTree()
     wincmd p
   endif
 endfunction
-"
-" NERDTree config end
-"
 
 
 "
@@ -264,6 +257,3 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-"
-" coc config end
-"
