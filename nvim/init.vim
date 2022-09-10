@@ -112,7 +112,12 @@ let $FZF_DEFAULT_OPTS='--layout=reverse --border'
 lua << EOF
 require("nvim-tree").setup {
   reload_on_bufenter = true,
-  respect_buf_cwd = true
+  respect_buf_cwd = true,
+  actions = {
+    open_file = {
+      quit_on_open = true
+    }
+  }
 }
 EOF
 

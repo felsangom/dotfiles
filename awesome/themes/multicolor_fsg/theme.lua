@@ -17,19 +17,20 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 local theme                                     = {}
 theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome/themes/multicolor_fsg"
-theme.font                                      = "CaskaydiaCove Nerd Font " .. dpi(9)
+theme.font                                      = "CaskaydiaCove Nerd Font " .. dpi(10)
 theme.taglist_font                              = "CaskaydiaCove Nerd Font " .. dpi(13)
 theme.icon_font                                 = "CaskaydiaCove Nerd Font"
 theme.icon_size                                 = dpi(13)
 theme.menu_bg_normal                            = "#282c34"
 theme.menu_bg_focus                             = "#191f2b"
 theme.bg_normal                                 = "#282c34"
-theme.bg_focus                                  = theme.bg_normal
+theme.bg_focus                                  = theme.bg_normal .. '00'
 theme.bg_urgent                                 = "#b70202"
 theme.fg_normal                                 = "#cccccc"
-theme.fg_focus                                  = "#46d9ff"
+theme.fg_focus                                  = "#ea6962"
 theme.fg_urgent                                 = "#ffffff"
 theme.fg_minimize                               = "#ffffff"
+theme.bg_systray                                = theme.bg_normal .. '00'
 theme.border_width                              = dpi(2)
 theme.border_normal                             = "#282c34"
 theme.border_focus                              = "#ea6962"
@@ -43,7 +44,7 @@ theme.taglist_squares_sel                       = theme.confdir .. "/icons/squar
 theme.taglist_squares_unsel                     = theme.confdir .. "/icons/square_b.png"
 theme.tasklist_plain_task_name                  = true
 theme.tasklist_disable_icon                     = true
-theme.useless_gap                               = 3
+theme.useless_gap                               = 2
 theme.layout_tile                               = theme.confdir .. "/icons/tile.png"
 theme.layout_tilegaps                           = theme.confdir .. "/icons/tilegaps.png"
 theme.layout_tileleft                           = theme.confdir .. "/icons/tileleft.png"
@@ -100,8 +101,8 @@ end
 
 -- Textclock
 os.setlocale(os.getenv("LANG")) -- to localize the clock
-local clockicon = make_icon('\u{f073}', '#7788af')
-local mytextclock = wibox.widget.textclock(markup("#7788af", "%d/%m/%Y ") .. markup("#ab7367", ">") .. markup("#de5e1e", " %H:%M "))
+local clockicon = make_icon('\u{f073}', '#7daea3')
+local mytextclock = wibox.widget.textclock(markup("#7daea3", "%d/%m/%Y ") .. markup("#7daea3", ">") .. markup("#7daea3", " %H:%M "))
 mytextclock.font = theme.font
 
 -- Calendar
@@ -117,16 +118,16 @@ mytextclock:connect_signal("button::press",
 )
 
 -- CPU
-local cpuicon = make_icon('\u{f85a}', '#e33a6e')
+local cpuicon = make_icon('\u{f85a}', '#ea6962')
 local cpu = lain.widget.cpu({
   settings = function()
-    widget:set_markup(markup.fontfg(theme.font, "#e33a6e", cpu_now.usage .. "% "))
+    widget:set_markup(markup.fontfg(theme.font, "#ea6962", cpu_now.usage .. "% "))
   end
 })
 
 -- Battery
 --[[
-local baticon = make_icon('\u{f0e7}', '#e0da37')
+local baticon = make_icon('\u{f0e7}', '#d8a657')
 local bat = lain.widget.bat({
   settings = function()
     local perc = bat_now.perc ~= "N/A" and bat_now.perc .. "%" or bat_now.perc
@@ -135,7 +136,7 @@ local bat = lain.widget.bat({
       perc = perc .. " plug"
     end
 
-    widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, perc .. " "))
+    widget:set_markup(markup.fontfg(theme.font, "#d8a657", perc .. " "))
   end
 })
 ]]--
@@ -143,21 +144,21 @@ local bat = lain.widget.bat({
 local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
 
 -- Net
-local netdownicon = make_icon('\u{f0ab}', '#87af5f')
+local netdownicon = make_icon('\u{f0ab}', '#a9b665')
 local netdowninfo = wibox.widget.textbox()
-local netupicon = make_icon('\u{f0aa}', '#e54c62')
+local netupicon = make_icon('\u{f0aa}', '#ea6962')
 local netupinfo = lain.widget.net({
   settings = function()
-    widget:set_markup(markup.fontfg(theme.font, "#e54c62", net_now.sent .. " "))
-    netdowninfo:set_markup(markup.fontfg(theme.font, "#87af5f", net_now.received .. " "))
+    widget:set_markup(markup.fontfg(theme.font, "#ea6962", net_now.sent .. " "))
+    netdowninfo:set_markup(markup.fontfg(theme.font, "#a9b665", net_now.received .. " "))
   end
 })
 
 -- MEM
-local memicon = make_icon('\u{f2db}', '#e0da37')
+local memicon = make_icon('\u{f2db}', '#d8a657')
 local memory = lain.widget.mem({
   settings = function()
-    widget:set_markup(markup.fontfg(theme.font, "#e0da37", mem_now.used .. "M "))
+    widget:set_markup(markup.fontfg(theme.font, "#d8a657", mem_now.used .. "M "))
   end
 })
 
@@ -213,9 +214,9 @@ function theme.at_screen_connect(s)
     position = "top",
     screen = s,
     height = dpi(26),
-    bg = theme.bg_normal,
+    bg = theme.bg_normal ..'98',
     fg = theme.fg_normal,
-    border_width = 3,
+    border_width = 2,
     border_color = '#00000000',
     shape = function(cr, width, height)
       gears.shape.rounded_rect(cr, width, height, 8)
@@ -234,7 +235,7 @@ function theme.at_screen_connect(s)
     s.mytasklist, -- Middle widget
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
-      wibox.widget.systray(),
+      s.systray,
       wibox.container.margin(wibox.widget.textbox(''), 0, 4),
       volume_widget(),
       wibox.container.margin(wibox.widget.textbox(markup('#444444', '|')), 2, 2),
