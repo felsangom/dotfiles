@@ -14,7 +14,6 @@ shell:
     - --login
 
 window:
-  startup_mode: Maximized
   opacity: 0.98
 
 font:

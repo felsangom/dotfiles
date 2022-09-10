@@ -1,11 +1,9 @@
 --[[
-
   MultiColor - FSG
 
     Theme based on:
       Multicolor Awesome WM theme 2.0
       github.com/lcpz
-
 --]]
 
 local gears = require("gears")
@@ -19,9 +17,9 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 local theme                                     = {}
 theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome/themes/multicolor_fsg"
-theme.font                                      = "Ubuntu " .. dpi(9)
-theme.taglist_font                              = "Hack " .. dpi(15)
-theme.icon_font                                 = "Hack"
+theme.font                                      = "CaskaydiaCove Nerd Font " .. dpi(9)
+theme.taglist_font                              = "CaskaydiaCove Nerd Font " .. dpi(13)
+theme.icon_font                                 = "CaskaydiaCove Nerd Font"
 theme.icon_size                                 = dpi(13)
 theme.menu_bg_normal                            = "#282c34"
 theme.menu_bg_focus                             = "#191f2b"
@@ -34,7 +32,7 @@ theme.fg_urgent                                 = "#ffffff"
 theme.fg_minimize                               = "#ffffff"
 theme.border_width                              = dpi(2)
 theme.border_normal                             = "#282c34"
-theme.border_focus                              = "#46d9ff"
+theme.border_focus                              = "#ea6962"
 theme.border_marked                             = "#3ca4d8"
 theme.menu_border_width                         = 0
 theme.menu_width                                = dpi(130)
@@ -109,7 +107,7 @@ mytextclock.font = theme.font
 -- Calendar
 local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
 local cw = calendar_widget({
-  theme = "outrun",
+  theme = "dark",
   placement = "top_right"
 })
 mytextclock:connect_signal("button::press",
@@ -127,6 +125,7 @@ local cpu = lain.widget.cpu({
 })
 
 -- Battery
+--[[
 local baticon = make_icon('\u{f0e7}', '#e0da37')
 local bat = lain.widget.bat({
   settings = function()
@@ -139,6 +138,7 @@ local bat = lain.widget.bat({
     widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, perc .. " "))
   end
 })
+]]--
 
 local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
 
@@ -176,9 +176,9 @@ function theme.at_screen_connect(s)
   gears.wallpaper.maximized(wallpaper, s, true)
 
   -- Tags
-  local names = { '\u{f268}', '\u{f121}', '\u{e795}', '\u{f2d0}', '\u{f269}' }
+  local names = { '\u{f269}', '\u{f121}', '\u{e795}', '\u{f2d0}',  }
   local l = awful.layout.suit
-  local layouts = { l.max, l.tile, l.fair, l.max, l.max }
+  local layouts = { l.max, l.tile, l.fair, l.max }
   awful.tag(names, s, layouts)
 
   -- Create a promptbox for each screen
@@ -192,8 +192,7 @@ function theme.at_screen_connect(s)
       awful.button({}, 1, function () awful.layout.inc( 1) end),
       awful.button({}, 2, function () awful.layout.set( awful.layout.layouts[1] ) end),
       awful.button({}, 3, function () awful.layout.inc(-1) end),
-      awful.button({}, 4, function () awful.layout.inc( 1) end),
-      awful.button({}, 5, function () awful.layout.inc(-1) end)
+      awful.button({}, 4, function () awful.layout.inc( 1) end)
     )
   )
 
@@ -261,9 +260,9 @@ function theme.at_screen_connect(s)
       cpuicon,
       cpu.widget,
       wibox.container.margin(wibox.widget.textbox(markup('#444444', '|')), 2, 2),
-      baticon,
-      bat.widget,
-      wibox.container.margin(wibox.widget.textbox(markup("#444444", "|")), 2, 2),
+      --baticon,
+      --bat.widget,
+      --wibox.container.margin(wibox.widget.textbox(markup("#444444", "|")), 2, 2),
       clockicon,
       mytextclock,
       s.mylayoutbox,
