@@ -21,6 +21,10 @@ Need [vim-plug](https://github.com/junegunn/vim-plug) installed to run the PlugI
 ## Rofi themes
 [rofi-themes-collection](https://githubmemory.com/repo/lr-tech/rofi-themes-collection)
 
-![](https://github.com/felsangom/dotfiles/blob/main/awesome/screenshot2.png)
+## Screenshots
 
-![](https://raw.githubusercontent.com/felsangom/dotfiles/main/awesome/screenshot.png)
+![](https://github.com/felsangom/dotfiles/blob/main/screenshots/awesome2.png)
+
+![](https://github.com/felsangom/dotfiles/blob/main/screenshots/awesome.png)
+
+![](https://github.com/felsangom/dotfiles/blob/main/screenshots/awesome3.png)
