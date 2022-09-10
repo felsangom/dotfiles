@@ -2,14 +2,18 @@
 My personal linux dotfiles and configs. Bellow are a set of instructions on how to use it.
 
 ## AwesomeWM
-Need [awesome-wm-widgets](https://github.com/streetturtle/awesome-wm-widgets) for some awesome widgets to work. Just follow the link install instructions.
-You will also need a patched font for the icons. I'm using Hack Nerd Font and a customized version of the multicolor theme.
+Copy the ```awesome``` folder into ~/.config and reload AwesomeWM.
+You'll need [awesome-wm-widgets](https://github.com/streetturtle/awesome-wm-widgets) for some awesome widgets to work. Just follow the link install instructions.
+You will also need a patched font for the icons. I'm using CaskaydiaCove Nerd Font and a customized version of the multicolor theme. If you chose a different font, remember to change config files acordingly (theme.lua, alacritty.yml, etc).
 
 ## Alacritty
-Need a Nerd Font. Download the ones you like, and customize in config files. I'm using the Hack Nerd Font.
+Need a Nerd Font. Download the ones you like, and customize in config files. I'm using the CaskaydiaCove Nerd Font.
+
+## Picom
+I'm using picom as composer. The config file ajust vsync and alacritty active window opacity.
 
 ## Bash
-Install [oh-my-bash](https://github.com/ohmybash/oh-my-bash), so you can use the [agnoster](https://github.com/ohmybash/oh-my-bash/wiki/Themes#agnoster) theme.
+Install [oh-my-posh](https://ohmyposh.dev/), and choose the theme you like.
 
 ## Neovim
 Need [vim-plug](https://github.com/junegunn/vim-plug) installed to run the PlugInstall command in nvim.
