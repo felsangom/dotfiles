@@ -21,8 +21,6 @@ local hotkeys_popup = require("awful.hotkeys_popup")
                       require("awful.hotkeys_popup.keys")
 local mytable       = awful.util.table or gears.table -- 4.{0,1} compatibility
 
--- }}}
-
 -- {{{ Error handling
 
 -- Check if awesome encountered an error during startup and fell back to

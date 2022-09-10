@@ -40,12 +40,10 @@ set clipboard^=unnamed,unnamedplus
 set list listchars=tab:»\ ,space:·,trail:·,eol:¬
 set number
 set smarttab
-set cindent
 set tabstop=2
 set shiftwidth=2
 set expandtab
 set relativenumber
-set nu
 set nohlsearch
 set nowrap
 set guicursor=

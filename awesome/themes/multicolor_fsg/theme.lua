@@ -103,8 +103,13 @@ end
 -- Textclock
 os.setlocale(os.getenv("LANG")) -- to localize the clock
 local clockicon = make_icon('\u{f073}', '#7daea3')
-local mytextclock = wibox.widget.textclock(markup("#7daea3", "%d/%m/%Y ") .. markup("#7daea3", ">") .. markup("#7daea3", " %H:%M "))
+local mytextclock = wibox.widget.textclock(markup("#7daea3", "%d/%m/%Y ") .. markup("#7daea3", "%H:%M "))
 mytextclock.font = theme.font
+mytextclock:connect_signal("button::press",
+  function(_, _, _, button)
+    if button == 1 then cw.toggle() end
+  end
+)
 
 -- Calendar
 local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
@@ -112,11 +117,6 @@ local cw = calendar_widget({
   theme = "dark",
   placement = "top_right"
 })
-mytextclock:connect_signal("button::press",
-  function(_, _, _, button)
-    if button == 1 then cw.toggle() end
-  end
-)
 
 -- CPU
 local cpuicon = make_icon('\u{f85a}', '#ea6962')
@@ -170,7 +170,7 @@ function theme.at_screen_connect(s)
   -- Tags
   local names = { '\u{f269}', '\u{f121}', '\u{e795}', '\u{f2d0}' }
   local l = awful.layout.suit
-  local layouts = { l.max, l.tile, l.fair, l.max }
+  local layouts = { l.max, l.tile, l.fair, l.floating }
   awful.tag(names, s, layouts)
 
   -- Create a promptbox for each screen
