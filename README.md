@@ -1,5 +1,6 @@
 # Felipe Gomes - dotfiles
-My personal linux dotfiles and configs. Bellow are a set of instructions on how to use it.
+My personal linux dotfiles and configs. I've modified the multicolor theme from [awesome-copycats](https://github.com/lcpz/awesome-copycats) and added a Gruvbox style and colors to it.
+Bellow are a set of instructions on how to use it.
 
 ## AwesomeWM
 Copy the ```awesome``` folder into ~/.config and reload AwesomeWM.
