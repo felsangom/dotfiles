@@ -165,18 +165,8 @@ local memory = lain.widget.mem({
 local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
 
 function theme.at_screen_connect(s)
-  -- Quake application
-  s.quake = lain.util.quake({ app = awful.util.terminal })
-
-  -- If wallpaper is a function, call it with the screen
-  local wallpaper = theme.wallpaper
-  if type(wallpaper) == "function" then
-    wallpaper = wallpaper(s)
-  end
-  gears.wallpaper.maximized(wallpaper, s, true)
-
   -- Tags
-  local names = { '\u{f269}', '\u{f121}', '\u{e795}', '\u{f2d0}',  }
+  local names = { '\u{f269}', '\u{f121}', '\u{e795}', '\u{f2d0}' }
   local l = awful.layout.suit
   local layouts = { l.max, l.tile, l.fair, l.max }
   awful.tag(names, s, layouts)
