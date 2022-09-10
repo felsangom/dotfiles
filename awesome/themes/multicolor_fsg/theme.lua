@@ -42,6 +42,7 @@ theme.menu_fg_normal                            = "#aaaaaa"
 theme.menu_fg_focus                             = "#ff8c00"
 theme.taglist_squares_sel                       = theme.confdir .. "/icons/square_a.png"
 theme.taglist_squares_unsel                     = theme.confdir .. "/icons/square_b.png"
+theme.tasklist_bg_normal                        = theme.bg_normal .. '00'
 theme.tasklist_plain_task_name                  = true
 theme.tasklist_disable_icon                     = true
 theme.useless_gap                               = 2
@@ -178,6 +179,7 @@ function theme.at_screen_connect(s)
   -- Create an imagebox widget which will contains an icon indicating which layout we're using.
   -- We need one layoutbox per screen.
   s.mylayoutbox = awful.widget.layoutbox(s)
+  s.mylayoutbox = wibox.container.margin(s.mylayoutbox, 5, 5, 5, 5)
   s.mylayoutbox:buttons(
     my_table.join(
       awful.button({}, 1, function () awful.layout.inc( 1) end),
