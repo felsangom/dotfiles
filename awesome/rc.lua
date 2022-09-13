@@ -69,14 +69,16 @@ run_once({ "unclutter -root" }) -- comma-separated entries
 
 local themes = { "multicolor_fsg" }
 
-local chosen_theme = themes[1]
-local modkey       = "Mod4"
-local altkey       = "Mod1"
-local terminal     = "alacritty"
-local vi_focus     = false
-local cycle_prev   = true
-local editor       = "nvim"
-local browser      = "firefox"
+local chosen_theme          = themes[1]
+local modkey                = "Mod4"
+local altkey                = "Mod1"
+local terminal              = "alacritty"
+local vi_focus              = false
+local cycle_prev            = true
+local editor                = "nvim"
+local browser               = "firefox"
+-- Window border radius. Set to 0 to disable.
+local window_border_radius  = 8
 
 awful.util.terminal = terminal
 awful.util.tagnames = { "1", "2", "3", "4" }
@@ -227,10 +229,10 @@ globalkeys = mytable.join(
     }
   ),
 
-  -- X screen locker
+  -- i3lock
   awful.key({ altkey, "Control" }, "l",
     function ()
-      os.execute(scrlocker)
+      os.execute("i3lock")
     end,
     {
       description = "lock screen",
@@ -845,7 +847,7 @@ awful.rules.rules = {
       keys = clientkeys,
       buttons = clientbuttons,
       screen = awful.screen.preferred,
-      placement = awful.placement.centered + awful.placement.no_overlap + awful.placement.no_offscreen,
+      placement = awful.placement.centered,
       size_hints_honor = false
     }
   },
@@ -895,17 +897,6 @@ awful.rules.rules = {
     properties = {
       titlebars_enabled = true
     }
-  },
-
-  -- Set Firefox to always map on the tag named "2" on screen 1.
-  {
-    rule = {
-      class = "Firefox"
-    },
-    properties = {
-      screen = 1,
-      tag = "1"
-    }
   }
 }
 
@@ -926,10 +917,15 @@ client.connect_signal("manage", function (c)
 
   awful.titlebar.hide(c)
 
-  if c.maximized or c.fullscreen then
-    c.shape = gears.shape.rectangle
-  else
-    c.shape = gears.shape.rounded_rect
+  -- Maximized windows have normal borders, other windows rounded borders.
+  if window_border_radius > 0 then
+    if c.maximized or c.fullscreen then
+      c.shape = gears.shape.rectangle
+    else
+      c.shape = function(cr, width, height)
+        gears.shape.rounded_rect(cr, width, height, window_border_radius)
+      end
+    end
   end
 end)
 
@@ -991,4 +987,5 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 awful.spawn.single_instance("nm-applet")
 awful.spawn.single_instance("picom -b")
 awful.spawn.single_instance("numlockx on")
+awful.spawn.single_instance("setxkbmap -layout br")
 awful.spawn("nitrogen --restore")

@@ -1,4 +1,4 @@
 configuration {
   modi: "window,run,drun,ssh,combi";
 }
-@theme "/usr/share/rofi/themes/Pop-Dark.rasi"
+@theme "/usr/share/rofi/themes/gruvbox-dark-soft.rasi"

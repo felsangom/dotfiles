@@ -102,7 +102,7 @@ end
 
 -- Textclock
 os.setlocale(os.getenv("LANG")) -- to localize the clock
-local clockicon = make_icon('\u{f073}', '#7daea3')
+local clockicon = make_icon('\u{f073} ', '#7daea3')
 local mytextclock = wibox.widget.textclock(markup("#7daea3", "%d/%m/%Y ") .. markup("#7daea3", "%H:%M "))
 mytextclock.font = theme.font
 mytextclock:connect_signal("button::press",
@@ -119,7 +119,7 @@ local cw = calendar_widget({
 })
 
 -- CPU
-local cpuicon = make_icon('\u{f85a}', '#ea6962')
+local cpuicon = make_icon('\u{f85a} ', '#ea6962')
 local cpu = lain.widget.cpu({
   settings = function()
     widget:set_markup(markup.fontfg(theme.font, "#ea6962", cpu_now.usage .. "% "))
@@ -128,7 +128,7 @@ local cpu = lain.widget.cpu({
 
 -- Battery
 --[[
-local baticon = make_icon('\u{f0e7}', '#d8a657')
+local baticon = make_icon('\u{f0e7} ', '#d8a657')
 local bat = lain.widget.bat({
   settings = function()
     local perc = bat_now.perc ~= "N/A" and bat_now.perc .. "%" or bat_now.perc
@@ -145,9 +145,9 @@ local bat = lain.widget.bat({
 local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
 
 -- Net
-local netdownicon = make_icon('\u{f0ab}', '#a9b665')
+local netdownicon = make_icon('\u{f0ab} ', '#a9b665')
 local netdowninfo = wibox.widget.textbox()
-local netupicon = make_icon('\u{f0aa}', '#ea6962')
+local netupicon = make_icon('\u{f0aa} ', '#ea6962')
 local netupinfo = lain.widget.net({
   settings = function()
     widget:set_markup(markup.fontfg(theme.font, "#ea6962", net_now.sent .. " "))
@@ -156,7 +156,7 @@ local netupinfo = lain.widget.net({
 })
 
 -- MEM
-local memicon = make_icon('\u{f2db}', '#d8a657')
+local memicon = make_icon('\u{f2db} ', '#d8a657')
 local memory = lain.widget.mem({
   settings = function()
     widget:set_markup(markup.fontfg(theme.font, "#d8a657", mem_now.used .. "M "))
@@ -168,7 +168,7 @@ local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout
 
 function theme.at_screen_connect(s)
   -- Tags
-  local names = { '\u{f269}', '\u{f121}', '\u{e795}', '\u{f2d0}' }
+  local names = { '\u{f269} ', '\u{f121} ', '\u{e795} ', '\u{f2d0} ' }
   local l = awful.layout.suit
   local layouts = { l.max, l.tile, l.fair, l.floating }
   awful.tag(names, s, layouts)
