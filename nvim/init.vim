@@ -3,17 +3,17 @@
 "
 call plug#begin('~/.nvim/plugged')
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'nvim-lualine/lualine.nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'airblade/vim-gitgutter'
-Plug 'sainnhe/gruvbox-material'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'tpope/vim-fugitive'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 
 call plug#end()
 
@@ -52,7 +52,7 @@ set updatetime=50
 set hidden
 set shortmess+=c
 set signcolumn=yes
-
+let mapleader=" "
 syntax on
 set t_Co=256
 
@@ -63,12 +63,7 @@ let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors
 
-let g:gruvbox_material_background = 'soft'
-let g:gruvbox_material_enable_italic = 1
-let g:gruvbox_material_enable_bold = 1
-let g:gruvbox_material_better_performance = 1
-colorscheme gruvbox-material
-let g:airline_theme='gruvbox_material'
+colorscheme tokyonight-storm
 set background=dark
 
 " Automatically remove all trailing whitespace
@@ -77,6 +72,36 @@ autocmd BufWritePre * %s/\s\+$//e
 " j/k will move virtual lines (lines that wrap)
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+
+"
+" TokyoNight theme
+"
+lua << EOF
+require("tokyonight").setup({
+  style = "storm",
+  transparent = true,
+  terminal_colors = true,
+  styles = {
+    comments = {
+      italics = true
+    },
+    keywords = {
+      italics = true
+    }
+  }
+})
+EOF
+
+"
+" LuaLine
+"
+lua << EOF
+require('lualine').setup {
+  options = {
+    theme = 'tokyonight'
+  }
+}
+EOF
 
 "
 " treesitter
@@ -93,16 +118,25 @@ EOF
 
 
 "
-" fzf config
+" Telescope
 "
-nnoremap <C-p> :GFiles<CR>
-nnoremap <C-A-p> :GFiles?<CR>
-nnoremap <C-A-s> :Ag<CR>
+lua << EOF
+require('telescope').setup({
+  defaults = {
+    layout_strategy = 'vertical',
+    layout_config = {
+      width = 0.75,
+      height = 0.75,
+      prompt_position = 'top'
+    },
+  },
+})
+EOF
 
-let g:fzf_layout = { 'down':  '40%' }
-let g:fzf_preview_window = ['right:40%:hidden', 'ctrl-/']
-let $FZF_DEFAULT_OPTS='--layout=reverse --border'
-
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep({grep_open_files = false})<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 "
 " nvim-tree
