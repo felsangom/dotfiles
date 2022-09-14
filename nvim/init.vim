@@ -3,7 +3,6 @@
 "
 call plug#begin('~/.nvim/plugged')
 
-Plug 'nvim-lualine/lualine.nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
@@ -14,28 +13,19 @@ Plug 'tpope/vim-fugitive'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+Plug 'nvim-lualine/lualine.nvim'
 
 call plug#end()
 
 "
 " Felipe Gomes configs
 "
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#branch#enabled=1
-let g:airline#extensions#hunks#enabled=0
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_close_button = 0
-let g:airline#extensions#tabline#show_buffers = 0
-let g:airline#extensions#tabline#show_tab_count = 0
-let g:airline#extensions#tabline#show_splits = 0
-let g:airline#extensions#tabline#show_tab_nr = 0
-let g:airline#extensions#tabline#fnamemod = ':t'
 set laststatus=2
 set encoding=utf-8
 set showmatch
 set ignorecase
 set incsearch
-set mouse=a
+set mouse+=a
 set clipboard^=unnamed,unnamedplus
 set list listchars=tab:»\ ,space:·,trail:·,eol:¬
 set number
@@ -55,17 +45,7 @@ set signcolumn=yes
 let mapleader=" "
 syntax on
 set t_Co=256
-
 "
-" Theme configs
-"
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-set termguicolors
-
-colorscheme tokyonight-storm
-set background=dark
-
 " Automatically remove all trailing whitespace
 autocmd BufWritePre * %s/\s\+$//e
 
@@ -73,24 +53,28 @@ autocmd BufWritePre * %s/\s\+$//e
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
+
 "
 " TokyoNight theme
 "
 lua << EOF
 require("tokyonight").setup({
   style = "storm",
-  transparent = true,
   terminal_colors = true,
   styles = {
     comments = {
-      italics = true
+      italic = true
     },
     keywords = {
-      italics = true
+      italic = true
     }
   }
 })
 EOF
+
+colorscheme tokyonight-storm
+set background=dark
+
 
 "
 " LuaLine
@@ -98,8 +82,18 @@ EOF
 lua << EOF
 require('lualine').setup {
   options = {
-    theme = 'tokyonight'
-  }
+    theme = 'tokyonight',
+    icons_enabled = true,
+    globalstatus = true
+  },
+  tabline = {
+    lualine_a = {
+      {
+        'tabs', mode = 2, max_length = vim.o.columns
+      }
+    }
+  },
+  extensions = { 'nvim-tree' }
 }
 EOF
 
@@ -123,10 +117,9 @@ EOF
 lua << EOF
 require('telescope').setup({
   defaults = {
-    layout_strategy = 'vertical',
+    sorting_strategy = 'ascending',
+    scroll_strategy = 'limit',
     layout_config = {
-      width = 0.75,
-      height = 0.75,
       prompt_position = 'top'
     },
   },
