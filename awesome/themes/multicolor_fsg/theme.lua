@@ -45,7 +45,7 @@ theme.taglist_squares_unsel                     = theme.confdir .. "/icons/squar
 theme.tasklist_bg_normal                        = theme.bg_normal .. '00'
 theme.tasklist_plain_task_name                  = true
 theme.tasklist_disable_icon                     = true
-theme.useless_gap                               = 2
+theme.useless_gap                               = 4
 theme.layout_tile                               = theme.confdir .. "/icons/tile.png"
 theme.layout_tilegaps                           = theme.confdir .. "/icons/tilegaps.png"
 theme.layout_tileleft                           = theme.confdir .. "/icons/tileleft.png"
@@ -220,6 +220,7 @@ function theme.at_screen_connect(s)
     fg = theme.fg_normal,
     border_width = 2,
     border_color = '#00000000',
+    type = 'dock',
     shape = function(cr, width, height)
       gears.shape.rounded_rect(cr, width, height, 8)
     end
