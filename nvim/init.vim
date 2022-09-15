@@ -49,9 +49,16 @@ set t_Co=256
 " Automatically remove all trailing whitespace
 autocmd BufWritePre * %s/\s\+$//e
 
+"
+" Key mappings
+"
+
 " j/k will move virtual lines (lines that wrap)
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+
+" Paste replacing selected text
+xnoremap <leader>p  "_dP
 
 
 "
