@@ -7,78 +7,77 @@
 --]]
 
 local gears = require("gears")
-local lain  = require("lain")
+local lain = require("lain")
 local awful = require("awful")
 local wibox = require("wibox")
-local dpi   = require("beautiful.xresources").apply_dpi
+local naughty = require("naughty")
+
+local dpi = require("beautiful.xresources").apply_dpi
 
 local os = os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
-local theme                                     = {}
-theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome/themes/multicolor_fsg"
-theme.font                                      = "CaskaydiaCove Nerd Font " .. dpi(10)
-theme.taglist_font                              = "CaskaydiaCove Nerd Font " .. dpi(13)
-theme.icon_font                                 = "CaskaydiaCove Nerd Font"
-theme.icon_size                                 = dpi(13)
-theme.menu_bg_normal                            = "#282c34"
-theme.menu_bg_focus                             = "#191f2b"
-theme.bg_normal                                 = "#282c34"
-theme.bg_focus                                  = theme.bg_normal .. '00'
-theme.bg_urgent                                 = "#b70202"
-theme.fg_normal                                 = "#cccccc"
-theme.fg_focus                                  = "#ea6962"
-theme.fg_urgent                                 = "#ffffff"
-theme.fg_minimize                               = "#ffffff"
-theme.bg_systray                                = theme.bg_normal .. '00'
-theme.border_width                              = dpi(2)
-theme.border_normal                             = "#282c34"
-theme.border_focus                              = "#ea6962"
-theme.border_marked                             = "#3ca4d8"
-theme.menu_border_width                         = 0
-theme.menu_width                                = dpi(130)
-theme.menu_submenu_icon                         = theme.confdir .. "/icons/submenu.png"
-theme.menu_fg_normal                            = "#aaaaaa"
-theme.menu_fg_focus                             = "#ff8c00"
-theme.taglist_squares_sel                       = theme.confdir .. "/icons/square_a.png"
-theme.taglist_squares_unsel                     = theme.confdir .. "/icons/square_b.png"
-theme.tasklist_bg_normal                        = theme.bg_normal .. '00'
-theme.tasklist_plain_task_name                  = true
-theme.tasklist_disable_icon                     = true
-theme.useless_gap                               = 4
-theme.layout_tile                               = theme.confdir .. "/icons/tile.png"
-theme.layout_tilegaps                           = theme.confdir .. "/icons/tilegaps.png"
-theme.layout_tileleft                           = theme.confdir .. "/icons/tileleft.png"
-theme.layout_tilebottom                         = theme.confdir .. "/icons/tilebottom.png"
-theme.layout_tiletop                            = theme.confdir .. "/icons/tiletop.png"
-theme.layout_fairv                              = theme.confdir .. "/icons/fairv.png"
-theme.layout_fairh                              = theme.confdir .. "/icons/fairh.png"
-theme.layout_spiral                             = theme.confdir .. "/icons/spiral.png"
-theme.layout_dwindle                            = theme.confdir .. "/icons/dwindle.png"
-theme.layout_max                                = theme.confdir .. "/icons/max.png"
-theme.layout_fullscreen                         = theme.confdir .. "/icons/fullscreen.png"
-theme.layout_magnifier                          = theme.confdir .. "/icons/magnifier.png"
-theme.layout_floating                           = theme.confdir .. "/icons/floating.png"
-theme.titlebar_close_button_normal              = theme.confdir .. "/icons/titlebar/close_normal.png"
-theme.titlebar_close_button_focus               = theme.confdir .. "/icons/titlebar/close_focus.png"
-theme.titlebar_minimize_button_normal           = theme.confdir .. "/icons/titlebar/minimize_normal.png"
-theme.titlebar_minimize_button_focus            = theme.confdir .. "/icons/titlebar/minimize_focus.png"
-theme.titlebar_ontop_button_normal_inactive     = theme.confdir .. "/icons/titlebar/ontop_normal_inactive.png"
-theme.titlebar_ontop_button_focus_inactive      = theme.confdir .. "/icons/titlebar/ontop_focus_inactive.png"
-theme.titlebar_ontop_button_normal_active       = theme.confdir .. "/icons/titlebar/ontop_normal_active.png"
-theme.titlebar_ontop_button_focus_active        = theme.confdir .. "/icons/titlebar/ontop_focus_active.png"
-theme.titlebar_sticky_button_normal_inactive    = theme.confdir .. "/icons/titlebar/sticky_normal_inactive.png"
-theme.titlebar_sticky_button_focus_inactive     = theme.confdir .. "/icons/titlebar/sticky_focus_inactive.png"
-theme.titlebar_sticky_button_normal_active      = theme.confdir .. "/icons/titlebar/sticky_normal_active.png"
-theme.titlebar_sticky_button_focus_active       = theme.confdir .. "/icons/titlebar/sticky_focus_active.png"
-theme.titlebar_floating_button_normal_inactive  = theme.confdir .. "/icons/titlebar/floating_normal_inactive.png"
-theme.titlebar_floating_button_focus_inactive   = theme.confdir .. "/icons/titlebar/floating_focus_inactive.png"
-theme.titlebar_floating_button_normal_active    = theme.confdir .. "/icons/titlebar/floating_normal_active.png"
-theme.titlebar_floating_button_focus_active     = theme.confdir .. "/icons/titlebar/floating_focus_active.png"
+local theme = {}
+theme.confdir = os.getenv("HOME") .. "/.config/awesome/themes/multicolor_fsg"
+theme.font = "CaskaydiaCove Nerd Font " .. dpi(10)
+theme.taglist_font = "CaskaydiaCove Nerd Font " .. dpi(13)
+theme.icon_font = "CaskaydiaCove Nerd Font"
+theme.icon_size = dpi(13)
+theme.menu_bg_normal = "#1f2335"
+theme.menu_bg_focus = "#292e42"
+theme.bg_normal = "#24283b"
+theme.bg_focus = theme.bg_normal .. '00'
+theme.bg_urgent = theme.bg_normal
+theme.fg_normal = "#c0caf5"
+theme.fg_focus = "#e0af68"
+theme.fg_urgent = "#db4b4b"
+theme.fg_minimize = "#a9b1d6"
+theme.border_width = dpi(2)
+theme.border_normal = theme.bg_normal
+theme.border_focus = "#3d59a1"
+theme.border_marked = "#1d202f"
+theme.menu_border_width = 0
+theme.menu_width = dpi(130)
+theme.menu_submenu_icon = theme.confdir .. "/icons/submenu.png"
+theme.menu_fg_normal = theme.fg_normal
+theme.menu_fg_focus = theme.fg_focus
+theme.tasklist_bg_normal = theme.bg_normal
+theme.tasklist_plain_task_name = true
+theme.tasklist_disable_icon = true
+theme.useless_gap = 2
+theme.layout_tile = theme.confdir .. "/icons/tile.png"
+theme.layout_tilegaps = theme.confdir .. "/icons/tilegaps.png"
+theme.layout_tileleft = theme.confdir .. "/icons/tileleft.png"
+theme.layout_tilebottom = theme.confdir .. "/icons/tilebottom.png"
+theme.layout_tiletop = theme.confdir .. "/icons/tiletop.png"
+theme.layout_fairv = theme.confdir .. "/icons/fairv.png"
+theme.layout_fairh = theme.confdir .. "/icons/fairh.png"
+theme.layout_spiral = theme.confdir .. "/icons/spiral.png"
+theme.layout_dwindle = theme.confdir .. "/icons/dwindle.png"
+theme.layout_max = theme.confdir .. "/icons/max.png"
+theme.layout_fullscreen = theme.confdir .. "/icons/fullscreen.png"
+theme.layout_magnifier = theme.confdir .. "/icons/magnifier.png"
+theme.layout_floating = theme.confdir .. "/icons/floating.png"
+theme.titlebar_close_button_normal = theme.confdir .. "/icons/titlebar/close_normal.png"
+theme.titlebar_close_button_focus = theme.confdir .. "/icons/titlebar/close_focus.png"
+theme.titlebar_minimize_button_normal = theme.confdir .. "/icons/titlebar/minimize_normal.png"
+theme.titlebar_minimize_button_focus = theme.confdir .. "/icons/titlebar/minimize_focus.png"
+theme.titlebar_ontop_button_normal_inactive = theme.confdir .. "/icons/titlebar/ontop_normal_inactive.png"
+theme.titlebar_ontop_button_focus_inactive = theme.confdir .. "/icons/titlebar/ontop_focus_inactive.png"
+theme.titlebar_ontop_button_normal_active = theme.confdir .. "/icons/titlebar/ontop_normal_active.png"
+theme.titlebar_ontop_button_focus_active = theme.confdir .. "/icons/titlebar/ontop_focus_active.png"
+theme.titlebar_sticky_button_normal_inactive = theme.confdir .. "/icons/titlebar/sticky_normal_inactive.png"
+theme.titlebar_sticky_button_focus_inactive = theme.confdir .. "/icons/titlebar/sticky_focus_inactive.png"
+theme.titlebar_sticky_button_normal_active = theme.confdir .. "/icons/titlebar/sticky_normal_active.png"
+theme.titlebar_sticky_button_focus_active = theme.confdir .. "/icons/titlebar/sticky_focus_active.png"
+theme.titlebar_floating_button_normal_inactive = theme.confdir .. "/icons/titlebar/floating_normal_inactive.png"
+theme.titlebar_floating_button_focus_inactive = theme.confdir .. "/icons/titlebar/floating_focus_inactive.png"
+theme.titlebar_floating_button_normal_active = theme.confdir .. "/icons/titlebar/floating_normal_active.png"
+theme.titlebar_floating_button_focus_active = theme.confdir .. "/icons/titlebar/floating_focus_active.png"
 theme.titlebar_maximized_button_normal_inactive = theme.confdir .. "/icons/titlebar/maximized_normal_inactive.png"
-theme.titlebar_maximized_button_focus_inactive  = theme.confdir .. "/icons/titlebar/maximized_focus_inactive.png"
-theme.titlebar_maximized_button_normal_active   = theme.confdir .. "/icons/titlebar/maximized_normal_active.png"
-theme.titlebar_maximized_button_focus_active    = theme.confdir .. "/icons/titlebar/maximized_focus_active.png"
+theme.titlebar_maximized_button_focus_inactive = theme.confdir .. "/icons/titlebar/maximized_focus_inactive.png"
+theme.titlebar_maximized_button_normal_active = theme.confdir .. "/icons/titlebar/maximized_normal_active.png"
+theme.titlebar_maximized_button_focus_active = theme.confdir .. "/icons/titlebar/maximized_focus_active.png"
 
 local markup = lain.util.markup
 
@@ -168,7 +167,7 @@ local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout
 
 function theme.at_screen_connect(s)
   -- Tags
-  local names = { '\u{f269} ', '\u{f121} ', '\u{e795} ', '\u{f2d0} ' }
+  local names = { '\u{f269}', '\u{f121}', '\u{f120}', '\u{eb23}' }
   local l = awful.layout.suit
   local layouts = { l.max, l.tile, l.fair, l.floating }
   awful.tag(names, s, layouts)
@@ -205,6 +204,44 @@ function theme.at_screen_connect(s)
         widget = wibox.widget.separator
       },
       layout = wibox.layout.fixed.horizontal
+    },
+    widget_template = {
+      {
+        {
+          {
+            id = 'text_role',
+            forced_width = 20,
+            valign = 'center',
+            halign = 'center',
+            widget = wibox.widget.textbox
+          },
+          left = 3,
+          right = 3,
+          widget = wibox.container.margin
+        },
+        id = 'text_margin_role',
+        bottom = 2,
+        color = theme.fg_focus .. '00',
+        widget = wibox.container.margin
+      },
+      id = 'background_role',
+      widget = wibox.container.background,
+      -- This callback is used for selected tag bottom border
+      create_callback = function(comp, tag, index, tags) --luacheck: no unused args
+        -- On create, index 1 has border
+        if (index == 1) then
+          comp:get_children_by_id('text_margin_role')[1].color = theme.fg_focus
+        end
+
+        -- On selected property change, show/hide border
+        tag:connect_signal('property::selected', function(t)
+          if (t.selected) then
+            comp:get_children_by_id('text_margin_role')[1].color = theme.fg_focus
+          else
+            comp:get_children_by_id('text_margin_role')[1].color = theme.fg_focus .. '00'
+          end
+        end)
+      end
     }
   }
 
@@ -216,7 +253,7 @@ function theme.at_screen_connect(s)
     position = "top",
     screen = s,
     height = dpi(26),
-    bg = theme.bg_normal ..'98',
+    bg = theme.bg_normal .. 'ee',
     fg = theme.fg_normal,
     border_width = 2,
     border_color = '#00000000',
