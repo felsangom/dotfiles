@@ -29,3 +29,7 @@ Need [vim-plug](https://github.com/junegunn/vim-plug) installed to run the PlugI
 ![](https://github.com/felsangom/dotfiles/blob/main/screenshots/awesome.png)
 
 ![](https://github.com/felsangom/dotfiles/blob/main/screenshots/awesome3.png)
+
+## Wallpaper
+
+https://images.hdqwalls.com/download/night-sky-digital-art-4k-fc-1920x1080.jpg
