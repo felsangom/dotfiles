@@ -1,5 +1,6 @@
 --[[
-  MultiColor - FSG
+  MultiColor - FSG - TokyoNight variation
+  https://github.com/felsangom/dotfiles/tree/tokyonight
 
     Theme based on:
       Multicolor Awesome WM theme 2.0
@@ -19,32 +20,69 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 local theme = {}
 theme.confdir = os.getenv("HOME") .. "/.config/awesome/themes/multicolor_fsg"
+-- Colors
+theme.color = {
+  background = "#24283b",
+  foreground = "#c0caf5",
+  highlight = "#353a52",
+  black = "#1d202f",
+  red = "#f7768e",
+  green = "#9ece6a",
+  yellow = "#e0af68",
+  blue = "#7aa2f7",
+  magenta = "#bb9af7",
+  cyan = "#7dcfff",
+  white = "#a9b1d6",
+  gray = '#444444'
+}
+-- Font config
 theme.font = "CaskaydiaCove Nerd Font " .. dpi(10)
 theme.taglist_font = "CaskaydiaCove Nerd Font " .. dpi(13)
 theme.icon_font = "CaskaydiaCove Nerd Font"
 theme.icon_size = dpi(13)
-theme.menu_bg_normal = "#1f2335"
-theme.menu_bg_focus = "#292e42"
-theme.bg_normal = "#24283b"
-theme.bg_focus = theme.bg_normal .. '00'
+-- Menu
+theme.menu_bg_normal = theme.color.background
+theme.menu_bg_focus = theme.color.highlight
+-- Background and foreground colors
+theme.bg_normal = theme.color.background
+theme.bg_focus = theme.color.highlight
 theme.bg_urgent = theme.bg_normal
-theme.fg_normal = "#c0caf5"
-theme.fg_focus = "#e0af68"
-theme.fg_urgent = "#db4b4b"
-theme.fg_minimize = "#a9b1d6"
-theme.border_width = dpi(2)
+theme.fg_normal = theme.color.foreground
+theme.fg_focus = theme.color.red
+theme.fg_urgent = theme.color.red
+theme.widget_separator_color = theme.color.gray
+-- Borders
+theme.useless_gap = 4
+theme.border_width = 2
 theme.border_normal = theme.bg_normal
-theme.border_focus = "#3d59a1"
-theme.border_marked = "#1d202f"
+theme.border_focus = theme.color.blue
+theme.border_marked = theme.color.magenta
+-- Wibar border
+theme.wibar_height = dpi(26)
+theme.wibar_bg = theme.bg_normal .. 'cc'
+theme.wibar_border = 0
+theme.wibar_border_radius = 0
+theme.wibar_border_color = "#00000000"
+-- Menu
 theme.menu_border_width = 0
 theme.menu_width = dpi(130)
 theme.menu_submenu_icon = theme.confdir .. "/icons/submenu.png"
 theme.menu_fg_normal = theme.fg_normal
 theme.menu_fg_focus = theme.fg_focus
-theme.tasklist_bg_normal = theme.bg_normal
+-- Taglist
+theme.taglist_bg_normal = theme.bg_normal
+theme.taglist_bg_focus = theme.bg_focus .. '00'
+theme.taglist_fg_focus = theme.fg_focus
+theme.taglist_fg_occupied = theme.color.yellow
+theme.taglist_fg_urgent = theme.fg_urgent
+theme.taglist_fg_empty = theme.fg_normal
+theme.taglist_spacing = 5
+-- Tasklist
+theme.tasklist_bg_normal = theme.bg_normal .. '00'
+theme.tasklist_bg_focus = theme.bg_normal .. '00'
 theme.tasklist_plain_task_name = true
 theme.tasklist_disable_icon = true
-theme.useless_gap = 2
+-- Layout icons
 theme.layout_tile = theme.confdir .. "/icons/tile.png"
 theme.layout_tilegaps = theme.confdir .. "/icons/tilegaps.png"
 theme.layout_tileleft = theme.confdir .. "/icons/tileleft.png"
@@ -58,6 +96,7 @@ theme.layout_max = theme.confdir .. "/icons/max.png"
 theme.layout_fullscreen = theme.confdir .. "/icons/fullscreen.png"
 theme.layout_magnifier = theme.confdir .. "/icons/magnifier.png"
 theme.layout_floating = theme.confdir .. "/icons/floating.png"
+-- Titlebar icons
 theme.titlebar_close_button_normal = theme.confdir .. "/icons/titlebar/close_normal.png"
 theme.titlebar_close_button_focus = theme.confdir .. "/icons/titlebar/close_focus.png"
 theme.titlebar_minimize_button_normal = theme.confdir .. "/icons/titlebar/minimize_normal.png"
@@ -101,8 +140,8 @@ end
 
 -- Textclock
 os.setlocale(os.getenv("LANG")) -- to localize the clock
-local clockicon = make_icon('\u{f073} ', '#7daea3')
-local mytextclock = wibox.widget.textclock(markup("#7daea3", "%d/%m/%Y ") .. markup("#7daea3", "%H:%M "))
+local clockicon = make_icon('\u{f073} ', theme.color.blue)
+local mytextclock = wibox.widget.textclock(markup(theme.fg_normal, "%d/%m/%Y ") .. markup(theme.fg_normal, "%H:%M "))
 mytextclock.font = theme.font
 mytextclock:connect_signal("button::press",
   function(_, _, _, button)
@@ -118,10 +157,10 @@ local cw = calendar_widget({
 })
 
 -- CPU
-local cpuicon = make_icon('\u{f85a} ', '#ea6962')
+local cpuicon = make_icon('\u{f85a} ', theme.color.red)
 local cpu = lain.widget.cpu({
   settings = function()
-    widget:set_markup(markup.fontfg(theme.font, "#ea6962", cpu_now.usage .. "% "))
+    widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, cpu_now.usage .. "% "))
   end
 })
 
@@ -144,21 +183,21 @@ local bat = lain.widget.bat({
 local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
 
 -- Net
-local netdownicon = make_icon('\u{f0ab} ', '#a9b665')
+local netdownicon = make_icon('\u{f13a} ', theme.color.green)
 local netdowninfo = wibox.widget.textbox()
-local netupicon = make_icon('\u{f0aa} ', '#ea6962')
+local netupicon = make_icon('\u{f139} ', theme.color.red)
 local netupinfo = lain.widget.net({
   settings = function()
-    widget:set_markup(markup.fontfg(theme.font, "#ea6962", net_now.sent .. " "))
-    netdowninfo:set_markup(markup.fontfg(theme.font, "#a9b665", net_now.received .. " "))
+    widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, net_now.sent .. " "))
+    netdowninfo:set_markup(markup.fontfg(theme.font, theme.fg_normal, net_now.received .. " "))
   end
 })
 
 -- MEM
-local memicon = make_icon('\u{f2db} ', '#d8a657')
+local memicon = make_icon('\u{f2db} ', theme.color.yellow)
 local memory = lain.widget.mem({
   settings = function()
-    widget:set_markup(markup.fontfg(theme.font, "#d8a657", mem_now.used .. "M "))
+    widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, mem_now.used .. "M "))
   end
 })
 
@@ -252,14 +291,16 @@ function theme.at_screen_connect(s)
   s.mywibox = awful.wibar({
     position = "top",
     screen = s,
-    height = dpi(26),
-    bg = theme.bg_normal .. 'ee',
-    fg = theme.fg_normal,
-    border_width = 2,
-    border_color = '#00000000',
+    height = theme.wibar_height,
+    border_width = theme.wibar_border,
+    border_color = theme.wibar_border_color,
     type = 'dock',
     shape = function(cr, width, height)
-      gears.shape.rounded_rect(cr, width, height, 8)
+      if (theme.wibar_border_radius > 0) then
+        gears.shape.rounded_rect(cr, width, height, 8)
+      else
+        gears.shape.rectangle(cr, width, height)
+      end
     end
   })
 
@@ -270,7 +311,7 @@ function theme.at_screen_connect(s)
       layout = wibox.layout.fixed.horizontal,
       wibox.container.margin(s.mytaglist, 5),
       s.mypromptbox,
-      wibox.container.margin(wibox.widget.textbox(markup('#444444', '|')), 2, 2)
+      wibox.container.margin(wibox.widget.textbox(markup(theme.widget_separator_color, '|')), 2, 2)
     },
     s.mytasklist, -- Middle widget
     { -- Right widgets
@@ -278,22 +319,22 @@ function theme.at_screen_connect(s)
       s.systray,
       wibox.container.margin(wibox.widget.textbox(''), 0, 4),
       volume_widget(),
-      wibox.container.margin(wibox.widget.textbox(markup('#444444', '|')), 2, 2),
+      wibox.container.margin(wibox.widget.textbox(markup(theme.widget_separator_color, '|')), 2, 2),
       netdownicon,
       netdowninfo,
       wibox.container.margin(wibox.widget.textbox(''), 0, 4),
       netupicon,
       netupinfo.widget,
-      wibox.container.margin(wibox.widget.textbox(markup('#444444', '|')), 2, 2),
+      wibox.container.margin(wibox.widget.textbox(markup(theme.widget_separator_color, '|')), 2, 2),
       memicon,
       memory.widget,
-      wibox.container.margin(wibox.widget.textbox(markup('#444444', '|')), 2, 2),
+      wibox.container.margin(wibox.widget.textbox(markup(theme.widget_separator_color, '|')), 2, 2),
       cpuicon,
       cpu.widget,
-      wibox.container.margin(wibox.widget.textbox(markup('#444444', '|')), 2, 2),
+      wibox.container.margin(wibox.widget.textbox(markup(theme.widget_separator_color, '|')), 2, 2),
       --baticon,
       --bat.widget,
-      --wibox.container.margin(wibox.widget.textbox(markup("#444444", "|")), 2, 2),
+      --wibox.container.margin(wibox.widget.textbox(markup(theme.widget_separator_color, "|")), 2, 2),
       clockicon,
       mytextclock,
       s.mylayoutbox,
