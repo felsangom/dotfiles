@@ -138,6 +138,13 @@ local function make_icon(icon_code, icon_color)
   return wibox.container.margin(icon_widget, 5, 5)
 end
 
+-- Calendar
+local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
+local cw = calendar_widget({
+  theme = "dark",
+  placement = "top_right"
+})
+
 -- Textclock
 os.setlocale(os.getenv("LANG")) -- to localize the clock
 local clockicon = make_icon('\u{f073} ', theme.color.blue)
@@ -148,13 +155,6 @@ mytextclock:connect_signal("button::press",
     if button == 1 then cw.toggle() end
   end
 )
-
--- Calendar
-local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
-local cw = calendar_widget({
-  theme = "dark",
-  placement = "top_right"
-})
 
 -- CPU
 local cpuicon = make_icon('\u{f85a} ', theme.color.red)
