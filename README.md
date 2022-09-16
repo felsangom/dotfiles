@@ -15,7 +15,7 @@ Need a Nerd Font. Download the ones you like, and customize in config files. I'm
 
 ## Picom
 
-I'm using picom as composer. The config file ajust vsync and alacritty active window opacity.
+I'm using picom as composer. The config file ajust vsync, opacity, shadow, etc.
 
 ## Bash
 
@@ -23,7 +23,7 @@ Install [oh-my-posh](https://ohmyposh.dev/), and choose the theme you like.
 
 ## Neovim
 
-Need [vim-plug](https://github.com/junegunn/vim-plug) installed to run the PlugInstall command in nvim.
+Need [vim-plug](https://github.com/junegunn/vim-plug) installed to run the PlugInstall command in nvim. Use ```:checkhealth``` to install missing stuff.
 
 ## Rofi themes
 
@@ -31,11 +31,11 @@ Get the simple-tokyonight theme from [https://github.com/lr-tech/rofi-themes-col
 
 ## Screenshots
 
-![](https://github.com/felsangom/dotfiles/blob/main/screenshots/awesome2.png)
+![](https://github.com/felsangom/dotfiles/blob/tokyonight/screenshots/1.png)
 
-![](https://github.com/felsangom/dotfiles/blob/main/screenshots/awesome.png)
+![](https://github.com/felsangom/dotfiles/blob/tokyonight/screenshots/2.png)
 
-![](https://github.com/felsangom/dotfiles/blob/main/screenshots/awesome3.png)
+![](https://github.com/felsangom/dotfiles/blob/tokyonight/screenshots/3.png)
 
 ## Wallpaper
 
