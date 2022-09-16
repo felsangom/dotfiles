@@ -39,4 +39,4 @@ Get the simple-tokyonight theme from [https://github.com/lr-tech/rofi-themes-col
 
 ## Wallpaper
 
-https://images.hdqwalls.com/download/night-sky-digital-art-4k-fc-1920x1080.jpg
+https://www.wallpaperflare.com/search?wallpaper=digital+art
