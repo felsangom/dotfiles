@@ -39,4 +39,4 @@ Get the simple-tokyonight theme from [https://github.com/lr-tech/rofi-themes-col
 
 ## Wallpaper
 
-https://www.wallpaperflare.com/search?wallpaper=digital+art
+https://www.wallpaperflare.com/forest-landscape-sky-trees-nature-mountains-birds-man-wallpaper-grdac

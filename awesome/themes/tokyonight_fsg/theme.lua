@@ -1,5 +1,5 @@
 --[[
-  MultiColor - FSG - TokyoNight variation
+  TokyoNight - FSG
   https://github.com/felsangom/dotfiles/tree/tokyonight
 
     Theme based on:
@@ -19,7 +19,7 @@ local os = os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 local theme = {}
-theme.confdir = os.getenv("HOME") .. "/.config/awesome/themes/multicolor_fsg"
+theme.confdir = os.getenv("HOME") .. "/.config/awesome/themes/tokyonight_fsg"
 -- Colors
 theme.color = {
   background = "#24283b",
@@ -52,7 +52,7 @@ theme.fg_focus = theme.color.red
 theme.fg_urgent = theme.color.red
 theme.widget_separator_color = theme.color.gray
 -- Borders
-theme.useless_gap = 4
+theme.useless_gap = 3
 theme.border_width = 2
 theme.border_normal = theme.bg_normal
 theme.border_focus = theme.color.blue
@@ -141,7 +141,7 @@ end
 -- Textclock
 os.setlocale(os.getenv("LANG")) -- to localize the clock
 local clockicon = make_icon('\u{f073} ', theme.color.blue)
-local mytextclock = wibox.widget.textclock(markup(theme.fg_normal, "%d/%m/%Y ") .. markup(theme.fg_normal, "%H:%M "))
+local mytextclock = wibox.widget.textclock(markup(theme.fg_normal, "%d/%m ") .. markup(theme.fg_normal, "%H:%M "))
 mytextclock.font = theme.font
 mytextclock:connect_signal("button::press",
   function(_, _, _, button)

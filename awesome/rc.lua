@@ -67,7 +67,7 @@ run_once({ "unclutter -root" }) -- comma-separated entries
 
 -- {{{ Variable definitions
 
-local themes = { "multicolor_fsg" }
+local themes = { "tokyonight_fsg" }
 
 local chosen_theme          = themes[1]
 local modkey                = "Mod4"
@@ -78,7 +78,7 @@ local cycle_prev            = true
 local editor                = "nvim"
 local browser               = "firefox"
 -- Window border radius. Set to 0 to disable.
-local window_border_radius  = 8
+local window_border_radius  = 4
 
 awful.util.terminal = terminal
 awful.util.tagnames = { "1", "2", "3", "4" }
