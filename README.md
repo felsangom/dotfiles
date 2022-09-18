@@ -1,6 +1,6 @@
-# Felipe Gomes - dotfiles
+# My dotfiles
 
-My personal linux dotfiles and configs. I've modified the multicolor theme from [awesome-copycats](https://github.com/lcpz/awesome-copycats) and added a TokyoNight style and colors, among other improvements.
+My personal linux dotfiles and configs. I've modified the multicolor theme from [awesome-copycats](https://github.com/lcpz/awesome-copycats) and added a Gruvbox material style and colors, among other improvements.
 Bellow are a set of instructions on how to use it.
 
 ## AwesomeWM
@@ -27,16 +27,14 @@ Need [vim-plug](https://github.com/junegunn/vim-plug) installed to run the PlugI
 
 ## Rofi themes
 
-Get the simple-tokyonight theme from [https://github.com/lr-tech/rofi-themes-collection](https://github.com/lr-tech/rofi-themes-collection). I've modified it to be a bit wider and centered.
+Get gruvbox-dark-soft that ships with rofi.
 
 ## Screenshots
 
-![](https://github.com/felsangom/dotfiles/blob/tokyonight/screenshots/1.png)
+![](https://github.com/felsangom/dotfiles/blob/main/screenshots/1.png)
 
-![](https://github.com/felsangom/dotfiles/blob/tokyonight/screenshots/2.png)
-
-![](https://github.com/felsangom/dotfiles/blob/tokyonight/screenshots/3.png)
+![](https://github.com/felsangom/dotfiles/blob/main/screenshots/2.png)
 
 ## Wallpaper
 
-https://www.wallpaperflare.com/forest-landscape-sky-trees-nature-mountains-birds-man-wallpaper-grdac
+https://wallpaperaccess.com/digital-art-1920x1080

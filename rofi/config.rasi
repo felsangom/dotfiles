@@ -1,6 +1,4 @@
 configuration {
   modi: "window,run,drun,ssh,combi";
 }
-//@theme "/usr/share/rofi/themes/gruvbox-dark-soft.rasi"
-//@theme "/usr/share/rofi/themes/solarized.rasi"
-@theme "/home/felipe/.local/share/rofi/themes/simple-tokyonight.rasi"
+@theme "/usr/share/rofi/themes/gruvbox-dark.rasi"
