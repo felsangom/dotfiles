@@ -9,17 +9,17 @@
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 
-local gears         = require("gears")
-local awful         = require("awful")
-                      require("awful.autofocus")
-local wibox         = require("wibox")
-local beautiful     = require("beautiful")
-local naughty       = require("naughty")
-local lain          = require("lain")
-local freedesktop   = require("freedesktop")
+local gears = require("gears")
+local awful = require("awful")
+              require("awful.autofocus")
+local wibox = require("wibox")
+local beautiful = require("beautiful")
+local naughty = require("naughty")
+local lain = require("lain")
+local freedesktop = require("freedesktop")
 local hotkeys_popup = require("awful.hotkeys_popup")
                       require("awful.hotkeys_popup.keys")
-local mytable       = awful.util.table or gears.table -- 4.{0,1} compatibility
+local mytable = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 -- {{{ Error handling
 
@@ -67,16 +67,16 @@ run_once({ "unclutter -root" }) -- comma-separated entries
 
 -- {{{ Variable definitions
 
-local themes = { "tokyonight_fsg" }
+local themes = { "gruvbox_fsg" }
 
-local chosen_theme          = themes[1]
-local modkey                = "Mod4"
-local altkey                = "Mod1"
-local terminal              = "alacritty"
-local vi_focus              = false
-local cycle_prev            = true
-local editor                = "nvim"
-local browser               = "firefox"
+local chosen_theme = themes[1]
+local modkey = "Mod4"
+local altkey = "Mod1"
+local terminal = "alacritty"
+local vi_focus = false
+local cycle_prev = true
+local editor = "nvim"
+local browser = "firefox"
 -- Window border radius. Set to 0 to disable.
 local window_border_radius  = 4
 
@@ -92,15 +92,15 @@ awful.layout.layouts = {
   awful.layout.suit.fair
 }
 
-lain.layout.termfair.nmaster           = 3
-lain.layout.termfair.ncol              = 1
-lain.layout.termfair.center.nmaster    = 3
-lain.layout.termfair.center.ncol       = 1
-lain.layout.cascade.tile.offset_x      = 2
-lain.layout.cascade.tile.offset_y      = 32
+lain.layout.termfair.nmaster = 3
+lain.layout.termfair.ncol = 1
+lain.layout.termfair.center.nmaster = 3
+lain.layout.termfair.center.ncol = 1
+lain.layout.cascade.tile.offset_x = 2
+lain.layout.cascade.tile.offset_y = 32
 lain.layout.cascade.tile.extra_padding = 5
-lain.layout.cascade.tile.nmaster       = 5
-lain.layout.cascade.tile.ncol          = 2
+lain.layout.cascade.tile.nmaster = 5
+lain.layout.cascade.tile.ncol = 2
 
 awful.util.taglist_buttons = mytable.join(
   awful.button({ }, 1, function(t) t:view_only() end),

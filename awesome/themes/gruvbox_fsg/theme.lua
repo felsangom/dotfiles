@@ -1,6 +1,6 @@
 --[[
-  TokyoNight - FSG
-  https://github.com/felsangom/dotfiles/tree/tokyonight
+  Gruvbox material - FSG
+  https://github.com/felsangom/dotfiles
 
     Theme based on:
       Multicolor Awesome WM theme 2.0
@@ -19,20 +19,20 @@ local os = os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 local theme = {}
-theme.confdir = os.getenv("HOME") .. "/.config/awesome/themes/tokyonight_fsg"
+theme.confdir = os.getenv("HOME") .. "/.config/awesome/themes/gruvbox_fsg"
 -- Colors
 theme.color = {
-  background = "#24283b",
-  foreground = "#c0caf5",
-  highlight = "#353a52",
-  black = "#1d202f",
-  red = "#f7768e",
-  green = "#9ece6a",
-  yellow = "#e0af68",
-  blue = "#7aa2f7",
-  magenta = "#bb9af7",
-  cyan = "#7dcfff",
-  white = "#a9b1d6",
+  background = "#282828",
+  foreground = "#d4be98",
+  highlight = "#3c3836",
+  black = "#3c3836",
+  red = "#ea6962",
+  green = "#a9b665",
+  yellow = "#d8a657",
+  blue = "#7daea3",
+  magenta = "#d3869b",
+  cyan = "#89b482",
+  white = "#d4be98",
   gray = '#444444'
 }
 -- Font config

@@ -7,13 +7,13 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'airblade/vim-gitgutter'
-Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'tpope/vim-fugitive'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 Plug 'nvim-lualine/lualine.nvim'
+Plug 'sainnhe/gruvbox-material'
 
 call plug#end()
 
@@ -62,25 +62,16 @@ xnoremap <leader>p  "_dP
 
 
 "
-" TokyoNight theme
+" gruvbox-material theme
 "
-lua << EOF
-require("tokyonight").setup({
-  style = "storm",
-  terminal_colors = true,
-  styles = {
-    comments = {
-      italic = true
-    },
-    keywords = {
-      italic = true
-    }
-  }
-})
-EOF
-
-colorscheme tokyonight-storm
+set termguicolors
 set background=dark
+let g:gruvbox_material_background = 'medium'
+let g:gruvbox_material_foreground = 'material'
+let g:gruvbox_material_better_performance = 1
+let g:gruvbox_material_enable_italic = 1
+let g:gruvbox_material_sign_column_background = 'grey'
+colorscheme gruvbox-material
 
 
 "
@@ -89,7 +80,7 @@ set background=dark
 lua << EOF
 require('lualine').setup {
   options = {
-    theme = 'tokyonight',
+    theme = 'gruvbox-material',
     icons_enabled = true,
     globalstatus = true
   },
