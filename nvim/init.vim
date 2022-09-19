@@ -1,4 +1,4 @@
-
+"
 " Plugins
 "
 call plug#begin('~/.nvim/plugged')
