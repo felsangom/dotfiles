@@ -71,6 +71,7 @@ let g:gruvbox_material_foreground = 'material'
 let g:gruvbox_material_better_performance = 1
 let g:gruvbox_material_enable_italic = 1
 let g:gruvbox_material_sign_column_background = 'grey'
+let g:gruvbox_material_show_eob = 0
 colorscheme gruvbox-material
 
 
