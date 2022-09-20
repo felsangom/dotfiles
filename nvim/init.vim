@@ -126,10 +126,25 @@ nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 "
 " nvim-tree
 "
+
+let g:loaded = 1
+let g:loaded_netrwPluggin = 1
 lua << EOF
 require("nvim-tree").setup {
+  disable_netrw = true,
   reload_on_bufenter = true,
   respect_buf_cwd = true,
+  hijack_cursor = true,
+  hijack_netrw = true,
+  hijack_unnamed_buffer_when_opening = true,
+  renderer = {
+    indent_markers = {
+      enable = true
+    }
+  },
+  update_focused_file = {
+    enable = true
+  },
   actions = {
     open_file = {
       quit_on_open = true
