@@ -1,6 +1,6 @@
 --[[
-Felipe Gomes neovim config files
-https://github.com/felsangom/dotfiles
+-- Felipe Gomes neovim config files
+-- https://github.com/felsangom/dotfiles
 --]]
 
 require('plugins')
