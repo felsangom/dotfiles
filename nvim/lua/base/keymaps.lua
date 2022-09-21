@@ -18,6 +18,9 @@ vim.g.mapleader = ' '
 -- Paste replacing selected text, without losing data
 map('x', '<leader>p', '"_dP')
 
+-- jk exits insert mode
+map('i', 'jk', '<ESC>')
+
 --[[
 -- Telescope mappings
 --]]
@@ -29,7 +32,6 @@ map('n', '<leader>fh', '<cmd>lua require(\'telescope.builtin\').help_tags()<cr>'
 --[[
 -- Nvim-tree mappings
 --]]
-map('i', 'jk', '<ESC>')
 map('n', '<C-n>', ':NvimTreeToggle<CR>')
 
 --[[
@@ -67,8 +69,6 @@ map('n', '<F2>', '<Plug>(coc-rename)', { noremap = false })
 map('n', '<space>a', ':<C-u>CocList diagnostics<CR>')
 -- Manage extensions
 map('n', '<space>e', ':<C-u>CocList extensions<CR>')
--- Show commands
-map('n', '<space>c', ':<C-u>CocList commands<CR>')
 -- Find symbol in current document
 map('n', '<space>o', ':<C-u>CocList outline<CR>')
 -- Find symbol in workspace
