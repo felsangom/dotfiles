@@ -23,7 +23,9 @@ Install [oh-my-posh](https://ohmyposh.dev/), and choose the theme you like.
 
 ## Neovim
 
-Need [vim-plug](https://github.com/junegunn/vim-plug) installed to run the PlugInstall command in nvim. Use ```:checkhealth``` to install missing stuff.
+I've migrated all neovim configs to lua. The old init.vim was moved to old.init.vim just to save it for anyone that wants, but it will not be updated anymore.
+The new neovim config uses [packer](https://github.com/wbthomason/packer.nvim) as plugin management. To use my config files, just copy nvim folder to your config directory, usually ```~/.config```.
+Use ```:checkhealth``` to install missing stuff.
 
 ## Rofi themes
 
