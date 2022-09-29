@@ -27,6 +27,6 @@ o.scrolloff = 3
 o.updatetime = 50
 o.hidden = true
 o.signcolumn = "yes"
-g.syntax_on = true
+--g.syntax_on = true
 o.mouse:append "a"
 o.shortmess:append "csI"
