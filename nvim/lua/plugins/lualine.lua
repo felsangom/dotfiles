@@ -4,7 +4,7 @@
 
 require("lualine").setup {
   options = {
-    theme = "gruvbox-material",
+    theme = "everforest",
     icons_enabled = true,
     globalstatus = true
   },
