@@ -48,7 +48,7 @@ theme.bg_normal = theme.color.background
 theme.bg_focus = theme.color.highlight
 theme.bg_urgent = theme.bg_normal
 theme.fg_normal = theme.color.foreground
-theme.fg_focus = theme.color.red
+theme.fg_focus = theme.color.green
 theme.fg_urgent = theme.color.red
 theme.widget_separator_color = theme.color.gray
 -- Borders
