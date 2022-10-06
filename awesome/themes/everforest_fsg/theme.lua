@@ -1,10 +1,10 @@
 --[[
-  Gruvbox material - FSG
+  Everforest - FSG
   https://github.com/felsangom/dotfiles
 
     Theme based on:
-      Multicolor Awesome WM theme 2.0
-      github.com/lcpz
+      Multicolor Awesome WM theme 2.0 - github.com/lcpz
+      Sainnhe Everforest - github.com/sainnhe/everforest
 --]]
 
 local gears = require("gears")
@@ -22,17 +22,17 @@ local theme = {}
 theme.confdir = os.getenv("HOME") .. "/.config/awesome/themes/gruvbox_fsg"
 -- Colors
 theme.color = {
-  background = "#282828",
-  foreground = "#d4be98",
+  background = "#2b3339",
+  foreground = "#d3c6aa",
   highlight = "#3c3836",
-  black = "#3c3836",
-  red = "#ea6962",
-  green = "#a9b665",
-  yellow = "#d8a657",
-  blue = "#7daea3",
-  magenta = "#d3869b",
-  cyan = "#89b482",
-  white = "#d4be98",
+  black = "#4b565c",
+  red = "#e67e80",
+  green = "#a7c080",
+  yellow = "#dbbc7f",
+  blue = "#7fbbb3",
+  magenta = "#d699b6",
+  cyan = "#83c092",
+  white = "#d3c6aa",
   gray = '#444444'
 }
 -- Font config
@@ -48,7 +48,7 @@ theme.bg_normal = theme.color.background
 theme.bg_focus = theme.color.highlight
 theme.bg_urgent = theme.bg_normal
 theme.fg_normal = theme.color.foreground
-theme.fg_focus = theme.color.red
+theme.fg_focus = theme.color.green
 theme.fg_urgent = theme.color.red
 theme.widget_separator_color = theme.color.gray
 -- Borders

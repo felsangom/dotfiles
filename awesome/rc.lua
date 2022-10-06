@@ -67,7 +67,7 @@ run_once({ "unclutter -root" }) -- comma-separated entries
 
 -- {{{ Variable definitions
 
-local themes = { "gruvbox_fsg" }
+local themes = { "everforest_fsg" }
 
 local chosen_theme = themes[1]
 local modkey = "Mod4"
