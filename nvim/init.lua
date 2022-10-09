@@ -3,8 +3,8 @@
 -- https://github.com/felsangom/dotfiles
 --]]
 
-require('plugins')
-require('base.options')
-require('base.autocmds')
-require('base.keymaps')
-require('base.theme')
+require('fsg.plugins')
+require('fsg.options')
+require('fsg.autocmds')
+require('fsg.keymaps')
+require('fsg.theme')

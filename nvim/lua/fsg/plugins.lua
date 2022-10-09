@@ -56,10 +56,3 @@ packer.startup(function(use)
     packer.sync()
   end
 end)
-
--- Load each plugin configuration file
-require("plugins.lualine")
-require("plugins.treesitter")
-require("plugins.telescope")
-require("plugins.nvim-tree")
-require("plugins.coc")

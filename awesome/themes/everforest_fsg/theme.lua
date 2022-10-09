@@ -19,7 +19,7 @@ local os = os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 local theme = {}
-theme.confdir = os.getenv("HOME") .. "/.config/awesome/themes/gruvbox_fsg"
+theme.confdir = os.getenv("HOME") .. "/.config/awesome/themes/everforest_fsg"
 -- Colors
 theme.color = {
   background = "#2b3339",
