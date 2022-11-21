@@ -33,6 +33,7 @@ map('n', '<leader>ff', '<cmd>lua require(\'telescope.builtin\').find_files({ hid
 map('n', '<leader>fg', '<cmd>lua require(\'telescope.builtin\').live_grep({grep_open_files = false})<cr>')
 map('n', '<leader>fb', '<cmd>lua require(\'telescope.builtin\').buffers()<cr>')
 map('n', '<leader>fh', '<cmd>lua require(\'telescope.builtin\').help_tags()<cr>')
+map('n', '<leader>fp', ':Telescope resume<CR>')
 
 --[[
 -- Nvim-tree mappings
