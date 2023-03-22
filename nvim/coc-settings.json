@@ -6,7 +6,6 @@
   "diagnostic.virtualText": false,
   "diagnostic.virtualTextCurrentLineOnly": false,
   "eslint.format.enable": false,
-  "javascript.format.enabled": false,
   "json.format.enable": false,
   "suggest.noselect": true,
   "suggest.enablePreselect": true,
