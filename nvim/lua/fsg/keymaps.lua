@@ -22,6 +22,8 @@ map('n', '<leader>ft', ':%bd<CR>')
 
 -- Paste replacing selected text, without losing data
 map('x', '<leader>p', '"_dP')
+-- Delete without yanking
+map('x', '<leader>d', '"_d')
 
 -- jk exits insert mode
 map('i', 'jk', '<ESC>')
