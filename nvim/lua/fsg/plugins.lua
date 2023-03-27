@@ -47,7 +47,7 @@ packer.startup(function(use)
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use { 'nvim-telescope/telescope.nvim', tag = '0.1.0' }
   use 'nvim-lualine/lualine.nvim'
-  use 'sainnhe/everforest'
+  use "rebelot/kanagawa.nvim"
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

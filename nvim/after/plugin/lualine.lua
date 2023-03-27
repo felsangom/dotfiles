@@ -4,7 +4,7 @@
 
 require("lualine").setup {
   options = {
-    theme = "everforest",
+    theme = "kanagawa",
     icons_enabled = true,
     globalstatus = true
   },
