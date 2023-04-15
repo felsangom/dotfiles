@@ -19,7 +19,6 @@ o.smarttab = true
 o.tabstop = 2
 o.shiftwidth = 2
 o.expandtab = true
-o.relativenumber = true
 o.hlsearch = false
 o.wrap = false
 o.guicursor = ""
@@ -30,3 +29,5 @@ o.signcolumn = "yes"
 --g.syntax_on = true
 o.mouse:append "a"
 o.shortmess:append "csI"
+o.relativenumber = true
+g.loaded_perl_provider = 0

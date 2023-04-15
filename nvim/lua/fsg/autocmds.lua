@@ -14,36 +14,6 @@ api.nvim_create_autocmd(
   }
 )
 
--- formatexpr on specified file types
-api.nvim_create_autocmd(
-  "FileType",
-  {
-    group = coc_group,
-    pattern = 'typescript,json',
-    command = "setl formatexpr=CocAction('formatSelected')"
-  }
-)
-
--- Signature help on jump placeholder
-api.nvim_create_autocmd(
-  "User",
-  {
-    group = coc_group,
-    pattern = 'CocJumpPlaceholder',
-    command = "call CocActionAsync('showSignatureHelp')"
-  }
-)
-
--- Highlight symbol under cursor on CursorHold
-api.nvim_create_autocmd(
-  "CursorHold",
-  {
-    group = coc_group,
-    pattern = '*',
-    command = "silent call CocActionAsync('highlight')"
-  }
-)
-
 --[[
 -- If you like code folding, uncomment the autocmd bellow
 -- Autocmd according to https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation

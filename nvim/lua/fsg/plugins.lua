@@ -7,7 +7,7 @@ local fn = vim.fn
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 
 if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({
+  PackerBootstrap = fn.system({
     'git',
     'clone',
     '--depth',
@@ -37,7 +37,6 @@ end
 packer.startup(function(use)
   use 'wbthomason/packer.nvim'
 
-  use { 'neoclide/coc.nvim', branch = 'release' }
   use 'kyazdani42/nvim-web-devicons'
   use 'kyazdani42/nvim-tree.lua'
   use 'airblade/vim-gitgutter'
@@ -49,9 +48,30 @@ packer.startup(function(use)
   use 'nvim-lualine/lualine.nvim'
   use "rebelot/kanagawa.nvim"
 
+  use {
+    'VonHeikemen/lsp-zero.nvim',
+    branch = 'v2.x',
+    requires = {
+      -- LSP Support
+      {'neovim/nvim-lspconfig'},             -- Required
+      {                                      -- Optional
+        'williamboman/mason.nvim',
+        run = function()
+          pcall(vim.cmd, 'MasonUpdate')
+        end,
+      },
+      {'williamboman/mason-lspconfig.nvim'}, -- Optional
+
+      -- Autocompletion
+      {'hrsh7th/nvim-cmp'},     -- Required
+      {'hrsh7th/cmp-nvim-lsp'}, -- Required
+      {'L3MON4D3/LuaSnip'},     -- Required
+    }
+  }
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
-  if packer_bootstrap then
+  if PackerBootstrap then
     packer.sync()
   end
 end)
