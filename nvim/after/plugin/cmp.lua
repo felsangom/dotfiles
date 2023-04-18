@@ -1,8 +1,11 @@
--- Make sure you setup `cmp` after lsp-zero
-
 local cmp = require('cmp')
 
 cmp.setup({
+  snippet = {
+    expand = function(args)
+      require'luasnip'.lsp_expand(args.body)
+    end
+  },
   mapping = {
     -- `Enter` key to confirm completion
     ['<CR>'] = cmp.mapping.confirm({select = false}),
@@ -11,8 +14,10 @@ cmp.setup({
     ['<C-Space>'] = cmp.mapping.complete()
   },
   sources = cmp.config.sources({
-    { name = 'nvim_lsp' }
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' }
   }, {
-    { name = 'buffer' }
+    { name = 'buffer' },
+    { name = 'path' }
   })
 })

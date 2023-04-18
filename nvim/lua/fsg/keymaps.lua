@@ -28,6 +28,10 @@ map('x', '<leader>d', '"_d')
 -- jk exits insert mode
 map('i', 'jk', '<ESC>')
 
+-- Create/resize splits
+map('n', '<leader>|', ':vs<CR>')
+map('n', '<leader>-', ':sp<CR>')
+
 --[[
 -- Telescope mappings
 --]]

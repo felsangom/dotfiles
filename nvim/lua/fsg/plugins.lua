@@ -45,6 +45,7 @@ packer.startup(function(use)
   use 'nvim-lua/plenary.nvim'
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use { 'nvim-telescope/telescope.nvim', tag = '0.1.0' }
+  use { 'echasnovski/mini.nvim', branch = 'stable' }
   use 'nvim-lualine/lualine.nvim'
   use 'stevearc/dressing.nvim'
   use "rebelot/kanagawa.nvim"
@@ -74,9 +75,12 @@ packer.startup(function(use)
 
       -- Autocompletion
       {'hrsh7th/nvim-cmp'},     -- Required
-      {'hrsh7th/cmp-buffer'},   -- Required
+      {'hrsh7th/cmp-buffer'},
+      {'hrsh7th/cmp-path'},
       {'hrsh7th/cmp-nvim-lsp'}, -- Required
-      {'L3MON4D3/LuaSnip'},     -- Required
+      {'saadparwaiz1/cmp_luasnip'},
+      {'L3MON4D3/LuaSnip'},
+      {'rafamadriz/friendly-snippets'},
     }
   }
 
