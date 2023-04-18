@@ -26,8 +26,10 @@ o.scrolloff = 3
 o.updatetime = 50
 o.hidden = true
 o.signcolumn = "yes"
---g.syntax_on = true
+o.cursorline = true
 o.mouse:append "a"
 o.shortmess:append "csI"
 o.relativenumber = true
+o.splitbelow = true
+o.splitright = true
 g.loaded_perl_provider = 0

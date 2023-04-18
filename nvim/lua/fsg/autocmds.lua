@@ -3,7 +3,6 @@
 --]]
 
 local api = vim.api
-local coc_group = vim.api.nvim_create_augroup("coc_group", { clear = true})
 
 -- Automatically remove all trailing whitespace
 api.nvim_create_autocmd(
