@@ -46,7 +46,16 @@ packer.startup(function(use)
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use { 'nvim-telescope/telescope.nvim', tag = '0.1.0' }
   use 'nvim-lualine/lualine.nvim'
+  use 'stevearc/dressing.nvim'
   use "rebelot/kanagawa.nvim"
+
+  use {
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require("todo-comments").setup {}
+    end
+  }
 
   use {
     'VonHeikemen/lsp-zero.nvim',
