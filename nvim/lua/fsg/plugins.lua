@@ -35,54 +35,31 @@ if not status_ok then
 end
 
 packer.startup(function(use)
-  use 'wbthomason/packer.nvim'
-
-  use 'kyazdani42/nvim-web-devicons'
-  use 'kyazdani42/nvim-tree.lua'
-  use 'airblade/vim-gitgutter'
+  use { 'wbthomason/packer.nvim' }
+  use { 'kyazdani42/nvim-web-devicons' }
+  use { 'kyazdani42/nvim-tree.lua' }
+  use { 'airblade/vim-gitgutter' }
   use { 'nvim-treesitter/nvim-treesitter', run = function() require('nvim-treesitter.install').update({ with_sync = true }) end }
-  use 'tpope/vim-fugitive'
-  use 'nvim-lua/plenary.nvim'
+  use { 'tpope/vim-fugitive' }
+  use { 'nvim-lua/plenary.nvim' }
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use { 'nvim-telescope/telescope.nvim', tag = '0.1.0' }
   use { 'echasnovski/mini.nvim', branch = 'stable' }
-  use 'nvim-lualine/lualine.nvim'
-  use 'stevearc/dressing.nvim'
-  use "rebelot/kanagawa.nvim"
-
-  use {
-    "folke/todo-comments.nvim",
-    requires = "nvim-lua/plenary.nvim",
-    config = function()
-      require("todo-comments").setup {}
-    end
-  }
-
-  use {
-    'VonHeikemen/lsp-zero.nvim',
-    branch = 'v2.x',
-    requires = {
-      -- LSP Support
-      {'neovim/nvim-lspconfig'},             -- Required
-      {                                      -- Optional
-        'williamboman/mason.nvim',
-        run = function()
-          -- pcall(vim.cmd, 'MasonUpdate')
-          vim.cmd.MasonUpdate()
-        end,
-      },
-      {'williamboman/mason-lspconfig.nvim'}, -- Optional
-
-      -- Autocompletion
-      {'hrsh7th/nvim-cmp'},     -- Required
-      {'hrsh7th/cmp-buffer'},
-      {'hrsh7th/cmp-path'},
-      {'hrsh7th/cmp-nvim-lsp'}, -- Required
-      {'saadparwaiz1/cmp_luasnip'},
-      {'L3MON4D3/LuaSnip'},
-      {'rafamadriz/friendly-snippets'},
-    }
-  }
+  use { 'nvim-lualine/lualine.nvim' }
+  use { 'stevearc/dressing.nvim' }
+  use { 'rebelot/kanagawa.nvim' }
+  -- LSP
+  use { 'neovim/nvim-lspconfig' }
+  use { 'williamboman/mason.nvim', run = function() vim.cmd.MasonUpdate() end }
+  use { 'williamboman/mason-lspconfig.nvim' }
+  -- Autocompletion
+  use { 'hrsh7th/nvim-cmp' }
+  use { 'hrsh7th/cmp-buffer' }
+  use { 'hrsh7th/cmp-path' }
+  use { 'hrsh7th/cmp-nvim-lsp' }
+  use { 'saadparwaiz1/cmp_luasnip' }
+  use { 'L3MON4D3/LuaSnip' }
+  use { 'rafamadriz/friendly-snippets' }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
