@@ -5,11 +5,14 @@ Basic neovim configs
 local g = vim.g
 local o = vim.opt
 
+g.mapleader = ' '
+g.maplocalleader = ' '
 o.swapfile = false
 o.laststatus = 2
 o.encoding = "utf-8"
 o.showmatch = true
 o.ignorecase = true
+o.smartcase = true
 o.incsearch = true
 o.clipboard = "unnamedplus"
 o.list = true
@@ -32,4 +35,6 @@ o.shortmess:append "csI"
 o.relativenumber = true
 o.splitbelow = true
 o.splitright = true
+o.showmode = false
+o.termguicolors = true
 g.loaded_perl_provider = 0

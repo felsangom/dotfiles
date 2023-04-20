@@ -2,7 +2,9 @@
 -- Telescope configs
 --]]
 
-require("telescope").setup({
+local telescope = require("telescope")
+
+telescope.setup({
   defaults = {
     sorting_strategy = "ascending",
     scroll_strategy = "limit",
@@ -12,4 +14,6 @@ require("telescope").setup({
     }
   }
 })
+
+telescope.load_extension('fzf')
 

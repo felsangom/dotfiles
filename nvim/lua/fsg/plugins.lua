@@ -38,7 +38,6 @@ packer.startup(function(use)
   use { 'wbthomason/packer.nvim' }
   use { 'kyazdani42/nvim-web-devicons' }
   use { 'kyazdani42/nvim-tree.lua' }
-  use { 'airblade/vim-gitgutter' }
   use { 'nvim-treesitter/nvim-treesitter', run = function() require('nvim-treesitter.install').update({ with_sync = true }) end }
   use { 'tpope/vim-fugitive' }
   use { 'nvim-lua/plenary.nvim' }

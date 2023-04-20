@@ -1,4 +1,33 @@
 local cmp = require('cmp')
+local luasnip = require('luasnip')
+
+local kind_icons = {
+  Text = "",
+  Method = "",
+  Function = "",
+  Constructor = "",
+  Field = "",
+  Variable = "",
+  Class = "ﴯ",
+  Interface = "",
+  Module = "",
+  Property = "ﰠ",
+  Unit = "",
+  Value = "",
+  Enum = "",
+  Keyword = "",
+  Snippet = "",
+  Color = "",
+  File = "",
+  Reference = "",
+  Folder = "",
+  EnumMember = "",
+  Constant = "",
+  Struct = "",
+  Event = "",
+  Operator = "",
+  TypeParameter = ""
+}
 
 cmp.setup({
   snippet = {
@@ -10,16 +39,24 @@ cmp.setup({
     -- `Enter` key to confirm completion
     ['<CR>'] = cmp.mapping.confirm({select = false}),
     -- Tab, Shift + Tab to cycle through list
-    ['<Tab>'] = cmp.mapping(function()
+    ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      else
+        fallback()
       end
-    end),
-    ['<S-Tab>'] = cmp.mapping(function()
+    end, { 'i', 's' }),
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
       end
-    end),
+    end, { 'i', 's' }),
 
     -- Ctrl+Space to trigger completion menu
     ['<C-Space>'] = cmp.mapping.complete()
@@ -30,5 +67,23 @@ cmp.setup({
   }, {
     { name = 'buffer' },
     { name = 'path' }
-  })
+  }),
+  formatting = {
+    format = function(entry, vim_item)
+      local lspkind_ok, lspkind = pcall(require, "lspkind")
+      if not lspkind_ok then
+        vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
+        vim_item.menu = ({
+          buffer = "[Buffer]",
+          nvim_lsp = "[LSP]",
+          luasnip = "[LuaSnip]",
+          nvim_lua = "[Lua]"
+        })[entry.source.name]
+        return vim_item
+      else
+        -- From lspkind
+        return lspkind.cmp_format()
+      end
+    end
+  }
 })
