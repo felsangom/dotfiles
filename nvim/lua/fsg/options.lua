@@ -7,6 +7,11 @@ local o = vim.opt
 
 g.mapleader = ' '
 g.maplocalleader = ' '
+o.autowrite = true
+o.completeopt = "menu,menuone,noselect"
+o.conceallevel = 3
+o.confirm = true
+o.formatoptions = "jcroqlnt"
 o.swapfile = false
 o.laststatus = 2
 o.encoding = "utf-8"
@@ -24,17 +29,18 @@ o.shiftwidth = 2
 o.expandtab = true
 o.hlsearch = false
 o.wrap = false
-o.guicursor = ""
 o.scrolloff = 3
 o.updatetime = 50
 o.hidden = true
 o.signcolumn = "yes"
 o.cursorline = true
 o.mouse:append "a"
-o.shortmess:append "csI"
+o.shortmess:append({ W = true, I = true, c = true, s = true, C = true })
 o.relativenumber = true
 o.splitbelow = true
 o.splitright = true
 o.showmode = false
 o.termguicolors = true
+o.undofile = true
+o.undolevels = 10000
 g.loaded_perl_provider = 0
