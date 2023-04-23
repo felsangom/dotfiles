@@ -21,7 +21,7 @@ o.smartcase = true
 o.incsearch = true
 o.clipboard = "unnamedplus"
 o.list = true
-o.listchars = "tab:» ,space:·,trail:·,eol:¬"
+o.listchars:append "tab:» ,space:·,trail:·,eol:¬"
 o.number = true
 o.smarttab = true
 o.tabstop = 2
