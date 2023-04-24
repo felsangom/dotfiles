@@ -18,6 +18,9 @@ return {
   -- icons
   { "nvim-tree/nvim-web-devicons", lazy = true },
 
+  -- plenary
+  { "nvim-lua/plenary.nvim", lazy = true },
+
   -- ui components
   { "MunifTanjim/nui.nvim", lazy = true },
 }
