@@ -7,9 +7,7 @@ local o = vim.opt
 
 g.mapleader = ' '
 g.maplocalleader = ' '
-o.autowrite = true
 o.completeopt = "menu,menuone,noselect"
-o.conceallevel = 3
 o.confirm = true
 o.formatoptions = "jcroqlnt"
 o.swapfile = false
@@ -44,3 +42,5 @@ o.termguicolors = true
 o.undofile = true
 o.undolevels = 10000
 g.loaded_perl_provider = 0
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
