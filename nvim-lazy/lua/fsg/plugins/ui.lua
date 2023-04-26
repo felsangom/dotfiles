@@ -9,7 +9,14 @@ return {
       options = {
         theme = "kanagawa",
         icons_enabled = true,
-        globalstatus = true
+        globalstatus = true,
+        section_separators = { left = '', right = '' },
+        component_separators = '|'
+      },
+      sections = {
+        lualine_a = {
+          { 'mode', separator = { right = '' }, right_padding = 2 },
+        }
       },
       tabline = {}
     }
@@ -31,6 +38,18 @@ return {
         return vim.ui.input(...)
       end
     end,
+    opts = {
+      input = {
+        win_options = {
+          winblend = 0
+        }
+      },
+      select = {
+        win_options = {
+          winblend = 0
+        }
+      }
+    }
   },
 
   -- icons
