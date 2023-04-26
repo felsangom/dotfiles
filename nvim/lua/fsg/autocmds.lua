@@ -13,19 +13,27 @@ api.nvim_create_autocmd(
   }
 )
 
---[[
--- If you like code folding, uncomment the autocmd bellow
--- Autocmd according to https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation
---]]
---[[
-vim.api.nvim_create_autocmd(
-  {'BufEnter','BufAdd','BufNew','BufNewFile','BufWinEnter'},
-  {
-    group = vim.api.nvim_create_augroup('TS_FOLD_WORKAROUND', {}),
-    callback = function()
-      vim.opt.foldmethod = 'expr'
-      vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+local noice_hl = vim.api.nvim_create_augroup("NoiceHighlights", {})
+local noice_cmd_types = {
+  CmdLine = "Constant",
+  Input = "Constant",
+  Calculator = "Constant",
+  Lua = "Constant",
+  Filter = "Constant",
+  Rename = "Constant",
+  Substitute = "NoiceCmdlinePopupBorderSearch",
+  Help = "helpVim",
+}
+vim.api.nvim_clear_autocmds({ group = noice_hl })
+vim.api.nvim_create_autocmd("BufEnter", {
+  group = noice_hl,
+  desc = "redefinition of noice highlight groups",
+  callback = function()
+    for type, hl in pairs(noice_cmd_types) do
+      vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorder" .. type, {})
+      vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorder" .. type, { link = hl })
     end
-  }
-)
---]]
+    vim.api.nvim_set_hl(0, "NoiceConfirmBorder", {})
+    vim.api.nvim_set_hl(0, "NoiceConfirmBorder", { link = "Constant" })
+  end,
+})

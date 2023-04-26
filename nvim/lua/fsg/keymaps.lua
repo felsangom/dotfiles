@@ -1,7 +1,6 @@
 --[[
 -- All keymaps are grouped in this file for convenience
 --]]
-
 local function map(mode, lhs, rhs, options)
   local default_options = { noremap = true, silent = true }
 
@@ -33,22 +32,6 @@ map('n', '<C-Up>', '<cmd>resize +2<cr>')
 map('n', '<C-Down>', '<cmd>resize -2<cr>')
 map('n', '<C-Left>', '<cmd>vertical resize -2<cr>')
 map('n', '<C-Right>', '<cmd>vertical resize +2<cr>')
-
---[[
--- Telescope mappings
---]]
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', function() builtin.find_files({ hidden = true }) end, {})
-vim.keymap.set('n', '<leader>fg', function() builtin.live_grep({ grep_open_files = false }) end, {})
-vim.keymap.set('n', '<leader>fw', builtin.grep_string, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-vim.keymap.set('n', '<leader>fp', builtin.resume, {})
-
---[[
--- Nvim-tree mappings
---]]
-map('n', '<C-n>', ':NvimTreeToggle<CR>')
 
 --[[
 -- LSP
