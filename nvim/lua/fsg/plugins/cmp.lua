@@ -12,6 +12,12 @@ return {
     local cmp = require("cmp")
     local luasnip = require('luasnip')
 
+    local has_words_before = function()
+      unpack = unpack or table.unpack
+      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+      return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+    end
+
     return {
       completion = {
         completeopt = "menu,menuone,noinsert",
@@ -30,6 +36,8 @@ return {
             cmp.select_next_item()
           elseif luasnip.expand_or_jumpable() then
             luasnip.expand_or_jump()
+          elseif has_words_before() then
+            cmp.complete()
           else
             fallback()
           end
@@ -48,10 +56,11 @@ return {
         ['<C-Space>'] = cmp.mapping.complete()
       }),
       sources = cmp.config.sources({
-        { name = "nvim_lsp" },
-        { name = "luasnip" },
-        { name = "buffer" },
-        { name = "path" },
+        { name = "nvim_lsp", max_item_count = 15 },
+        { name = "luasnip", max_item_count = 5 },
+        { name = "path" }
+      }, {
+        { name = "buffer", max_item_count = 5 }
       }),
       formatting = {
         format = function(_, item)
