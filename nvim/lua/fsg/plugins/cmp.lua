@@ -10,6 +10,7 @@ return {
   },
   opts = function()
     local cmp = require("cmp")
+    local luasnip = require("luasnip")
 
     local has_words_before = function()
       unpack = unpack or table.unpack
@@ -40,6 +41,8 @@ return {
         ['<Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
+          elseif luasnip.expand_or_locally_jumpable() then
+            luasnip.expand_or_jump()
           elseif has_words_before() then
             cmp.complete()
           else
@@ -49,6 +52,8 @@ return {
         ['<S-Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
+          elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
           else
             fallback()
           end
@@ -60,12 +65,7 @@ return {
           max_item_count = 15,
           entry_filter = function(entry)
             -- Filter out lsp snippets
-            local kind = cmp.lsp.CompletionItemKind[entry:get_kind()]
-            if kind == "Snippet" then
-              return false
-            else
-              return true
-            end
+            return not cmp.lsp.CompletionItemKind[entry:get_kind()] == "Snippet"
           end
         },
         { name = "luasnip", max_item_count = 5 },

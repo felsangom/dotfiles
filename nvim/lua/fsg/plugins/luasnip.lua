@@ -10,6 +10,7 @@ return {
   },
   opts = {
     history = true,
-    updateevents = "TextChanged,TextChangedI"
+    delete_check_events = {"TextChanged", "InsertEnter"},
+    region_check_events = {"TextChangedI", "CursorMoved", "InsertLeave", "InsertEnter"}
   }
 }
