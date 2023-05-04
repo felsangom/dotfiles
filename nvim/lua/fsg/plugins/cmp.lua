@@ -22,6 +22,9 @@ return {
       completion = {
         completeopt = "menu,menuone",
       },
+      window = {
+        documentation = cmp.config.disable
+      },
       snippet = {
         expand = function(args)
           require("luasnip").lsp_expand(args.body)

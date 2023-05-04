@@ -15,7 +15,7 @@ end
 -- Close current buffer
 map('n', '<leader>fa', ':bd<CR>')
 -- Close all buffers
-map('n', '<leader>ft', ':%bd!<CR>')
+map('n', '<leader>ft', ':%bd<CR>')
 
 -- Paste replacing selected text, without losing data
 map('x', '<leader>p', '"_dP')
