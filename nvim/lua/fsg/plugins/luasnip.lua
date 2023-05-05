@@ -13,7 +13,7 @@ return {
   },
   opts = {
     history = true,
-    delete_check_events = {"TextChanged", "InsertEnter"},
-    region_check_events = {"TextChangedI", "CursorMoved", "InsertLeave", "InsertEnter"}
+    delete_check_events = {"InsertEnter"},
+    region_check_events = {"InsertLeave", "InsertEnter"}
   }
 }
