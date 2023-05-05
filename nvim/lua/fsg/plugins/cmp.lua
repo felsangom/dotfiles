@@ -67,8 +67,8 @@ return {
           name = "nvim_lsp",
           max_item_count = 15,
           entry_filter = function(entry)
-            -- Filter out lsp snippets
-            return not cmp.lsp.CompletionItemKind[entry:get_kind()] == "Snippet"
+            -- Filter out empty lsp snippets
+            return entry:get_word() ~= ''
           end
         },
         { name = "luasnip", max_item_count = 5 },
