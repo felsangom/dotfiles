@@ -24,8 +24,8 @@ local noice_cmd_types = {
   Substitute = "NoiceCmdlinePopupBorderSearch",
   Help = "helpVim",
 }
-vim.api.nvim_clear_autocmds({ group = noice_hl })
-vim.api.nvim_create_autocmd("BufEnter", {
+api.nvim_clear_autocmds({ group = noice_hl })
+api.nvim_create_autocmd("BufEnter", {
   group = noice_hl,
   desc = "redefinition of noice highlight groups",
   callback = function()

@@ -22,16 +22,26 @@ map('x', '<leader>p', '"_dP')
 -- Delete without yanking
 map('x', '<leader>d', '"_d')
 
--- jk exits insert mode
-map('i', 'jk', '<ESC>')
+-- jk exits insert mode and abandon any snippets
+vim.keymap.set('i', 'jk', function ()
+  local luasnip = require("luasnip")
+  local current_nodes = luasnip.session.current_nodes
+  if current_nodes then
+    if current_nodes[vim.api.nvim_get_current_buf()] then
+      current_nodes[vim.api.nvim_get_current_buf()] = nil
+    end
+  end
+
+  vim.cmd("stopinsert")
+end)
 
 -- Create/resize splits
 map('n', '<leader>|', ':vs<CR>')
 map('n', '<leader>-', ':sp<CR>')
-map('n', '<C-Up>', '<cmd>resize +2<cr>')
-map('n', '<C-Down>', '<cmd>resize -2<cr>')
-map('n', '<C-Left>', '<cmd>vertical resize -2<cr>')
-map('n', '<C-Right>', '<cmd>vertical resize +2<cr>')
+map('n', '<C-Up>', ':resize +2<CR>')
+map('n', '<C-Down>', ':resize -2<CR>')
+map('n', '<C-Left>', ':vertical resize -2<CR>')
+map('n', '<C-Right>', ':vertical resize +2<CR>')
 
 --[[
 -- LSP
