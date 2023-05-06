@@ -12,9 +12,23 @@ return {
     local cmp = require("cmp")
     local luasnip = require("luasnip")
 
+    local has_words_before = function()
+      unpack = unpack or table.unpack
+      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+      return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+    end
+
     return {
       completion = {
         completeopt = "menu,menuone",
+        get_trigger_characters = function (trigger_characters)
+          -- Don't open cmp suggestions on space or tab
+          local filter_characters = function(char)
+            return char ~= ' ' and char ~= '\t'
+          end
+
+          return vim.tbl_filter(filter_characters, trigger_characters)
+        end
       },
       snippet = {
         expand = function(args)
@@ -37,6 +51,8 @@ return {
             cmp.select_next_item()
           elseif luasnip.expand_or_locally_jumpable() then
             luasnip.expand_or_jump()
+          elseif has_words_before() then
+            cmp.complete()
           else
             fallback()
           end
