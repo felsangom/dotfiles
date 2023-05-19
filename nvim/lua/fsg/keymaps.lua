@@ -11,6 +11,8 @@ local function map(mode, lhs, rhs, options)
   vim.api.nvim_set_keymap(mode, lhs, rhs, default_options)
 end
 
+-- Oil
+map('n', '<leader>x', ':Oil<CR>')
 
 -- Close current buffer
 map('n', '<leader>fa', ':bd<CR>')
