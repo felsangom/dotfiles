@@ -24,13 +24,6 @@ map('x', '<leader>p', '"_dP')
 -- Delete without yanking
 map('x', '<leader>d', '"_d')
 
--- Trouble
-map('n', '<leader>tt', '<cmd>TroubleToggle<CR>')
-map('n', '<leader>td', '<cmd>TroubleToggle document_diagnostics<CR>')
-map('n', '<leader>tw', '<cmd>TroubleToggle workspace_diagnostics<CR>')
-map('n', '<leader>tq', '<cmd>TroubleToggle quickfix<CR>')
-map('n', '<leader>tl', '<cmd>TroubleToggle loclist<CR>')
-map('n', 'gr', '<cmd>TroubleToggle lsp_references<CR>')
 
 -- jk exits insert mode and abandon any snippets
 vim.keymap.set('i', 'jk', function ()
@@ -54,12 +47,6 @@ map('n', '<C-Down>', '<cmd>resize -2<CR>')
 map('n', '<C-Left>', '<cmd>vertical resize -2<CR>')
 map('n', '<C-Right>', '<cmd>vertical resize +2<CR>')
 
---[[
--- LSP
---]]
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, {})
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, {})
-
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -71,6 +58,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- Buffer local mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local opts = { buffer = ev.buf }
+    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+    vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
@@ -83,5 +72,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<space>fc', function()
       vim.lsp.buf.format { async = true }
     end, opts)
+
+    -- Trouble
+    local trouble = require('trouble')
+    vim.keymap.set('n', '<leader>tt', function() trouble.toggle() end, {})
+    vim.keymap.set('n', '<leader>td', function() trouble.toggle('document_diagnostics') end, {})
+    vim.keymap.set('n', '<leader>tw', function() trouble.toggle('workspace_diagnostics') end, {})
+    vim.keymap.set('n', '<leader>tq', function() trouble.toggle('quickfix') end, {})
+    vim.keymap.set('n', '<leader>tl', function() trouble.toggle('loclist') end, {})
+    vim.keymap.set('n', 'gr', function() trouble.toggle('lsp_references') end, {})
   end,
 })
