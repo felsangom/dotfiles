@@ -12,17 +12,25 @@ local function map(mode, lhs, rhs, options)
 end
 
 -- Oil
-map('n', '<leader>e', ':Oil<CR>')
+map('n', '<leader>e', '<cmd>Oil<CR>')
 
 -- Close current buffer
-map('n', '<leader>fa', ':bd<CR>')
+map('n', '<leader>fa', '<cmd>bd<CR>')
 -- Close all buffers
-map('n', '<leader>ft', ':%bd<CR>')
+map('n', '<leader>ft', '<cmd>%bd<CR>')
 
 -- Paste replacing selected text, without losing data
 map('x', '<leader>p', '"_dP')
 -- Delete without yanking
 map('x', '<leader>d', '"_d')
+
+-- Trouble
+map('n', '<leader>tt', '<cmd>TroubleToggle<CR>')
+map('n', '<leader>td', '<cmd>TroubleToggle document_diagnostics<CR>')
+map('n', '<leader>tw', '<cmd>TroubleToggle workspace_diagnostics<CR>')
+map('n', '<leader>tq', '<cmd>TroubleToggle quickfix<CR>')
+map('n', '<leader>tl', '<cmd>TroubleToggle loclist<CR>')
+map('n', 'gr', '<cmd>TroubleToggle lsp_references<CR>')
 
 -- jk exits insert mode and abandon any snippets
 vim.keymap.set('i', 'jk', function ()
@@ -38,13 +46,13 @@ vim.keymap.set('i', 'jk', function ()
 end)
 
 -- Create/resize splits
-map('n', '<leader>|', ':vs<CR>')
-map('n', '<leader>-', ':sp<CR>')
-map('n', '<leader>q', ':q<CR>')
-map('n', '<C-Up>', ':resize +2<CR>')
-map('n', '<C-Down>', ':resize -2<CR>')
-map('n', '<C-Left>', ':vertical resize -2<CR>')
-map('n', '<C-Right>', ':vertical resize +2<CR>')
+map('n', '<leader>|', '<cmd>vs<CR>')
+map('n', '<leader>-', '<cmd>sp<CR>')
+map('n', '<leader>q', '<cmd>q<CR>')
+map('n', '<C-Up>', '<cmd>resize +2<CR>')
+map('n', '<C-Down>', '<cmd>resize -2<CR>')
+map('n', '<C-Left>', '<cmd>vertical resize -2<CR>')
+map('n', '<C-Right>', '<cmd>vertical resize +2<CR>')
 
 --[[
 -- LSP
@@ -71,7 +79,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
     vim.keymap.set('n', '<f2>', vim.lsp.buf.rename, opts)
     vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+    -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
     vim.keymap.set('n', '<space>fc', function()
       vim.lsp.buf.format { async = true }
     end, opts)
