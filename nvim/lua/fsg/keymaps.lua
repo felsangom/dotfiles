@@ -12,7 +12,7 @@ local function map(mode, lhs, rhs, options)
 end
 
 -- Oil
-map('n', '<leader>x', ':Oil<CR>')
+map('n', '<leader>e', ':Oil<CR>')
 
 -- Close current buffer
 map('n', '<leader>fa', ':bd<CR>')
@@ -40,6 +40,7 @@ end)
 -- Create/resize splits
 map('n', '<leader>|', ':vs<CR>')
 map('n', '<leader>-', ':sp<CR>')
+map('n', '<leader>q', ':q<CR>')
 map('n', '<C-Up>', ':resize +2<CR>')
 map('n', '<C-Down>', ':resize -2<CR>')
 map('n', '<C-Left>', ':vertical resize -2<CR>')
@@ -48,10 +49,8 @@ map('n', '<C-Right>', ':vertical resize +2<CR>')
 --[[
 -- LSP
 --]]
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, {})
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, {})
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, {})
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, {})
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
