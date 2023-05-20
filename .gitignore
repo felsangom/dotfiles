@@ -1,4 +1,3 @@
 .git
-/awesome/awesome-wm-widgets
-/nvim/plugin
-/nvim/plugged
+./awesome/awesome-wm-widgets
+./nvim/lazy-lock.json
