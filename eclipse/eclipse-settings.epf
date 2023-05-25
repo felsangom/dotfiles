@@ -1,0 +1,9 @@
+#Thu May 25 10:00:58 BRT 2023
+\!/=
+/instance/org.eclipse.jdt.ui/org.eclipse.jdt.ui.formatterprofiles.version=23
+/instance/org.eclipse.jdt.ui/org.eclipse.jdt.ui.typefilter.disabled=java.awt.*;java.rmi.*;org.graalvm.*
+/instance/org.eclipse.jdt.ui/org.eclipse.jdt.ui.typefilter.enabled=com.sun.*;io.micrometer.shaded.*;jdk.*;sun.*;java.awt.List
+/instance/org.eclipse.jdt.ui/org.eclipse.jdt.ui.visibility.order=B,V,R,D,
+/instance/org.eclipse.jdt.ui/outlinesortoption=T,SF,SI,SM,F,I,C,M,
+@org.eclipse.jdt.ui=3.28.0.v20230210-2115
+file_export_version=3.0
