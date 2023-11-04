@@ -7,7 +7,7 @@ return {
     event = "VeryLazy",
     opts = {
       options = {
-        theme = "kanagawa",
+        theme = "tokyonight",
         icons_enabled = true,
         globalstatus = true,
         section_separators = { left = '', right = '' },
