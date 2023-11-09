@@ -47,6 +47,10 @@ map('n', '<C-Down>', '<cmd>resize -2<CR>')
 map('n', '<C-Left>', '<cmd>vertical resize -2<CR>')
 map('n', '<C-Right>', '<cmd>vertical resize +2<CR>')
 
+-- Fugitive
+map('n', '<leader>gb', '<cmd>Git blame<CR>')
+map('n', '<leader>df', '<cmd>Gdiffsplit<CR>')
+
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -65,11 +69,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
     vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
-    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
+    vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
     vim.keymap.set('n', '<f2>', vim.lsp.buf.rename, opts)
-    vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
-    -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-    vim.keymap.set('n', '<space>fc', function()
+    vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
+    vim.keymap.set('n', '<leader>cx', function()
       vim.lsp.buf.format { async = true }
     end, opts)
 

@@ -16,7 +16,12 @@ return {
         layout_config = {
           prompt_position = "top",
           preview_cutoff = 9999999999999
-        }
+        },
+        path_display = function(opts, path)
+            local tail = require("telescope.utils").path_tail(path)
+            local path_without_file = string.gsub(path, tail, '')
+            return string.format("%s (...%s)", tail, string.sub(path_without_file, -60))
+        end
       }
     })
     require('telescope').load_extension('fzf')
