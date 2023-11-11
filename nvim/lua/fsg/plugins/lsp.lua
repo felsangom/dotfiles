@@ -40,6 +40,23 @@ return {
             },
           },
         },
+        pylsp = {
+          settings = {
+            pylsp = {
+              plugins = {
+                mypy = {
+                  enabled = true,
+                  live_mode = true,
+                  strict_optional = true
+                },
+                ruff = {
+                  enabled = true,
+                  extendSelect = { "I" }
+                }
+              }
+            }
+          }
+        }
       },
       setup = {},
     },
@@ -132,9 +149,14 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = { "mason.nvim" },
     opts = function()
+      local null_ls = require("null-ls")
+
       return {
         root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git"),
-        sources = {},
+        sources = {
+          null_ls.builtins.diagnostics.mypy,
+          null_ls.builtins.diagnostics.ruff
+        },
       }
     end,
   },
