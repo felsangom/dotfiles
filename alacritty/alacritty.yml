@@ -6,7 +6,7 @@ working_directory: /home/felipe
 env:
   LANG: pt_BR.UTF-8
   LC_CTYPE: pt_BR.UTF-8
-  TERM: xterm-256color
+  TERM: alacritty
 
 shell:
   program: /bin/bash
@@ -27,39 +27,38 @@ font:
   bold_italic:
     family: CaskaydiaCove Nerd Font
 
-# Kanagawa Alacritty Colors
+# TokyoNight Alacritty Colors
 colors:
+  # Default colors
   primary:
-    background: '0x1f1f28'
-    foreground: '0xdcd7ba'
+    background: '0x24283b'
+    foreground: '0xc0caf5'
 
+  # Normal colors
   normal:
-    black:   '0x090618'
-    red:     '0xc34043'
-    green:   '0x76946a'
-    yellow:  '0xc0a36e'
-    blue:    '0x7e9cd8'
-    magenta: '0x957fb8'
-    cyan:    '0x6a9589'
-    white:   '0xc8c093'
+    black:   '0x1d202f'
+    red:     '0xf7768e'
+    green:   '0x9ece6a'
+    yellow:  '0xe0af68'
+    blue:    '0x7aa2f7'
+    magenta: '0xbb9af7'
+    cyan:    '0x7dcfff'
+    white:   '0xa9b1d6'
 
+  # Bright colors
   bright:
-    black:   '0x727169'
-    red:     '0xe82424'
-    green:   '0x98bb6c'
-    yellow:  '0xe6c384'
-    blue:    '0x7fb4ca'
-    magenta: '0x938aa9'
-    cyan:    '0x7aa89f'
-    white:   '0xdcd7ba'
-
-  selection:
-    background: '0x2d4f67'
-    foreground: '0xc8c093'
+    black:   '0x414868'
+    red:     '0xf7768e'
+    green:   '0x9ece6a'
+    yellow:  '0xe0af68'
+    blue:    '0x7aa2f7'
+    magenta: '0xbb9af7'
+    cyan:    '0x7dcfff'
+    white:   '0xc0caf5'
 
   indexed_colors:
-    - { index: 16, color: '0xffa066' }
-    - { index: 17, color: '0xff5d62' }
+    - { index: 16, color: '0xff9e64' }
+    - { index: 17, color: '0xdb4b4b' }
 
 key_bindings:
   - { key: PageUp, action: ScrollPageUp, mods: Shift }
