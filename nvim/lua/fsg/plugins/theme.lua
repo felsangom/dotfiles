@@ -5,10 +5,27 @@ return {
     opts = {
         style = 'storm',
         styles = {
-            functions = { italic = true }
+            functions = { italic = true },
         },
         on_highlights = function(hl, c)
             local prompt = "#2d3149"
+
+            local keywords = {
+                italic = true,
+                bg = '#24283b',
+                fg = '#9d7cd8'
+            }
+
+            hl.Conditional = keywords
+            hl.Repeat = keywords
+            hl.Label = keywords
+            hl.Exception = keywords
+            hl.Keyword = keywords
+            hl.Comment = {
+                italic = true,
+                bg = '#24283b',
+                fg = '#565f89'
+            }
 
             hl.TelescopeNormal = {
                 bg = c.bg_dark,
@@ -44,44 +61,3 @@ return {
         vim.cmd([[colorscheme tokyonight]])
     end
 }
-
--- return {
---   {
---     'rebelot/kanagawa.nvim',
---     lazy = false,
---     priority = 99999,
---     opts = {
---       commentStyle = { italic = true },
---       functionStyle = { italic = true },
---       keywordStyle = { italic = true },
---       statementStyle = { bold = false },
---       theme = "wave",
---       background = {
---         dark = "wave",
---         light = "lotus",
---       },
---       overrides = function(colors)
---         local theme = colors.theme
---
---         return {
---           Whitespace = { fg = theme.ui.bg_p2 },
---           NonText = { fg = theme.ui.bg_p2 },
---           CursorLine = { bg = theme.ui.bg_p1 },
---
---           -- Telescope
---           TelescopeTitle = { fg = theme.ui.special, bold = true },
---           TelescopePromptNormal = { bg = theme.ui.bg_p1 },
---           TelescopePromptBorder = { fg = theme.ui.bg_p1, bg = theme.ui.bg_p1 },
---           TelescopeResultsNormal = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m1 },
---           TelescopeResultsBorder = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
---           TelescopePreviewNormal = { bg = theme.ui.bg_dim },
---           TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
---         }
---       end,
---     },
---     config = function(_, opts)
---       require('kanagawa').setup(opts)
---       vim.cmd([[colorscheme kanagawa]])
---     end,
---   }
--- }

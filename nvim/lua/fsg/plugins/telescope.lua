@@ -4,6 +4,7 @@ return {
   cmd = "Telescope",
   version = false,
   dependencies = {
+    { 'nvim-treesitter/nvim-treesitter' },
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }
   },
   config = function()
@@ -13,14 +14,17 @@ return {
         selection_caret = " ",
         sorting_strategy = "ascending",
         scroll_strategy = "limit",
+        layout_strategy = "vertical",
         layout_config = {
-          prompt_position = "top",
-          preview_cutoff = 9999999999999
+            vertical = {
+                prompt_position = "top",
+                mirror = true
+            }
         },
         path_display = function(opts, path)
             local tail = require("telescope.utils").path_tail(path)
             local path_without_file = string.gsub(path, tail, '')
-            return string.format("%s (...%s)", tail, string.sub(path_without_file, -60))
+            return string.format("%s (...%s)", tail, string.sub(path_without_file, -40))
         end
       }
     })

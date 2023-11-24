@@ -51,6 +51,12 @@ map('n', '<C-Right>', '<cmd>vertical resize +2<CR>')
 map('n', '<leader>gb', '<cmd>Git blame<CR>')
 map('n', '<leader>df', '<cmd>Gdiffsplit<CR>')
 
+-- XML Format current buffer (file must be saved to disk)
+vim.keymap.set('n', '<leader>fx', function()
+    local current_file_path = vim.fn.expand('%:p')
+    vim.cmd("%! xmlformat " .. current_file_path)
+end, { desc = "Format XML" })
+
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
 vim.api.nvim_create_autocmd('LspAttach', {

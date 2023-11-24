@@ -1,4 +1,5 @@
 return {
+  { 'JoosepAlviste/nvim-ts-context-commentstring' },
   {
     "nvim-treesitter/nvim-treesitter",
     version = false,
@@ -11,10 +12,6 @@ return {
         additional_vim_regex_highlighting = false
       },
       indent = { enable = false },
-      context_commentstring = {
-        enable = true,
-        enable_autocmd = false
-      },
       ensure_installed = {
         "html",
         "javascript",
