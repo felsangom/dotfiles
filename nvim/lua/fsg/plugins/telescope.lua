@@ -32,19 +32,19 @@ return {
   end,
   keys = {
     -- find
-    { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+    { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find buffer" },
     { "<leader>ff", function() require('telescope.builtin').find_files({ hidden = true }) end, desc = "Find Files (root dir)" },
     { "<leader>fF", function() require('telescope.builtin').find_files({ hidden = true, cwd = false }) end, desc = "Find Files (cwd)" },
-    { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
+    { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent files" },
     -- search
-    { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
-    { "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Document diagnostics" },
-    { "<leader>sD", "<cmd>Telescope diagnostics<cr>", desc = "Workspace diagnostics" },
+    { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Search buffer" },
+    { "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Show document diagnostics" },
+    { "<leader>sD", "<cmd>Telescope diagnostics<cr>", desc = "Show workspace diagnostics" },
     { "<leader>sg", function() require('telescope.builtin').live_grep() end, desc = "Grep (root dir)" },
     { "<leader>sG", function() require('telescope.builtin').live_grep({ cwd = false }) end, desc = "Grep (cwd)" },
-    { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
-    { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
-    { "<leader>sr", "<cmd>Telescope resume<cr>", desc = "Resume" },
+    { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Show telescope keymaps" },
+    { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Show marks" },
+    { "<leader>sr", "<cmd>Telescope resume<cr>", desc = "Resume last search" },
     { "<leader>sw", function() require('telescope.builtin').grep_string() end, desc = "Word (root dir)" },
     { "<leader>sW", function() require('telescope.builtin').grep_string({ cwd = false }) end, desc = "Word (cwd)" },
     {

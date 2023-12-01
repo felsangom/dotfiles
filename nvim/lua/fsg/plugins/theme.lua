@@ -6,26 +6,11 @@ return {
         style = 'storm',
         styles = {
             functions = { italic = true },
+            keywords = { italic = true },
+            comments = { italic = true }
         },
         on_highlights = function(hl, c)
             local prompt = "#2d3149"
-
-            local keywords = {
-                italic = true,
-                bg = '#24283b',
-                fg = '#9d7cd8'
-            }
-
-            hl.Conditional = keywords
-            hl.Repeat = keywords
-            hl.Label = keywords
-            hl.Exception = keywords
-            hl.Keyword = keywords
-            hl.Comment = {
-                italic = true,
-                bg = '#24283b',
-                fg = '#565f89'
-            }
 
             hl.TelescopeNormal = {
                 bg = c.bg_dark,
