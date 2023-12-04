@@ -12,7 +12,7 @@ local function map(mode, lhs, rhs, options)
 end
 
 -- Oil
-map('n', '<leader>e', '<cmd>Oil<CR>', { desc = "Open file manager" })
+map('n', '<leader>e', '<cmd>Oil --float<CR>', { desc = "Open file manager" })
 
 -- Close current buffer
 map('n', '<leader>fa', '<cmd>bd<CR>', { desc = "Close current buffer" })
