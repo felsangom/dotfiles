@@ -111,10 +111,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- Trouble
     local trouble = require('trouble')
     vim.keymap.set('n', '<leader>tt', function() trouble.toggle() end, { desc = "Toggle trouble" })
-    vim.keymap.set('n', '<leader>td', function() trouble.toggle('document_diagnostics') end, { desc = "Toggle document diagnostics" })
-    vim.keymap.set('n', '<leader>tw', function() trouble.toggle('workspace_diagnostics') end, { desc = "Toggle workspace diagnostics" })
-    vim.keymap.set('n', '<leader>tq', function() trouble.toggle('quickfix') end, { desc = "Toggle quickfix" })
-    vim.keymap.set('n', '<leader>tl', function() trouble.toggle('loclist') end, { desc = "Toggle loclist" })
-    vim.keymap.set('n', 'gr', function() trouble.toggle('lsp_references') end, { desc = "Toggle references"})
+    vim.keymap.set('n', '<leader>td', function() trouble.open('document_diagnostics') end, { desc = "Toggle document diagnostics" })
+    vim.keymap.set('n', '<leader>tw', function() trouble.open('workspace_diagnostics') end, { desc = "Toggle workspace diagnostics" })
+    vim.keymap.set('n', '<leader>tq', function() trouble.open('quickfix') end, { desc = "Toggle quickfix" })
+    vim.keymap.set('n', '<leader>tl', function() trouble.open('loclist') end, { desc = "Toggle loclist" })
+    vim.keymap.set('n', 'gr', function() trouble.open('lsp_references') end, { desc = "Toggle references"})
   end,
 })
