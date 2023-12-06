@@ -6,6 +6,10 @@ return {
     default_file_explorer = true,
     columns = {
       "icon",
+    },
+    float = {
+      padding = 4,
+      max_width = 100
     }
   },
   config = function(_, opts)

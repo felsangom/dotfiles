@@ -13,9 +13,12 @@ return {
         selection_caret = " ",
         sorting_strategy = "ascending",
         scroll_strategy = "limit",
+        layout_strategy = "vertical",
         layout_config = {
-          prompt_position = "top",
-          preview_cutoff = 9999999999999
+          vertical = {
+            prompt_position = "top",
+            mirror = true
+          }
         }
       }
     })
