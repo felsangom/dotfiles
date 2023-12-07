@@ -11,8 +11,8 @@ local function map(mode, lhs, rhs, options)
   vim.api.nvim_set_keymap(mode, lhs, rhs, default_options)
 end
 
--- Oil
-map('n', '<leader>e', '<cmd>Oil --float<CR>', { desc = "Open file manager" })
+-- NvimTree
+map('n', '<leader>e', ':NvimTreeToggle<CR>')
 
 -- Close current buffer
 map('n', '<leader>fa', '<cmd>bd<CR>', { desc = "Close current buffer" })
