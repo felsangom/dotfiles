@@ -1,0 +1,88 @@
+working_directory = "/home/felipe"
+
+[env]
+LANG = "pt_BR.UTF-8"
+LC_CTYPE = "pt_BR.UTF-8"
+TERM = "xterm-256color"
+
+[window]
+opacity = 0.98
+dynamic_title = true
+
+[cursor]
+style = "Block"
+
+[font]
+size = 13
+
+[font.bold]
+family = "CaskaydiaCove Nerd Font"
+
+[font.bold_italic]
+family = "CaskaydiaCove Nerd Font"
+
+[font.italic]
+family = "CaskaydiaCove Nerd Font"
+
+[font.normal]
+family = "CaskaydiaCove Nerd Font"
+
+[[keyboard.bindings]]
+action = "ScrollPageUp"
+key = "PageUp"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ScrollPageDown"
+key = "PageDown"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ScrollToTop"
+key = "Home"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ScrollToBottom"
+key = "End"
+mods = "Shift"
+# TokyoNight Alacritty Colors
+# Default colors
+[colors.primary]
+background = '#24283b'
+foreground = '#c0caf5'
+
+[colors.cursor]
+cursor = '#c0caf5'
+text = '#24283b'
+
+# Normal colors
+[colors.normal]
+black = '#1d202f'
+red = '#f7768e'
+green = '#9ece6a'
+yellow = '#e0af68'
+blue = '#7aa2f7'
+magenta = '#bb9af7'
+cyan = '#7dcfff'
+white = '#a9b1d6'
+
+# Bright colors
+[colors.bright]
+black = '#414868'
+red = '#f7768e'
+green = '#9ece6a'
+yellow = '#e0af68'
+blue = '#7aa2f7'
+magenta = '#bb9af7'
+cyan = '#7dcfff'
+white = '#c0caf5'
+
+# Indexed Colors
+[[colors.indexed_colors]]
+index = 16
+color = '#ff9e64'
+
+[[colors.indexed_colors]]
+index = 17
+color = '#db4b4b'
