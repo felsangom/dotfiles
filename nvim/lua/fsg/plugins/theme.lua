@@ -10,6 +10,10 @@ return {
       },
       on_highlights = function(hl, c)
         local prompt = '#2d3149'
+        hl.MsgArea = {
+          bg = c.bg_dark,
+          fg = '#ff9e64',
+        }
         hl.TelescopeNormal = {
           bg = c.bg_dark,
           fg = c.fg_dark,

@@ -40,6 +40,7 @@ o.splitright = true
 o.showmode = false
 o.termguicolors = true
 g.loaded_perl_provider = 0
+g.loaded_ruby_provider = 0
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
 g.python3_host_prog = "/home/felipe/Python/venv/bin/python3"
