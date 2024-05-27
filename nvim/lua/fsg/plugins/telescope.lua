@@ -14,12 +14,15 @@ return {
         selection_caret = " ",
         sorting_strategy = "ascending",
         scroll_strategy = "limit",
-        layout_strategy = "vertical",
+        -- layout_strategy = "vertical",
         layout_config = {
-            vertical = {
-                prompt_position = "top",
-                mirror = true
+            horizontal = {
+                prompt_position = "top"
             }
+            -- vertical = {
+            --     prompt_position = "top",
+            --     mirror = true
+            -- }
         },
         path_display = function(opts, path)
             local tail = require("telescope.utils").path_tail(path)
