@@ -19,4 +19,11 @@ vim.opt.rtp:prepend(lazypath)
 require('fsg.options')
 require('fsg.autocmds')
 require('fsg.keymaps')
-require("lazy").setup("fsg.plugins")
+require("lazy").setup({
+  spec = {
+    { import = "fsg.plugins" }
+  },
+  rocks = {
+    enabled = false
+  }
+})
