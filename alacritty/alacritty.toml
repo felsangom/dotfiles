@@ -13,7 +13,7 @@ dynamic_title = true
 style = "Block"
 
 [font]
-size = 13
+size = 12
 
 [font.bold]
 family = "CaskaydiaCove Nerd Font"

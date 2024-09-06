@@ -2,8 +2,6 @@
 -- Auto commands
 --]]
 
-local api = vim.api
-
 -- Automatically remove all trailing whitespace
 -- api.nvim_create_autocmd(
 --   "BufWritePre",
@@ -13,27 +11,12 @@ local api = vim.api
 --   }
 -- )
 
-local noice_hl = vim.api.nvim_create_augroup("NoiceHighlights", {})
-local noice_cmd_types = {
-  CmdLine = "Constant",
-  Input = "Constant",
-  Calculator = "Constant",
-  Lua = "Constant",
-  Filter = "Constant",
-  Rename = "Constant",
-  Substitute = "NoiceCmdlinePopupBorderSearch",
-  Help = "helpVim",
-}
-api.nvim_clear_autocmds({ group = noice_hl })
-api.nvim_create_autocmd("BufEnter", {
-  group = noice_hl,
-  desc = "redefinition of noice highlight groups",
+vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
-    for type, hl in pairs(noice_cmd_types) do
-      vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorder" .. type, {})
-      vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorder" .. type, { link = hl })
+    if vim.opt.foldmethod:get() == "expr" then
+      vim.schedule(function()
+        vim.opt.foldmethod = "expr"
+      end)
     end
-    vim.api.nvim_set_hl(0, "NoiceConfirmBorder", {})
-    vim.api.nvim_set_hl(0, "NoiceConfirmBorder", { link = "Constant" })
   end,
 })

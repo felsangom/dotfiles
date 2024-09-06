@@ -18,17 +18,6 @@
             "style": "plain",
             "template": " \uf07b {{ .Path }} ",
             "type": "path"
-        }, {
-          "foreground": "#9d7cd8",
-          "powerline_symbol": "\ue0b0",
-          "properties": {
-            "fetch_status": true,
-            "fetch_stash_count": true,
-            "fetch_upstream_icon": true
-          },
-          "style": "plain",
-          "template": "{{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} 󰜦 {{ .StashCount }}{{ end }} ",
-          "type": "git"
         }]
     }, {
         "type": "prompt",
