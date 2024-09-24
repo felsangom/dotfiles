@@ -12,6 +12,12 @@ return {
                 section_separators = { left = '', right = '' },
                 component_separators = '|'
             },
+            extensions = {
+                'mason',
+                'oil',
+                'trouble',
+                'lazy'
+            },
             sections = {
                 lualine_a = {
                     { 'mode', separator = { right = '' }, right_padding = 2 },
