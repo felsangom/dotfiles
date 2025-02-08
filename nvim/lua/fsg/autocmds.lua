@@ -24,6 +24,7 @@ local noice_cmd_types = {
   Substitute = "NoiceCmdlinePopupBorderSearch",
   Help = "helpVim",
 }
+
 api.nvim_clear_autocmds({ group = noice_hl })
 api.nvim_create_autocmd("BufEnter", {
   group = noice_hl,
@@ -36,4 +37,12 @@ api.nvim_create_autocmd("BufEnter", {
     vim.api.nvim_set_hl(0, "NoiceConfirmBorder", {})
     vim.api.nvim_set_hl(0, "NoiceConfirmBorder", { link = "Constant" })
   end,
+})
+
+-- Remove annoying underline from diagnostics
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+  underline = false,
+  virtual_text = { spacing = 4 },
+  signs = true,
+  update_in_insert = false
 })

@@ -120,28 +120,31 @@ return {
       end
 
       if have_mason then
-        mlsp.setup({ ensure_installed = ensure_installed })
+        mlsp.setup({
+          automatic_installation = true,
+          ensure_installed = ensure_installed
+        })
         mlsp.setup_handlers({ setup })
       end
 
       local lspconfig = require('lspconfig')
       lspconfig.pylsp.setup({
-          settings = {
-            pylsp = {
-              plugins = {
-                mypy = {
-                  enabled = true,
-                  live_mode = true,
-                  strict_optional = true
-                },
-                ruff = {
-                  enabled = true,
-                  extendSelect = { "I" }
-                }
+        settings = {
+          pylsp = {
+            plugins = {
+              mypy = {
+                enabled = true,
+                live_mode = true,
+                strict_optional = true
+              },
+              ruff = {
+                enabled = true,
+                extendSelect = { "I" }
               }
             }
           }
-        })
+        }
+      })
     end,
   },
 
