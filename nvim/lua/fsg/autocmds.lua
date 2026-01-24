@@ -1,48 +1,65 @@
---[[
--- Auto commands
---]]
+local function augroup(name)
+    return vim.api.nvim_create_augroup("fsg_" .. name, { clear = true })
+end
 
-local api = vim.api
-
--- Automatically remove all trailing whitespace
-api.nvim_create_autocmd(
-  "BufWritePre",
-  {
-    pattern = "*",
-    command = "%s/\\s\\+$//e"
-  }
-)
-
-local noice_hl = vim.api.nvim_create_augroup("NoiceHighlights", {})
-local noice_cmd_types = {
-  CmdLine = "Constant",
-  Input = "Constant",
-  Calculator = "Constant",
-  Lua = "Constant",
-  Filter = "Constant",
-  Rename = "Constant",
-  Substitute = "NoiceCmdlinePopupBorderSearch",
-  Help = "helpVim",
-}
-
-api.nvim_clear_autocmds({ group = noice_hl })
-api.nvim_create_autocmd("BufEnter", {
-  group = noice_hl,
-  desc = "redefinition of noice highlight groups",
-  callback = function()
-    for type, hl in pairs(noice_cmd_types) do
-      vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorder" .. type, {})
-      vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorder" .. type, { link = hl })
-    end
-    vim.api.nvim_set_hl(0, "NoiceConfirmBorder", {})
-    vim.api.nvim_set_hl(0, "NoiceConfirmBorder", { link = "Constant" })
-  end,
+-- 1. Highlight on Yank
+-- Dá um feedback visual rápido piscando o texto ao copiar
+vim.api.nvim_create_autocmd("TextYankPost", {
+    group = augroup("highlight_yank"),
+    callback = function()
+        vim.highlight.on_yank({ timeout = 200 })
+    end,
 })
 
--- Remove annoying underline from diagnostics
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-  underline = false,
-  virtual_text = { spacing = 4 },
-  signs = true,
-  update_in_insert = false
+-- 2. Resize Splits automaticamente
+-- Se redimensionar a janela do terminal, o Neovim reajusta os splits para ficarem iguais.
+vim.api.nvim_create_autocmd({ "VimResized" }, {
+    group = augroup("resize_splits"),
+    callback = function()
+        local current_tab = vim.fn.tabpagenr()
+        vim.cmd("tabdo wincmd =")
+        vim.cmd("tabnext " .. current_tab)
+    end,
+})
+
+-- 3. Smart Whitespace Stripper
+-- Remove espaços, mas protege Markdown e não roda em arquivos binários
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+    group = augroup("trim_whitespace"),
+    pattern = "*",
+    callback = function()
+        -- Lista de exclusão (Blacklist)
+        local ignore_filetypes = { "markdown", "text", "binary" }
+        if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
+            return
+        end
+
+        -- Salva a posição do cursor para não pular pro começo
+        local save_cursor = vim.fn.getpos(".")
+        pcall(function() vim.cmd [[%s/\s\+$//e]] end)
+        vim.fn.setpos(".", save_cursor)
+    end,
+})
+
+-- 4. Abrir Help sempre na vertical
+vim.api.nvim_create_autocmd("FileType", {
+    group = augroup("help_window"),
+    pattern = "help",
+    callback = function()
+        vim.bo.bufhidden = "unload"
+        vim.cmd.wincmd("L") -- Move para a direita (Vertical Split)
+        vim.cmd.wincmd("=") -- Balanceia o tamanho
+    end,
+})
+
+-- 5 - Organizar imports Python ao salvar usando Ruff
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*.py",
+    callback = function()
+        vim.lsp.buf.code_action({
+            context = { only = { "source.organizeImports" } },
+            apply = true,
+        })
+        -- O format normal já roda pelo seu keymap ou outro autocmd se tiver
+    end,
 })
