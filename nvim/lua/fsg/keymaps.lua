@@ -10,6 +10,9 @@ local map = vim.keymap.set
 -- Oil (File Manager)
 map('n', '<leader>e', '<cmd>Oil<CR>', { desc = "Open Oil file manager" })
 
+-- Reiniciar LSP (Útil quando criar arquivos novos e o Pyright não enxergar)
+
+map('n', '<leader>lr', '<cmd>LspRestart<CR>', { desc = "Restart LSP Server" })
 -- Buffers
 map('n', '<leader>fa', '<cmd>bd<CR>', { desc = "Close current buffer" })
 map('n', '<leader>ft', '<cmd>%bd|e#|bd#<CR>', { desc = "Close all buffers except current" })
