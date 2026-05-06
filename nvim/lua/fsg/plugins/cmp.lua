@@ -18,15 +18,27 @@ return {
             return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
         end
 
+        local icons = require("mini.icons")
+
         return {
+            window = {
+                completion = {
+                    border = "rounded",
+                    winhighlight = "Normal:Normal,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None",
+                    scrollbar = false,
+                },
+                documentation = {
+                    border = "rounded",
+                    winhighlight = "Normal:Normal,FloatBorder:CmpDocBorder,CursorLine:PmenuSel,Search:None",
+                    scrollbar = false,
+                },
+            },
             completion = {
                 completeopt = "menu,menuone",
-                get_trigger_characters = function (trigger_characters)
-                    -- Don't open cmp suggestions on space or tab
+                get_trigger_characters = function(trigger_characters)
                     local filter_characters = function(char)
                         return char ~= ' ' and char ~= '\t'
                     end
-
                     return vim.tbl_filter(filter_characters, trigger_characters)
                 end
             },
@@ -45,7 +57,7 @@ return {
                 ["<CR>"] = cmp.mapping.confirm {
                     behavior = cmp.ConfirmBehavior.Replace,
                     select = false,
-                },  -- Tab, Shift + Tab to cycle through list
+                },
                 ['<Tab>'] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_next_item()
@@ -89,36 +101,19 @@ return {
                 }
             }),
             formatting = {
-                format = function(_, item)
-                    local icons = {
-                        Text = "",
-                        Method = "",
-                        Function = "󰊕",
-                        Constructor = "",
-                        Field = "",
-                        Variable = "󰫧",
-                        Class = "",
-                        Interface = "",
-                        Module = "",
-                        Property = "",
-                        Unit = "",
-                        Value = "",
-                        Enum = "",
-                        Keyword = "",
-                        Snippet = "",
-                        Color = "",
-                        File = "",
-                        Reference = "",
-                        Folder = "",
-                        EnumMember = "",
-                        Constant = "",
-                        Struct = "",
-                        Event = "",
-                        Operator = "",
-                        TypeParameter = ""
+                fields = { "kind", "abbr", "menu" },
+                format = function(entry, item)
+                    local source_labels = {
+                        nvim_lsp = "LSP",
+                        luasnip  = "Snip",
+                        buffer   = "Buf",
+                        path     = "Path",
                     }
-                    if icons[item.kind] then
-                        item.kind = icons[item.kind] .. ' ' .. item.kind
+                    local icon, _, _ = icons.get("lsp", item.kind)
+                    item.kind = (icon or "") .. " "
+                    item.menu = source_labels[entry.source.name] or entry.source.name
+                    if #item.abbr > 40 then
+                        item.abbr = item.abbr:sub(1, 40) .. "…"
                     end
                     return item
                 end,

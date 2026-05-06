@@ -107,5 +107,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('n', '<leader>cx', function()
       vim.lsp.buf.format { async = true }
     end, vim.tbl_extend('force', opts, { desc = "Format Buffer" }))
+
+    -- Inlay hints (toggle com <leader>ih)
+    if vim.lsp.inlay_hint then
+      vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
+      map('n', '<leader>ih', function()
+        vim.lsp.inlay_hint.enable(
+          not vim.lsp.inlay_hint.is_enabled({ bufnr = ev.buf }),
+          { bufnr = ev.buf }
+        )
+      end, vim.tbl_extend('force', opts, { desc = "Toggle Inlay Hints" }))
+    end
   end,
 })

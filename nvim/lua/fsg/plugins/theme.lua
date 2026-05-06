@@ -57,6 +57,9 @@ return {
                 bg = c.bg_dark,
                 fg = c.fg_dark,
             }
+
+            hl.CmpBorder = { fg = c.blue }
+            hl.CmpDocBorder = { fg = c.blue1 }
         end,
     },
     config = function(_, opts)

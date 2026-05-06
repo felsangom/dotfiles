@@ -1,12 +1,10 @@
 return {
-    -- LSP Configuration
     {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
-            { "williamboman/mason.nvim", config = true },
-            { "williamboman/mason-lspconfig.nvim" },
-            { "folke/neoconf.nvim", cmd = "Neoconf", config = true, opts = {} },
+            { "mason-org/mason.nvim", config = true },
+            { "mason-org/mason-lspconfig.nvim" },
             {
                 "folke/lazydev.nvim",
                 ft = "lua",
@@ -16,8 +14,8 @@ return {
             },
             "hrsh7th/cmp-nvim-lsp",
         },
-        opts = {
-            diagnostics = {
+        config = function()
+            vim.diagnostic.config({
                 underline = false,
                 update_in_insert = false,
                 virtual_text = {
@@ -28,74 +26,63 @@ return {
                 severity_sort = true,
                 signs = {
                     text = {
-                        [vim.diagnostic.severity.ERROR] = " ",
-                        [vim.diagnostic.severity.WARN] = " ",
-                        [vim.diagnostic.severity.HINT] = " ",
-                        [vim.diagnostic.severity.INFO] = " ",
+                        [vim.diagnostic.severity.ERROR] = " ",
+                        [vim.diagnostic.severity.WARN] = " ",
+                        [vim.diagnostic.severity.HINT] = " ",
+                        [vim.diagnostic.severity.INFO] = " ",
                     }
                 }
-            },
-            -- Definição dos Servidores
-            servers = {
-                lua_ls = {
-                    settings = {
-                        Lua = {
-                            workspace = { checkThirdParty = false },
-                            completion = { callSnippet = "Replace" },
-                            telemetry = { enable = false },
-                        },
-                    },
-                },
-
-                -- 2. LINTER & FORMATTER
-                ruff = {
-                    init_options = {
-                        settings = {
-                            args = {},
-                        }
-                    }
-                },
-            },
-        },
-        config = function(_, opts)
-            vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
+            })
 
             local capabilities = vim.tbl_deep_extend(
                 "force",
-                {},
                 vim.lsp.protocol.make_client_capabilities(),
                 require("cmp_nvim_lsp").default_capabilities()
             )
 
-            -- Função de Setup Unificada
-            local function setup(server_name)
-                local server_opts = opts.servers[server_name] or {}
-                server_opts.capabilities = vim.tbl_deep_extend("force", capabilities, server_opts.capabilities or {})
+            vim.lsp.config('*', { capabilities = capabilities })
 
-                vim.lsp.config[server_name] = server_opts
-                vim.lsp.enable(server_name)
-            end
-
-            local mlsp = require("mason-lspconfig")
-            local ensure_installed = vim.tbl_keys(opts.servers or {})
-
-            mlsp.setup({
-                ensure_installed = ensure_installed,
-                handlers = {
-                    function(server_name)
-                        setup(server_name)
-                    end,
+            vim.lsp.config('lua_ls', {
+                settings = {
+                    Lua = {
+                        workspace = { checkThirdParty = false },
+                        completion = { callSnippet = "Replace" },
+                        telemetry = { enable = false },
+                    },
                 },
+            })
+
+            vim.lsp.config('ruff', {
+                init_options = {
+                    settings = { args = {} }
+                }
+            })
+
+            vim.lsp.config('pyright', {
+                settings = {
+                    pyright = {
+                        disableOrganizeImports = true,
+                    },
+                    python = {
+                        analysis = {
+                            typeCheckingMode = "off",
+                        },
+                    },
+                },
+            })
+
+            require("mason-lspconfig").setup({
+                ensure_installed = { "lua_ls", "ruff", "pyright" },
+                automatic_enable = true,
             })
         end,
     },
-    -- Ferramentas CLI extras
     {
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
         opts = {
             ensure_installed = {
-                "stylua", -- Formatter Lua
-                "shfmt",  -- Formatter Shell
+                "stylua",
+                "shfmt",
             },
         },
         config = function(_, opts)
