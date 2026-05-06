@@ -21,6 +21,9 @@ return {
             sections = {
                 lualine_a = {
                     { 'mode', separator = { right = '' }, right_padding = 2 },
+                },
+                lualine_b = {
+                    'require("workspaces").name()', 'branch', 'diff', 'diagnostics'
                 }
             },
             tabline = {}
@@ -67,12 +70,16 @@ return {
                 ignore_empty_message = true
             },
             notification = {
-                override_vim_notify = true
+                override_vim_notify = true,
+                window = {
+                    winblend = 0,
+                },
             }
         }
     },
 
     -- icons
+    { "echasnovski/mini.icons", lazy = true },
     { "nvim-tree/nvim-web-devicons", lazy = true },
 
     -- plenary
@@ -80,4 +87,5 @@ return {
 
     -- ui components
     { "MunifTanjim/nui.nvim", lazy = true },
+    { 'andreshazard/vim-freemarker', lazy = false },
 }

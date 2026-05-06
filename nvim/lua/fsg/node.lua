@@ -1,11 +1,19 @@
-local home_dir = "/home/felipe"
+-- Pega o diretório home dinamicamente (Funciona em Linux e macOS)
+local home = vim.env.HOME
+local node_version = "v22.16.0"
+-- Constrói o caminho de forma limpa
+local node_path = home .. "/.nvm/versions/node/" .. node_version .. "/bin"
 
--- pin nvim to a specific node version, regardless of the project
--- prereq - need to install: nvm i 16.17.1
-local node_bin =  "/.nvm/versions/node/v18.16.1/bin"
--- vim.g.node_host_prog = home_dir .. node_bin .. "/node"
+-- Verifica se o diretório realmente existe para evitar erros silenciosos
+if vim.fn.isdirectory(node_path) == 1 then
+  -- Adiciona ao PATH usando a API nativa de Lua
+  -- Isso afeta o Neovim e qualquer terminal/subprocesso aberto por ele
+  vim.env.PATH = node_path .. ":" .. vim.env.PATH
+else
+  -- Opcional: Avisa se a versão pinada não for encontrada
+  vim.notify("Node version " .. node_version .. " not found! Check fsg/node.lua", vim.log.levels.WARN)
+end
 
--- for mason.nvim
--- prereq - install lsp server in that node/bin npm i -g typescript-language-server 
--- (handled by :Mason currently)
-vim.cmd("let $PATH = '" .. home_dir .. node_bin .. ":' . $PATH")
+-- Mantém comentado. Só é necessário para plugins legados que usam o 'remote plugin host'.
+-- Hoje em dia, a maioria das ferramentas usa o PATH diretamente.
+-- vim.g.node_host_prog = node_path .. "/node"

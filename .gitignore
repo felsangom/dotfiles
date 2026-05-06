@@ -1,2 +1,3 @@
 .git
 nvim/lazy-lock.json
+tmux/plugins

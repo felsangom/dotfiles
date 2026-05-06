@@ -1,114 +1,111 @@
 --[[
 -- All keymaps are grouped in this file for convenience
+-- Modernized using vim.keymap.set
 --]]
-local function map(mode, lhs, rhs, options)
-  local default_options = { noremap = true, silent = true }
 
-  if options then
-    default_options = vim.tbl_extend('force', default_options, options)
-  end
+local map = vim.keymap.set
 
-  vim.api.nvim_set_keymap(mode, lhs, rhs, default_options)
-end
+-- --- FILE MANAGEMENT & GENERAL ---
 
--- Oil
+-- Reiniciar LSP (Útil quando criar arquivos novos e o Pyright não enxergar)
+map('n', '<leader>lr', '<cmd>LspRestart<CR>', { desc = "Restart LSP Server" })
+
+-- Oil (File Manager)
 map('n', '<leader>e', '<cmd>Oil<CR>', { desc = "Open Oil file manager" })
 
--- Close current buffer
+-- Buffers
 map('n', '<leader>fa', '<cmd>bd<CR>', { desc = "Close current buffer" })
--- Close all buffers
-map('n', '<leader>ft', '<cmd>%bd<CR>', { desc = "Close all buffers" })
+map('n', '<leader>ft', '<cmd>%bd|e#|bd#<CR>', { desc = "Close all buffers except current" })
+map('n', '<leader>fs', '<cmd>w<CR>', { desc = "Save file" })
+map('n', '<leader>bd', '<cmd>bd!<CR>', { desc = "Force delete buffer" })
 
--- Paste replacing selected text, without losing data
-map('x', '<leader>p', '"_dP', { desc = "Paste without losing clipboard content" })
--- Delete without yanking
+-- Clipboard & Editing
+map('x', '<leader>p', '"_dP', { desc = "Paste without losing clipboard" })
 map('x', '<leader>d', '"_d', { desc = "Delete without yanking" })
 
--- Copy current file name to clipboard
-map('n', '<leader>cf', '<cmd>let @+=expand("%:t")<CR>', { desc = "Copy current file name to clipboard" })
--- Copy current file name with path to clipboard
-map('n', '<leader>cp', '<cmd>let @+=expand("%:p")<CR>', { desc = "Copy current file name with path to clipboard" })
+-- Copy Path (Versão Lua Puro)
+map('n', '<leader>cf', function()
+    vim.fn.setreg('+', vim.fn.expand("%:t"))
+    vim.notify("File name copied", vim.log.levels.INFO)
+end, { desc = "Copy file name" })
 
+map('n', '<leader>cp', function()
+    vim.fn.setreg('+', vim.fn.expand("%:p"))
+    vim.notify("Full path copied", vim.log.levels.INFO)
+end, { desc = "Copy full path" })
 
--- jk exits insert mode and abandon any snippets
-vim.keymap.set('i', 'jk', function ()
-  local luasnip = require("luasnip")
-  local current_nodes = luasnip.session.current_nodes
-  if current_nodes then
-    if current_nodes[vim.api.nvim_get_current_buf()] then
-      current_nodes[vim.api.nvim_get_current_buf()] = nil
-    end
+-- --- NAVIGATION & SPLITS ---
+
+-- Leap.nvim (Seguro)
+map({'n', 'x', 'o'}, 's',  '<Plug>(leap-forward)', { desc = "Leap Forward" })
+map({'n', 'x', 'o'}, 'S',  '<Plug>(leap-backward)', { desc = "Leap Backward" })
+map('n', 'gs', '<Plug>(leap-from-window)', { desc = "Leap from window" })
+
+-- Smart JK Escape (Protegido contra falhas do LuaSnip)
+map('i', 'jk', function ()
+  local ok, luasnip = pcall(require, "luasnip")
+  if ok and luasnip.session.current_nodes[vim.api.nvim_get_current_buf()] then
+      luasnip.unlink_current()
   end
-
   vim.cmd("stopinsert")
-end)
+end, { desc = "Exit insert mode" })
 
--- Create/resize splits
-map('n', '<leader>|', '<cmd>vs<CR>', { desc = "Create vertical split" })
-map('n', '<leader>-', '<cmd>sp<CR>', { desc = "Create horizontal split" })
+-- Splits
+map('n', '<leader>|', '<cmd>vs<CR>', { desc = "Vertical split" })
+map('n', '<leader>-', '<cmd>sp<CR>', { desc = "Horizontal split" })
 map('n', '<leader>q', '<cmd>q<CR>', { desc = "Quit" })
-map('n', '<C-Up>', '<cmd>resize +2<CR>', { desc = "Increase horizontal split size" })
-map('n', '<C-Down>', '<cmd>resize -2<CR>', { desc = "Decrease horizontal split size" })
-map('n', '<C-Left>', '<cmd>vertical resize -2<CR>', { desc = "Increase vertical split size" })
-map('n', '<C-Right>', '<cmd>vertical resize +2<CR>', { desc = "Decrease vertical split size" })
+
+-- Resize with Arrows (Melhor UX: não precisa soltar o Ctrl)
+map('n', '<C-Up>', '<cmd>resize +2<CR>', { desc = "Resize Height +" })
+map('n', '<C-Down>', '<cmd>resize -2<CR>', { desc = "Resize Height -" })
+map('n', '<C-Left>', '<cmd>vertical resize -2<CR>', { desc = "Resize Width -" })
+map('n', '<C-Right>', '<cmd>vertical resize +2<CR>', { desc = "Resize Width +" })
+
+-- --- PLUGINS (Global) ---
 
 -- Fugitive
 map('n', '<leader>gb', '<cmd>Git blame<CR>', { desc = "Git blame" })
 map('n', '<leader>df', '<cmd>Gdiffsplit<CR>',{ desc = "Git diff" })
 
--- Use LspAttach autocommand to only map the following keys
--- after the language server attaches to the current buffer
+-- Workspaces
+map('n', '<C-k>', '<cmd>WorkspacesOpen<CR>', { desc = "Open Workspace" })
+
+-- Trouble (Movido para Global para acesso sempre disponível)
+map('n', '<leader>tt', '<cmd>Trouble toggle<CR>', { desc = "Toggle Trouble" })
+map('n', '<leader>td', '<cmd>Trouble diagnostics toggle filter.buf=0<CR>', { desc = "Document Diagnostics" })
+map('n', '<leader>tw', '<cmd>Trouble diagnostics toggle<CR>', { desc = "Workspace Diagnostics" })
+map('n', '<leader>tq', '<cmd>Trouble qflist toggle<CR>', { desc = "Quickfix List" })
+map('n', '<leader>tr', '<cmd>Trouble lsp_references toggle<CR>', { desc = "LSP References" }) -- Mudei de 'tr' para '<leader>tr'
+
+-- --- LSP CONFIGURATION ---
+
 vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  group = vim.api.nvim_create_augroup('UserLspConfig', { clear = true }),
   callback = function(ev)
     -- Enable completion triggered by <c-x><c-o>
     vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-    -- Buffer local mappings.
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
     local opts = { buffer = ev.buf }
-    opts.desc = "Previous diagnostic"
-    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 
-    opts.desc = "Next diagnostic"
-    vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+    -- Navigation
+    map('n', 'gD', vim.lsp.buf.declaration, vim.tbl_extend('force', opts, { desc = "Go to Declaration" }))
+    map('n', 'gd', vim.lsp.buf.definition, vim.tbl_extend('force', opts, { desc = "Go to Definition" }))
+    map('n', 'gi', vim.lsp.buf.implementation, vim.tbl_extend('force', opts, { desc = "Go to Implementation" }))
+    map('n', '<leader>D', vim.lsp.buf.type_definition, vim.tbl_extend('force', opts, { desc = "Type Definition" }))
 
-    opts.desc = "Go to declaration"
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+    -- Actions & Info
+    map('n', 'K', vim.lsp.buf.hover, vim.tbl_extend('force', opts, { desc = "Hover Documentation" }))
+    map('n', '<S-k>', vim.lsp.buf.signature_help, vim.tbl_extend('force', opts, { desc = "Signature Help" }))
+    map('n', '<f2>', vim.lsp.buf.rename, vim.tbl_extend('force', opts, { desc = "Rename Symbol" }))
+    map({'n', 'v'}, '<leader>ca', vim.lsp.buf.code_action, vim.tbl_extend('force', opts, { desc = "Code Action" }))
 
-    opts.desc = "Go to definition"
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    -- Diagnostics (Navegação moderna)
+    map('n', '[d', function() vim.diagnostic.jump({ count = -1, float = true }) end, { desc = "Prev Diagnostic" })
+    map('n', ']d', function() vim.diagnostic.jump({ count = 1, float = true }) end, { desc = "Next Diagnostic" })
 
-    opts.desc = "Show documentation"
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-
-    opts.desc = "Go to implementation"
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-
-    opts.desc = "Signature help"
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
-
-    opts.desc = "Type definition"
-    vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
-
-    opts.desc = "Rename"
-    vim.keymap.set('n', '<f2>', vim.lsp.buf.rename, opts)
-
-    opts.desc = "Code action"
-    vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
-
-    opts.desc = "Format current buffer"
-    vim.keymap.set('n', '<leader>cx', function()
+    -- Formatting
+    map('n', '<leader>cx', function()
       vim.lsp.buf.format { async = true }
-    end, opts)
-
-    -- Trouble
-    local trouble = require('trouble')
-    vim.keymap.set('n', '<leader>tt', function() trouble.toggle() end, { desc = "Toggle trouble" })
-    vim.keymap.set('n', '<leader>td', function() trouble.open('document_diagnostics') end, { desc = "Toggle document diagnostics" })
-    vim.keymap.set('n', '<leader>tw', function() trouble.open('workspace_diagnostics') end, { desc = "Toggle workspace diagnostics" })
-    vim.keymap.set('n', '<leader>tq', function() trouble.open('quickfix') end, { desc = "Toggle quickfix" })
-    vim.keymap.set('n', '<leader>tl', function() trouble.open('loclist') end, { desc = "Toggle loclist" })
-    vim.keymap.set('n', 'gr', function() trouble.open('lsp_references') end, { desc = "Toggle references"})
+    end, vim.tbl_extend('force', opts, { desc = "Format Buffer" }))
   end,
 })

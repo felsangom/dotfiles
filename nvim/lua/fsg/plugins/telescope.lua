@@ -1,71 +1,91 @@
 return {
   "nvim-telescope/telescope.nvim",
-  lazy = true,
   cmd = "Telescope",
-  version = false,
+  version = false, -- Telescope não usa release tags com frequência, melhor usar HEAD
   dependencies = {
     { 'nvim-treesitter/nvim-treesitter' },
-    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }
+    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    { 'nvim-telescope/telescope-ui-select.nvim' },
   },
   config = function()
-    require('telescope').setup({
+    local telescope = require('telescope')
+    local actions = require('telescope.actions')
+
+    telescope.setup({
       defaults = {
         prompt_prefix = " ",
         selection_caret = " ",
-        sorting_strategy = "ascending",
-        scroll_strategy = "limit",
-        -- layout_strategy = "vertical",
-        layout_config = {
-            horizontal = {
-                prompt_position = "top"
-            }
-            -- vertical = {
-            --     prompt_position = "top",
-            --     mirror = true
-            -- }
+        path_display = { "filename_first" },
+
+        -- Otimização de Performance
+        file_ignore_patterns = { "node_modules", ".git/", "target/", "build/", "%.class" },
+
+        -- Proteção contra arquivos gigantes (Logs, Dumps)
+        preview = {
+            filesize_limit = 0.1, -- MB
         },
-        path_display = function(opts, path)
-            local tail = require("telescope.utils").path_tail(path)
-            local path_without_file = string.gsub(path, tail, '')
-            return string.format("%s (...%s)", tail, string.sub(path_without_file, -40))
-        end
+
+        sorting_strategy = "ascending",
+        layout_strategy = "vertical",
+        layout_config = {
+            vertical = {
+                prompt_position = "top",
+                mirror = true,
+                width = 0.85,
+                height = 0.90,
+                preview_height = 0.45,
+            }
+        },
+
+        -- Mapeamentos dentro da janela do Telescope
+        mappings = {
+            i = {
+                ["<C-j>"] = actions.move_selection_next,
+                ["<C-k>"] = actions.move_selection_previous,
+                ["<C-d>"] = actions.delete_buffer, -- Permite fechar buffers direto da lista com Ctrl+d
+            },
+            n = {
+                ["q"] = actions.close,
+                ["<C-d>"] = actions.delete_buffer,
+            }
+        },
+      },
+      extensions = {
+        ["ui-select"] = {
+          require("telescope.themes").get_dropdown {
+            -- Opções visuais para Code Actions ficarem bonitos
+          }
+        }
       }
     })
-    require('telescope').load_extension('fzf')
+
+    -- Carrega as extensões
+    telescope.load_extension('fzf')
+    telescope.load_extension('ui-select')
   end,
   keys = {
     -- find
-    { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find buffer" },
+    { "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Find buffer" },
     { "<leader>ff", function() require('telescope.builtin').find_files({ hidden = true }) end, desc = "Find Files (root dir)" },
-    { "<leader>fF", function() require('telescope.builtin').find_files({ hidden = true, cwd = false }) end, desc = "Find Files (cwd)" },
+    { "<leader>fF", function() require('telescope.builtin').find_files({ hidden = true, no_ignore = true }) end, desc = "Find ALL Files (inc. gitignore)" },
     { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent files" },
+
     -- search
     { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Search buffer" },
-    { "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Show document diagnostics" },
-    { "<leader>sD", "<cmd>Telescope diagnostics<cr>", desc = "Show workspace diagnostics" },
-    { "<leader>sg", function() require('telescope.builtin').live_grep() end, desc = "Grep (root dir)" },
-    { "<leader>sG", function() require('telescope.builtin').live_grep({ cwd = false }) end, desc = "Grep (cwd)" },
-    { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Show telescope keymaps" },
-    { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Show marks" },
-    { "<leader>sr", "<cmd>Telescope resume<cr>", desc = "Resume last search" },
-    { "<leader>sw", function() require('telescope.builtin').grep_string() end, desc = "Word (root dir)" },
-    { "<leader>sW", function() require('telescope.builtin').grep_string({ cwd = false }) end, desc = "Word (cwd)" },
+    { "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Document diagnostics" },
+    { "<leader>sD", "<cmd>Telescope diagnostics<cr>", desc = "Workspace diagnostics" },
+    { "<leader>sg", function() require('telescope.builtin').live_grep() end, desc = "Grep (Root)" },
+    { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Keymaps" },
+    { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Marks" },
+    { "<leader>sr", "<cmd>Telescope resume<cr>", desc = "Resume" },
+    { "<leader>sw", function() require('telescope.builtin').grep_string() end, desc = "Word under cursor" },
+
+    -- Symbols
     {
       "<leader>ss",
       function()
         require('telescope.builtin').lsp_document_symbols({
-          symbols = {
-            "Class",
-            "Function",
-            "Method",
-            "Constructor",
-            "Interface",
-            "Module",
-            "Struct",
-            "Trait",
-            "Field",
-            "Property",
-          },
+          symbols = { "Class", "Function", "Method", "Constructor", "Interface", "Module", "Struct", "Trait", "Field", "Property" },
         })
       end,
       desc = "Goto Symbol",
@@ -74,18 +94,7 @@ return {
       "<leader>sS",
       function()
         require('telescope.builtin').lsp_dynamic_workspace_symbols({
-          symbols = {
-            "Class",
-            "Function",
-            "Method",
-            "Constructor",
-            "Interface",
-            "Module",
-            "Struct",
-            "Trait",
-            "Field",
-            "Property",
-          },
+          symbols = { "Class", "Function", "Method", "Constructor", "Interface", "Module", "Struct", "Trait", "Field", "Property" },
         })
       end,
       desc = "Goto Symbol (Workspace)",
