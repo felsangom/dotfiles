@@ -65,7 +65,7 @@ return {
                     },
                     python = {
                         analysis = {
-                            typeCheckingMode = "off",
+                            ignore = { '*' }
                         },
                     },
                 },
