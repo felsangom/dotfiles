@@ -45,7 +45,18 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 --   end,
 -- })
 
--- 4. Abrir Help sempre na vertical (Opcional, mas muito bom)
+-- 4. Notificação discreta ao salvar arquivo
+vim.api.nvim_create_autocmd("BufWritePost", {
+    group = augroup("notify_save"),
+    callback = function()
+        local fname = vim.fn.expand("%:t")
+        if fname ~= "" then
+            vim.notify(fname .. " salvo", vim.log.levels.INFO)
+        end
+    end,
+})
+
+-- 5. Abrir Help sempre na vertical (Opcional, mas muito bom)
 -- Por padrão o help abre na horizontal e ocupa metade da tela.
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("help_window"),
