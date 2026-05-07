@@ -1,0 +1,5 @@
+module Panel
+ControlPanel 1.0 ControlPanel.qml
+PowerMenu    1.0 PowerMenu.qml
+SliderWidget 1.0 SliderWidget.qml
+ToggleButton 1.0 ToggleButton.qml

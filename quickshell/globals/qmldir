@@ -1,0 +1,2 @@
+module Globals
+singleton State 1.0 State.qml
