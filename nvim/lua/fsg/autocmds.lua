@@ -26,26 +26,7 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
   end,
 })
 
--- 3. Smart Whitespace Stripper
--- Remove espaços, mas protege Markdown e não roda em arquivos binários
--- vim.api.nvim_create_autocmd({ "BufWritePre" }, {
---   group = augroup("trim_whitespace"),
---   pattern = "*",
---   callback = function()
---     -- Lista de exclusão (Blacklist)
---     local ignore_filetypes = { "markdown", "text", "binary" }
---     if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
---         return
---     end
---
---     -- Salva a posição do cursor para não pular pro começo
---     local save_cursor = vim.fn.getpos(".")
---     pcall(function() vim.cmd [[%s/\s\+$//e]] end)
---     vim.fn.setpos(".", save_cursor)
---   end,
--- })
-
--- 4. Notificação discreta ao salvar arquivo
+-- 3. Notificação discreta ao salvar arquivo
 vim.api.nvim_create_autocmd("BufWritePost", {
     group = augroup("notify_save"),
     callback = function()
@@ -56,7 +37,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
     end,
 })
 
--- 5. Abrir Help sempre na vertical (Opcional, mas muito bom)
+-- 4. Abrir Help sempre na vertical (Opcional, mas muito bom)
 -- Por padrão o help abre na horizontal e ocupa metade da tela.
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("help_window"),

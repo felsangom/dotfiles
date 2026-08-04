@@ -61,6 +61,12 @@ map('n', '<C-Down>', '<cmd>resize -2<CR>', { desc = "Resize Height -" })
 map('n', '<C-Left>', '<cmd>vertical resize -2<CR>', { desc = "Resize Width -" })
 map('n', '<C-Right>', '<cmd>vertical resize +2<CR>', { desc = "Resize Width +" })
 
+-- Formatting (Global: funciona mesmo sem LSP anexado ao buffer,
+-- essencial pra formatar coisas como um XML colado num buffer novo)
+map({'n', 'v'}, '<leader>cx', function()
+    require("conform").format({ async = true, lsp_format = "fallback" })
+end, { desc = "Format Buffer" })
+
 -- --- PLUGINS (Global) ---
 
 -- Fugitive
@@ -102,11 +108,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- Diagnostics (Navegação moderna)
     map('n', '[d', function() vim.diagnostic.jump({ count = -1, float = true }) end, { desc = "Prev Diagnostic" })
     map('n', ']d', function() vim.diagnostic.jump({ count = 1, float = true }) end, { desc = "Next Diagnostic" })
-
-    -- Formatting
-    map('n', '<leader>cx', function()
-      vim.lsp.buf.format { async = true }
-    end, vim.tbl_extend('force', opts, { desc = "Format Buffer" }))
 
     -- Inlay hints (toggle com <leader>ih)
     if vim.lsp.inlay_hint then
