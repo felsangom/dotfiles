@@ -11,7 +11,12 @@ local map = vim.keymap.set
 map('n', '<leader>lr', '<cmd>LspRestart<CR>', { desc = "Restart LSP Server" })
 
 -- Oil (File Manager)
-map('n', '<leader>e', '<cmd>Oil<CR>', { desc = "Open Oil file manager" })
+map('n', '<leader>e', function()
+  if vim.bo.filetype == 'fugitiveblame' then
+    vim.cmd('normal gq')
+  end
+  vim.cmd.Oil()
+end, { desc = "Open Oil file manager" })
 
 -- Buffers
 map('n', '<leader>fa', '<cmd>bd<CR>', { desc = "Close current buffer" })
@@ -88,9 +93,6 @@ map('n', '<leader>tr', '<cmd>Trouble lsp_references toggle<CR>', { desc = "LSP R
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', { clear = true }),
   callback = function(ev)
-    -- Enable completion triggered by <c-x><c-o>
-    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-
     local opts = { buffer = ev.buf }
 
     -- Navigation
@@ -106,8 +108,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map({'n', 'v'}, '<leader>ca', vim.lsp.buf.code_action, vim.tbl_extend('force', opts, { desc = "Code Action" }))
 
     -- Diagnostics (Navegação moderna)
-    map('n', '[d', function() vim.diagnostic.jump({ count = -1, float = true }) end, { desc = "Prev Diagnostic" })
-    map('n', ']d', function() vim.diagnostic.jump({ count = 1, float = true }) end, { desc = "Next Diagnostic" })
+    local function open_float(_, bufnr)
+      vim.diagnostic.open_float({ bufnr = bufnr, scope = "cursor", focus = false })
+    end
+    map('n', '[d', function() vim.diagnostic.jump({ count = -1, on_jump = open_float }) end, { desc = "Prev Diagnostic" })
+    map('n', ']d', function() vim.diagnostic.jump({ count = 1, on_jump = open_float }) end, { desc = "Next Diagnostic" })
 
     -- Inlay hints (toggle com <leader>ih)
     if vim.lsp.inlay_hint then
